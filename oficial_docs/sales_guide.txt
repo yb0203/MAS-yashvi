@@ -1,0 +1,190 @@
+=== Page 1 ===
+MAS Mentor Platform — Plain-English Guide
+(for Sales & Non-Technical Teams)
+What this is: A simple, jargon-free explanation of the MAS mentor platform — both the student
+experience (dashboard, roadmap, badges, progress) and the admin panel that powers it (courses,
+modules, batches, leads, Mr Test, Mr Learn, mapping). No technical knowledge needed.
+Document version: 1.0 · Last updated: 2026-06-30 Companion doc:
+MAS_PLATFORM_TECHNICAL_GUIDE.md (for developers)
+The 30-Second Pitch
+MAS (My Analytics School) is an end-to-end student success platform. It takes a person from
+being a sales lead, to an enrolled student in a batch, follows them through a structured learning
+roadmap (live classes, video courses, and tests), keeps them motivated with XP, streaks, and badges,
+connects them to mentors, and tracks them all the way to placement.
+For the business, it's one system that runs the whole journey: marketing & sales →  enrollment →
+teaching →  testing →  mentoring →  placement.
+The Big Picture — one student's journey
+flowchart LR
+    L[Lead\nsomeone interested] --> A[Application\nthey sign up & pay]
+    A --> B[Batch\ntheir cohort]
+    B --> R[Roadmap\ntheir learning plan]
+    R --> C[Mr Learn courses\nvideo lessons]
+    R --> T[Mr Test exams\nassessments]
+    R --> M[Live classes & mentors]
+    C --> P[Progress, XP, badges]
+    T --> P
+    M --> P
+    P --> J[Placement / job applications]
+Everything in the platform is built around this ﬂow. The admin panel sets it up; the student
+dashboard is what the learner sees.
+
+=== Page 2 ===
+Part 1 — The Student Experience
+What a student sees on their dashboard
+When a student logs in, their personal dashboard shows:
+Their roadmap — a clear, ordered learning plan for their batch: what to study each week (video
+courses, tests, live classes, assignments, projects, milestones), with progress on each item.
+Progress ribbon — their Level (1 to 5), total XP (experience points), and their streak (how many
+days in a row they've shown up), with an "on ﬁre today" indicator.
+Badges — achievement awards they've earned (and ones still locked, with how to unlock them).
+Courses & classes — the video courses and live sessions assigned to them.
+Quizzes & AI classrooms — practice and interactive AI-led lessons.
+Mentor calls — booking and joining 1-on-1 sessions with mentors.
+Tokens — their balance of credits used to book mentor sessions.
+Application & placement status — where they stand, including the "Pay After Placement"
+agreement if applicable.
+The Roadmap (what the student follows)
+The roadmap is the heart of the student experience — an ordered list of learning steps for their
+batch. Each step is one of:
+Step type What it is
+📘  Module A block of learning (often a video course)
+📝  Test An assessment / exam
+✏  Assignment Work to submit
+🎥  Live Class A scheduled live session
+🎙  Webinar A talk or special session
+🚀  Project A hands-on project
+🏁  Milestone A checkpoint or achievement marker
+Steps are organized by week (or day/session/step, depending on the course). A student sees each
+step, what's inside it (the actual video course or exam), their progress, and any session notes the team
+added. Some tests are locked until the student ﬁnishes a required course ﬁrst.
+
+=== Page 3 ===
+Important nuance: Two students in the same batch can follow diﬀerent courses/roadmaps —
+the platform supports per-student plans.
+Gamiﬁcation — XP, Levels, Streaks, Badges (keeps students engaged)
+This is a strong sales talking point: students stay motivated because the platform rewards them.
+XP & Levels: Students earn points for logging in, completing modules, taking tests, ﬁnishing
+mentor calls, etc. Points move them up through 5 levels.
+Streaks: Showing up daily builds a streak; hitting milestones (every 7 days) earns bonus rewards.
+Badges (6 starter achievements):
+Badge How a student earns it
+Explorer First login after onboarding
+All Star Completing their full proﬁle
+Momentum A 7-day streak
+Achiever Passing their ﬁrst test
+Collaborator Completing their ﬁrst mentor call
+Scholar Finishing their ﬁrst course module
+When a student unlocks a badge, they get a celebration moment and bonus XP. This drives daily
+engagement and course completion.
+Part 2 — The Admin Panel (how the team runs
+it)
+The admin panel is where the team builds courses, creates batches, manages leads, and connects the
+testing and learning tools. Here's each major piece in plain English.
+Leads & Sales CRM — turning interest into enrollment
+A lead is a prospective student — someone who showed interest (via a form, a marketing campaign, a
+vendor list, or a CSV upload). The Sales CRM is where the team manages all of them.
+How a lead becomes a student: 1. Capture — leads come in from the website, marketing
+campaigns, vendors, or uploads. 2. Distribute — leads are assigned to sales heads, then to
+
+=== Page 4 ===
+telecallers/counsellors. (Sales heads approve bulk assignments.) 3. Qualify — the team calls and
+follows up. Leads are marked Hot / Warm / Cold, with follow-up reminders (Overdue / Today /
+Upcoming). 4. AI calling ("Aarya") — an AI voice agent can call batches of leads automatically. Based
+on how long the lead stays on the call, the system shows an AI-predicted interest chip
+(Hot/Warm/Cold) to help the team prioritize. 5. Automation workﬂows — the team can build
+automated nurture sequences: AI call →  if Hot, send WhatsApp/email →  wait →  follow up. 6. Convert
+— an interested lead becomes a paid Application, then gets assigned to a Batch. 7. Pay After
+Placement (MAS101) — for the ﬂagship program, students go through a digital agreement/MOU
+signing ﬂow after payment.
+Sales talking points: every lead is tracked, never lost; AI calling scales outreach; predicted-interest
+helps reps focus on the hottest prospects; the whole funnel from ﬁrst contact to enrollment is in one
+place.
+Courses — the learning content
+There are a few kinds of "course" in the system, each with a purpose:
+Classic Course — the real program with a roadmap and modules. This is what enrolled students
+follow.
+New Courses (marketing catalog) — the polished course cards shown on the public website
+(with pricing, highlights, badges-as-labels).
+Course Plans — AI-generated multi-lecture courses used to create AI Classrooms (50–200 AI
+lessons).
+Modules — the building blocks of a course
+A module is a teaching unit inside a course (it holds classes, quizzes, and assignments). Admins
+create modules, order them, and can assign speciﬁc modules to a speciﬁc batch. Think of a course as
+a book and modules as its chapters.
+How a roadmap is created
+The roadmap is built in the course editor: 1. Open the course and go to the Roadmap section. 2. Add
+items one by one — pick a type (Module, Test, Live Class, etc.), give it a title, set its week, add a
+description, thumbnail, links, and attachments. 3. Drag to reorder items; group them by week. 4.
+Admins can create custom step types (with their own emoji + color) beyond the seven built-ins. 5.
+Roadmaps can also be imported from a ﬁle (JSON) — one course at a time, or in bulk (up to 50
+courses at once).
+
+=== Page 5 ===
+How to create a batch
+A batch is a cohort of students going through a program together. To create one: 1. Click Create in the
+Batches section. 2. Fill in: batch code (e.g. "mas101"), name, the course it runs (optional — it can be
+independent), start/end dates, max students, pricing (oﬀer price + original/MRP price), GST settings,
+required documents (Aadhaar, college ID, resume, etc.), a banner image, the batch lead, and
+WhatsApp group links. 3. Save. Students get added to the batch through their applications, and
+admins can even assign a diﬀerent course per student within the same batch.
+Admins also get batch analytics — number of students, mentor connects, tokens used, revenue
+generated, and per-student breakdowns with Excel export.
+Mapping — how everything connects
+"Mapping" is how the team wires the pieces together so a student gets the right content:
+flowchart TD
+    LEAD[Lead] --> APP[Application: student + batch + course + status]
+    APP --> BATCH[Batch]
+    BATCH --> COURSE[Course default - can be overridden per student]
+    COURSE --> MOD[Modules: classes, quizzes, assignments]
+    COURSE --> ROAD[Roadmap items by week]
+    BATCH -. attach per roadmap item .-> MRL[Mr Learn courses]
+    BATCH -. attach per roadmap item .-> MRT[Mr Test exams]
+    BATCH -. session notes per item .-> NOTES[Roadmap notes]
+In practice, in a screen called the Course Builder, the team takes each roadmap step and attaches
+the actual Mr Learn video courses and Mr Test exams the batch's students should get — and can
+require a course to be completed before a test unlocks.
+Mr Test — the exams product
+Mr Test is the testing/assessment side, powered by an external exam engine (EzExam). From the
+admin panel the team can: - Browse available exams and see results. - Push MAS students into the
+exam system as test-takers. - Sync exam results back into MAS so they show up on the student's
+roadmap and feed badges/progress. - Attach an exam to a batch's roadmap (optionally locked behind
+a required course).
+In one line: Mr Test = the platform's exams and test-series, with results ﬂowing back into each
+student's record.
+
+=== Page 6 ===
+Mr Learn — the video learning product
+Mr Learn is the video-course / LMS side, powered by an external LMS (Graphy). From the admin
+panel the team can: - Browse video courses and manage learners. - Push MAS students into the LMS
+as learners. - Sync each student's course progress back into MAS. - Send automatic WhatsApp
+reminders to nudge students who are falling behind. - Attach courses to a batch's roadmap.
+In one line: Mr Learn = the platform's video courses, with progress tracking and automatic reminders.
+How Mr Test & Mr Learn diﬀer: Mr Test = exams; Mr Learn = video lessons. Both pull their
+results/progress back into the student's MAS roadmap so everything lives in one place.
+Why customers love the platform (talking points)
+One platform, whole journey — sales, enrollment, teaching, testing, mentoring, and placement in
+a single system.
+Structured learning — every student follows a clear weekly roadmap, not a pile of random
+content.
+Engagement built-in — XP, streaks, and badges keep students coming back and ﬁnishing
+courses.
+Personalized — students in the same batch can follow diﬀerent plans.
+Smart sales — AI calling and predicted-interest help the team convert more leads with less eﬀort.
+Nothing falls through the cracks — leads, progress, test results, and reminders are all tracked
+automatically.
+Mentor + placement focus — built around outcomes, including Pay-After-Placement programs.
+Common questions
+"Is Mr Test / Mr Learn built in-house?" — They're admin consoles that connect to specialist
+external tools (an exam engine and an LMS) and pull all results back into MAS, so the team
+manages everything from one place.
+"Can two students in a batch learn diﬀerent things?" — Yes. Each student can be assigned their
+own course/roadmap.
+"How does the AI calling work?" — An AI voice agent ("Aarya") calls leads, and the system predicts
+their interest level from the call so reps know who to prioritize.
+"What keeps students motivated?" — A full gamiﬁcation system: points, levels, daily streaks, and
+achievement badges.
+
+=== Page 7 ===
+This guide is intentionally non-technical. For architecture, data models, and APIs, see the companion
+MAS Platform Technical Guide.
+
