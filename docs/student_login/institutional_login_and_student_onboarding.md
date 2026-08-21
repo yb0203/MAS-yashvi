@@ -263,3 +263,26 @@ This specification defines the **Login, Identity, and Onboarding System** for th
 | **4** | **Expired Activation Magic Link** | Token expired after 7 days: *"Activation link expired. Enter your college email below to receive a fresh 10-minute code."* | Re-dispatches a single-use 6-digit OTP to verified institutional email. |
 | **5** | **OTP Rate Limit Exceeded**<br>(5 consecutive failed OTP attempts). | Security banner: *"Too many failed attempts. For security reasons, please wait 15 minutes before trying again."* | Account temporarily throttled; admin alert logged if repeated. |
 | **6** | **Deactivated / Suspended Student** | Login blocked: *"Your portal access has been deactivated by the institution administration."* | College support helpline and TPO office email displayed. |
+
+---
+
+## 9. Open Product Questions & Roadmap Considerations
+
+The following items are flagged for deeper architectural exploration, user research, and cross-functional alignment before freezing into `FINAL SPEC`:
+
+### 📌 Open Point 1: Deep Dive into the Institutional Admin Dashboard
+* We need to architect the **Institutional Admin / TPO Portal** with the same depth as the Student OS.
+* Key focus areas: How the college admin monitors batch progress, manages permissions across department HODs vs. central TPOs, and views institutional analytics (placement readiness indices, assessment completion rates).
+
+### 📌 Open Point 2: Frictionless Admin Journey & Workload Minimization
+* College administrators and placement officers are already overwhelmed with operational overhead.
+* We must evaluate every step of the admin onboarding flow to **strictly limit manual tasks**:
+  - Evaluate if multi-step login flows are strictly necessary for admins or if enterprise SSO / magic authentication can reduce friction.
+  - Automate routine workflows (e.g. auto-approving minor typo updates, automatic reminders to unactivated students) to ensure the platform feels like a time-saving productivity tool rather than extra administrative labor.
+
+### 📌 Open Point 3: Lean CSV Data Minimization & Derived Fields
+* We need to audit and prune the required CSV ingestion fields to the absolute minimum.
+* **Core Rule: Never ask for raw data that the platform can automatically derive.**
+  - *Example*: If the admin provides `graduation_year: 2028` and `program_duration: 4 Years`, the system can automatically compute `current_year` and active academic standing without requiring redundant columns.
+  - Minimize mandatory CSV headers to reduce upload friction and formatting errors for tier-2/3 college staff.
+
