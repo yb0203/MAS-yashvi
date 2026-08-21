@@ -286,3 +286,15 @@ The following items are flagged for deeper architectural exploration, user resea
   - *Example*: If the admin provides `graduation_year: 2028` and `program_duration: 4 Years`, the system can automatically compute `current_year` and active academic standing without requiring redundant columns.
   - Minimize mandatory CSV headers to reduce upload friction and formatting errors for tier-2/3 college staff.
 
+### 📌 Open Point 4: Necessity of Pre-Flight CSV Validation vs. Seamless Ingestion
+* We need to evaluate whether an interactive pre-flight CSV validation step (inline cell editing) is truly necessary or if it introduces unwanted cognitive friction for the admin.
+* Alternative approaches: Background asynchronous processing with automated error tolerance (e.g. valid rows imported immediately, while faulty rows generate a downloadable error sheet for re-upload).
+
+### 📌 Open Point 5: Generic Academic Scoring Metric (Optional CGPA / Rank / Percentage)
+* **CGPA is not universal across all customer archetypes**: While universities use CGPA (0.00–10.00), Coaching & Test-Prep Academies use **Batch Ranks**, **Percentiles**, or **Overall Test Percentages**.
+* We need to design a **Generic Academic Metric Configuration**:
+  - `academic_score_type`: Enum (`CGPA`, `PERCENTAGE`, `BATCH_RANK`, `PERCENTILE`, `NONE`).
+  - `academic_score_value`: String / Float.
+  - **Dynamic UI Labeling**: If a coaching academy configures `BATCH_RANK`, the UI displays `Batch Rank: #14 / 250 [ 🔒 Verified ]` instead of CGPA.
+  - Data ingestion must handle this field as **optional** so institutions without GPA systems can onboard seamlessly.
+
