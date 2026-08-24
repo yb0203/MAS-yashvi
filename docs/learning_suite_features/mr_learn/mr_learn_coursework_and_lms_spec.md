@@ -72,9 +72,9 @@ Shared globally across all modules with zero duplication:
 2. **📄 Master Profile & Settings (`/student/profile`)**: The **single universal profile page across the entire platform**:
    - **Academic Identity (Locked / Read-Only 🔒)**: Full Name, Roll No, Branch, Semester, and Verified CGPA (`8.65 [ 🔒 Verified ]`) + `[ ⚠️ Request Correction ]` button.
    - **Enrichment & Placement Assets (Editable ✏️)**: LinkedIn URL, GitHub URL, Portfolio Link, and active Placement Resume PDF.
-   - **Learning Transcript Vault**: Embedded transcript tab showing all completed course tracks, exam scores from `Mr. Test`, and downloadable verified certificates with QR verification codes.
+   - **Learning Transcript & Certificate Vault *(Open to Discussion / Needs More Thought)*: A proposed tab showing completed course records and downloadable certificates.
    - **Security & Device Manager**: View active logged-in devices + **`[ 🚪 Log Out of All Other Devices ]`** remote kill-switch.
-3. **📜 Learning Transcript & History**: Direct shortcut to the Transcript & Certificate tab inside the Master Profile.
+3. **📜 Learning Transcript & History**: *(Proposed shortcut — open to discussion)*.
 4. **🌗 Theme Toggle**: Instant 1-click toggle (`Light` / `Dark` / `System`) without leaving the current view.
 5. **🚪 Log Out**: Universal 1-click logout accessible from every module and screen.
 
@@ -249,4 +249,8 @@ The following items are flagged for team alignment:
 
 ### 📌 Open Point 2: Content Pacing Controls
 * Should all lectures in an assigned course be available immediately on Day 1 (self-paced), or should client admins have the option to schedule weekly module releases?
+
+### 📌 Open Point 3: Learning Transcript & Certificate Vault Scope
+* Need to explore how completed course records and certificates should be presented inside the Master Profile or as a standalone section, and whether employers/clients require verifiable public certificate URLs with QR codes.
+
 
