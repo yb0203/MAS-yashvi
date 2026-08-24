@@ -32,7 +32,7 @@
 3. **Universities & Engineering Colleges**:
    - Delivers semester-based curriculum mapped by branch and year, tracking attendance and learning milestones.
 4. **Placement Bootcamps & Finishing Schools**:
-   - Delivers fast-paced 60-day intensive industry readiness tracks to prepare students for recruitment drives.
+   - Delivers intensive industry readiness tracks ranging from 60 days to 6 months or 1 year, structured to prepare students for recruitment drives.
 
 ---
 
@@ -148,12 +148,12 @@ On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** wit
 | Feature Area | Current Immediate Scope (Next 15–20 Days)<br>*(Keep it Very Basic & Client-Ready)* | Future Long-Term Scope<br>*(Iterative Platform Enhancements)* |
 | :--- | :--- | :--- |
 | **Authentication** | **Silent SSO Handshake**: 1-Click transition from Dashboard to `Mr. Learn` with zero double login. | Unified single-session cookie across all platform subdomains. |
-| **Home Experience** | **Assigned Courses List**: Clean cards showing enrolled tracks, lecture counts, and progress bars. | AI-curated elective discovery & multi-department course browser. |
+| **Home Experience** | **Assigned Courses List**: Clean cards showing enrolled tracks, lecture counts, and progress bars. | **AI Course Builder & Authoring Studio**: Tools for AI curriculum generation, custom course development assistance, and client-assisted course onboarding. |
 | **Video Player** | Basic responsive player container with speed controls ($0.75\text{x}-2.0\text{x}$) and auto-save. | In-video interactive quiz checkpoints (Coursera model) and offline mobile caching. |
 | **Course Materials** | 1-Click downloadable PDF lecture slides and starter code files. | Synchronized timestamped notes with 1-click PDF study guide export. |
 | **Discussion Forum** | **Keyword-Restricted Filter**: Automated blacklist blocking profanity, spam, and phone numbers. | **AI Moderator**: Real-time automated doubt answering and toxicity sentiment shield. |
 | **Assessments Linking** | Independent modules for now. Assessment milestones referenced in syllabus overview. | **Deep Assessment Thresholds**: Direct automated unlocking of `Mr. Test` exams upon $\ge 75\%$ progress. |
-| **Admin Controls** | 1-Click track assignment to cohorts + downloadable CSV attendance & watch-time reports. | Live student watch telemetry heatmaps & automated at-risk reminder campaigns. |
+| **Admin Controls** | **Low-Effort Learner Progress CSV**: Simple export of enrolled student completion % (`MrLearnLearner` data) + 1-Click batch assignment. | Advanced live video watch telemetry heatmaps & automated at-risk reminder campaigns. |
 
 ---
 
@@ -186,8 +186,6 @@ The following items are flagged for team alignment:
 * Currently, `Mr. Learn` and `Mr. Test` operate as distinct modular building blocks.
 * In future iterations, we will define the exact cross-module linking rules (e.g. how a course completion event triggers an official assessment in `Mr. Test`).
 
-### 📌 Open Point 2: Keyword Filter Customization per Client
-* Should the keyword moderation dictionary be globally managed by our academic team, or should client admins be able to add custom blacklisted terms?
-
-### 📌 Open Point 3: Content Pacing Controls
+### 📌 Open Point 2: Content Pacing Controls
 * Should all lectures in an assigned course be available immediately on Day 1 (self-paced), or should client admins have the option to schedule weekly module releases?
+
