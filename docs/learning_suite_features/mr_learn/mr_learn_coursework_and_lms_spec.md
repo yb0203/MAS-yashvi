@@ -4,8 +4,8 @@
 **Status**: `DRAFT (Ready for Team Review)`  
 **Document Type**: High-Level Product Feature Document  
 **Scope Definition**:
-* **Current Immediate Scope (Phase 1: 15–20 Days)**: A clean, lightweight, highly functional Learning Experience ready for immediate client handover — single silent sign-on, clean "My Courses" home, zero-cart assigned tracks, basic video canvas with downloadable PDFs, and a keyword-moderated Q&A forum.
-* **Future Long-Term Scope (Phase 2)**: In-house video streaming engine, AI discussion moderator, and deep assessment milestone linking.
+* **Current Immediate Scope (Phase 1: 15–20 Days)**: Enhancing the current product for immediate client handover — single silent sign-on, clean "My Courses" home, zero-cart assigned tracks, basic video canvas with downloadable PDFs, authentic watch-time telemetry, and a keyword-moderated Q&A forum.
+* **Future Long-Term Scope (Phase 2)**: Scalable in-house learning operating system with advanced AI learning intelligence, in-video quiz checkpoints, and proprietary video encoding infrastructure.
 
 ---
 
@@ -132,14 +132,15 @@ A distraction-free, 2-column learning environment:
 └────────────────────────────────────────────────────────────────────┴─────────────────────────┘
 ```
 
-1. **Responsive Video Player**: Multi-speed playback ($0.75\text{x}-2.0\text{x}$), resolution toggle ($360\text{p}-1080\text{p}$), and full-screen mode. Auto-saves playback position.
+1. **Responsive Video Player with Adaptive Bitrate**:
+   - Multi-speed playback ($0.75\text{x}-2.0\text{x}$), resolution toggle ($360\text{p}-1080\text{p}$ with auto-bandwidth detection for low-connectivity hostels), and full-screen mode.
+   - **Authentic Watch-Time Verification**: Video progress is strictly calculated on actual seconds watched. Fast-forward scrubbing without watching does not artificially increment the completion percentage.
 2. **Interactive Syllabus Sidebar**: Module accordion with clear status icons (`[✓]` Completed, `[▶]` Currently Playing, `[ ]` Not Started).
-3. **Resource & PDF Downloads Tab**: 1-click download of official lecture slide decks, cheat sheets, and source code files.
+3. **Resource & PDF Downloads Tab**: 1-click download of official lecture slide decks, cheat sheets, and source code files directly from the course storage bucket.
 
 ---
 
-### 2.5 Discussion Forum: Course-Specific Q&A (Current Scope)
-
+### 2.5 Discussion Forum: Course-Specific Q&A & Support SLA
 To keep discussions tightly focused and eliminate moderation noise, discussion is structured as a **Course-Specific Q&A Space**:
 
 ```
@@ -150,6 +151,7 @@ To keep discussions tightly focused and eliminate moderation noise, discussion i
 │  • Audience: Only learners enrolled in this specific course & batch    │
 │  • Scope: Doubts, technical questions, and course-related discussions   │
 │  • Instructor Tools: Pin official announcements, [ ✅ Verified Answer ]│
+│  • Support SLA: Managed by Academic TAs with 24-hour response target   │
 │  • Security: Automated Keyword Blacklist (blocks profanity & spam)     │
 └────────────────────────────────────────────────────────────────────────┘
 ```
@@ -190,7 +192,21 @@ On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** wit
 
 ---
 
-## 4. Current Immediate Scope vs. Future Long-Term Scope
+## 4. Current vs. Target State Gap Analysis Matrix
+
+| Feature Dimension | Current Platform (`mrlearn.in`) | White-Label Target State | Gap Classification | Implementation Strategy |
+| :--- | :--- | :--- | :--- | :--- |
+| **Authentication & SSO** | Separate manual login screen (`email + password`). | **Silent Seamless SSO Handshake** from Dashboard. | 🔴 **Critical UX Fix** | Generate single-use signed auth token on dashboard navigation. |
+| **Course Catalog Access** | Retail e-commerce store (`/s/store`) with prices & cart. | **Clean "My Courses" Home** showing only assigned cohort tracks. | 🔴 **Critical B2B Pivot** | Filter catalog strictly by student batch ID; strip cart UI. |
+| **Branding & Vendor Leaks** | Graphy logos, watermarks, and external links in footer. | **100% Pure White-Labeling** with client branding only. | 🔴 **Critical Brand Fix** | Remove external footer scripts and inject custom theme CSS. |
+| **Watch-Time Integrity** | Basic video completion boolean. | **Authentic Watch-Time Verification** (anti-scrubbing). | 🟡 **High-Value Polish** | Enforce telemetry heartbeat on actual seconds watched. |
+| **Course Material Downloads** | Native Graphy asset storage. | **Clean Resources Tab** with 1-click PDF/code download. | 🟢 **Existing Backend** | Connect UI tab directly to existing S3 attachment endpoints. |
+| **Discussion & Forum** | Open public forum with zero moderation. | **Course-Specific Q&A Tab** with keyword profanity filter. | 🟡 **Feature Refinement** | Embed scoped Q&A tab under video with automated blacklist. |
+| **Admin Reporting** | Manual internal database queries. | **Low-Effort Progress CSV** (`MrLearnLearner` export). | 🟢 **Low-Effort Build** | Expose CSV download endpoint using existing sync table. |
+
+---
+
+## 5. Current Immediate Scope vs. Future Long-Term Scope
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -218,7 +234,7 @@ On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** wit
 
 ---
 
-## 5. Legacy B2C Features Removed
+## 6. Legacy B2C Features Removed
 
 | Legacy Feature | Action | Product Rationale |
 | :--- | :---: | :--- |
@@ -230,7 +246,7 @@ On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** wit
 
 ---
 
-## 6. Strategic Architecture Note: Delivery Evolution
+## 7. Strategic Architecture Note: Delivery Evolution
 
 > [!NOTE]
 > **DELIVERY EVOLUTION NOTE**  
@@ -239,7 +255,25 @@ On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** wit
 
 ---
 
-## 7. Open Product Questions & Discussion Points
+## 8. Client Review Questions & Implementation Answers
+
+The following questions reflect how an external client or technical auditor evaluates `Mr. Learn` and our operational resolution:
+
+### ❓ Question 1: Can our internal faculty or corporate trainers add supplementary notices or documents to pre-packaged tracks?
+* **Answer**: Yes. While core lecture tracks are curated by our academic team, client admins have a lightweight interface to attach custom supplementary announcements and PDF reference notes to any module without altering the core curriculum.
+
+### ❓ Question 2: How does the platform prevent students from fast-forwarding or scrubbing to artificially gain 100% attendance?
+* **Answer**: The platform's watch telemetry records **actual continuous playback duration**. Fast-forward scrubbing jumps the video position but does not increment the verified watch-time counter required for course completion.
+
+### ❓ Question 3: Who is responsible for answering student doubts in the Course Q&A forum?
+* **Answer**: During pilot deployments, our **In-House Academic Teaching Assistants** monitor the course Q&A board with an agreed **24-hour response target**. Client faculty/trainers also hold moderator badges and can participate directly if desired.
+
+### ❓ Question 4: How will students on slow mobile hostel Wi-Fi watch videos without buffering?
+* **Answer**: The player features **Adaptive Bitrate Streaming ($360\text{p} \rightarrow 1080\text{p}$)** which dynamically adjusts resolution based on real-time internet speeds, ensuring smooth playback even on low-bandwidth mobile connections.
+
+---
+
+## 9. Open Product Questions & Discussion Points
 
 The following items are flagged for team alignment:
 
@@ -252,5 +286,3 @@ The following items are flagged for team alignment:
 
 ### 📌 Open Point 3: Learning Transcript & Certificate Vault Scope
 * Need to explore how completed course records and certificates should be presented inside the Master Profile or as a standalone section, and whether employers/clients require verifiable public certificate URLs with QR codes.
-
-
