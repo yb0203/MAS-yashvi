@@ -44,14 +44,32 @@
 
 ---
 
-### 2.2 Screen 1: The Clean "My Courses" Home (`/learn`)
-A simple, focused learning catalog displaying **only the courses assigned to the student**:
+### 2.2 Universal Top Header & Back-to-Dashboard Navigation
+Across all pages in `Mr. Learn`, the platform maintains a **consistent, standardized institutional header** identical to the main Student OS:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ [LOGO] INSTITUTIONAL PORTAL              [ 🔍 Search my courses... ]     [👤 Alex M. ▼] │
+│ [LOGO] INSTITUTIONAL PORTAL   [ 🏠 Home / Dashboard ]   [ 📚 My Courses ]   [ 💬 Forum ]│
+│                                           [ 🔍 Search... ]     [🔔 (2)]  [👤 Alex M. ▼]│
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **🏠 [ Home / Dashboard ] Link**: Jumps straight back to the primary Student Dashboard (`portal.institution.edu/student/dashboard`) at any time in 1 click.
+* **👤 Unified Avatar Dropdown**: Contains `My Profile`, `Learning History`, `Theme`, and `[ 🚪 Log Out ]` (shared across all modules).
+* **Navigation Trail / Breadcrumbs**: In deep views, provides clear hierarchical breadcrumbs:  
+  `Dashboard > My Courses > Core Systems & Architecture > Lecture 2.1`.
+
+---
+
+### 2.3 Screen 1: The Clean "My Courses" Home (`/learn`)
+A simple, focused learning catalog displaying **only the courses assigned to the student's cohort**:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ [LOGO] INSTITUTIONAL PORTAL   [ 🏠 Dashboard ]   [ 📚 My Courses (Active) ]   [ 💬 Forum ]│
+│                                           [ 🔍 Search my courses... ]     [👤 Alex M. ▼]│
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 📚 MY ASSIGNED COURSES (3 Tracks Active)                                               │
+│ 📚 MY ASSIGNED COURSES (3 Active Tracks)                                               │
 │                                                                                        │
 │ ┌──────────────────────────────┐ ┌──────────────────────────────┐ ┌──────────────────┐ │
 │ │ [ COURSE THUMBNAIL ]         │ │ [ COURSE THUMBNAIL ]         │ │ [ THUMBNAIL ]    │ │
@@ -71,7 +89,7 @@ A simple, focused learning catalog displaying **only the courses assigned to the
 
 ---
 
-### 2.3 Screen 2: The Video Learning Canvas & Syllabus (`/learn/courses/:id`)
+### 2.4 Screen 2: The Video Learning Canvas & Syllabus (`/learn/courses/:id`)
 A distraction-free, 2-column learning environment:
 
 ```
@@ -89,7 +107,7 @@ A distraction-free, 2-column learning environment:
 │                                                                    │ [ ] 2.2 Data Models     │
 │ LECTURE TITLE: 2.1 System Architecture & Core Data Flow            │                         │
 │ ────────────────────────────────────────────────────────────────── │ SECTION 3: ADVANCED     │
-│ [ TAB 1: Resources & Downloads ]      [ TAB 2: Cohort Discussion ] │ [ ] 3.1 Scaling         │
+│ [ TAB 1: Resources & Downloads ]      [ TAB 2: Course Q&A Forum ]  │ [ ] 3.1 Scaling         │
 │ • 📄 Download Lecture Slides PDF                                   │                         │
 │ • 💻 Download Starter Code Script (.py / .sql)                     │                         │
 └────────────────────────────────────────────────────────────────────┴─────────────────────────┘
@@ -98,8 +116,34 @@ A distraction-free, 2-column learning environment:
 1. **Responsive Video Player**: Multi-speed playback ($0.75\text{x}-2.0\text{x}$), resolution toggle ($360\text{p}-1080\text{p}$), and full-screen mode. Auto-saves playback position.
 2. **Interactive Syllabus Sidebar**: Module accordion with clear status icons (`[✓]` Completed, `[▶]` Currently Playing, `[ ]` Not Started).
 3. **Resource & PDF Downloads Tab**: 1-click download of official lecture slide decks, cheat sheets, and source code files.
-4. **Cohort Discussion Tab**: Cohort-scoped Q&A space where students can ask questions and read peer discussions.
-   - **Keyword-Restricted Filter**: Automated dictionary blacklist that blocks spam, offensive language, and unverified phone numbers.
+
+---
+
+### 2.5 Discussion Forum Architecture: Course-Based vs. Institution-Wide
+
+To prevent noise and keep discussions highly relevant, the forum is structured into **Two Distinct Layers**:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                   DUAL-LAYER DISCUSSION ARCHITECTURE                   │
+├────────────────────────────────────────────────────────────────────────┤
+│  LAYER 1: Course-Specific Q&A (Inside Player Tab 2)                    │
+│  • Context: Directly attached to Lecture 2.1 / Specific Course Topic   │
+│  • Audience: Only students enrolled in this specific course & batch    │
+│                                                                        │
+│  LAYER 2: Institution / Cohort Community Forum (/learn/community)      │
+│  • Context: General academic discussions, announcements, peer study    │
+│  • Audience: All students in the student's batch / department          │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+* **Layer 1 (Course Q&A Tab under Player)**:
+  - Students ask doubts related to the specific video lecture.
+  - TAs and instructors can reply inline and pin official answers.
+* **Layer 2 (General Cohort Forum via Top Nav `[ 💬 Forum ]`)**:
+  - A clean discussion board categorized by topics (e.g. `#general-announcements`, `#interview-prep`, `#project-collab`).
+* **Automated Keyword-Restricted Blacklist**:
+  - Applied across both layers to auto-block spam, profanity, and unverified phone numbers.
 
 ---
 
