@@ -4,8 +4,8 @@
 **Status**: `DRAFT (Ready for Team Review)`  
 **Document Type**: High-Level Product Feature Document  
 **Scope Definition**:
-* **Current Immediate Scope (Phase 1: 15–20 Days)**: Enhancing the current product for immediate client handover — stripping B2C artifacts, fixing major UX/branding flaws, and seamlessly integrating learning telemetry into the Student Dashboard.
-* **Future Long-Term Scope (Phase 2)**: Scalable in-house learning operating system with advanced AI learning intelligence.
+* **Current Immediate Scope (Phase 1: 15–20 Days)**: A clean, lightweight, highly functional Learning Experience ready for immediate client handover — single silent sign-on, clean "My Courses" home, zero-cart assigned tracks, basic video canvas with downloadable PDFs, and a keyword-moderated Q&A forum.
+* **Future Long-Term Scope (Phase 2)**: In-house video streaming engine, AI discussion moderator, and deep assessment milestone linking.
 
 ---
 
@@ -30,157 +30,134 @@
 2. **Online Higher Ed Aggregators & Digital Universities**:
    - Delivers structured digital semester courses to distributed remote students with verifiable progress transcripts.
 3. **Universities & Engineering Colleges**:
-   - Delivers semester-based curriculum mapped by branch and year, tracking attendance and unlocking exams.
+   - Delivers semester-based curriculum mapped by branch and year, tracking attendance and learning milestones.
 4. **Placement Bootcamps & Finishing Schools**:
    - Delivers fast-paced 60-day intensive industry readiness tracks to prepare students for recruitment drives.
 
 ---
 
-## 2. Current Immediate Scope vs. Future Vision
+## 2. End-to-End User Experience & Navigation Flow
+
+### 2.1 The Silent Single Sign-On (SSO) Handshake
+* **Zero Double-Login**: When an onboarded student clicks any course on their Student Dashboard, the platform executes a **silent authentication handshake**.
+* The student transitions directly into `Mr. Learn` **without ever being asked for a second username or password**.
+
+---
+
+### 2.2 Screen 1: The Clean "My Courses" Home (`/learn`)
+A simple, focused learning catalog displaying **only the courses assigned to the student**:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ [LOGO] INSTITUTIONAL PORTAL              [ 🔍 Search my courses... ]     [👤 Alex M. ▼] │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ 📚 MY ASSIGNED COURSES (3 Tracks Active)                                               │
+│                                                                                        │
+│ ┌──────────────────────────────┐ ┌──────────────────────────────┐ ┌──────────────────┐ │
+│ │ [ COURSE THUMBNAIL ]         │ │ [ COURSE THUMBNAIL ]         │ │ [ THUMBNAIL ]    │ │
+│ │ Core Systems & Architecture  │ │ Technical Problem Solving    │ │ Professional Prep│ │
+│ │ 15 / 20 Lectures Completed   │ │ 0 / 10 Lectures Completed    │ │ 5 / 8 Lectures   │ │
+│ │ Progress: [=======>--- 75%]  │ │ Progress: [----------   0%]  │ │ Progress: [== 62%]│ │
+│ │ [ ▶ Resume Coursework ➔ ]    │ │ [ 🚀 Start Coursework ➔ ]    │ │ [ ▶ Resume ➔ ]   │ │
+│ └──────────────────────────────┘ └──────────────────────────────┘ └──────────────────┘ │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **Clear Progress Bars**: Each card displays total lectures, completed count, and a visual progress bar (`0%` to `100%`).
+* **Smart Dynamic CTA**:
+  - `[ 🚀 Start Coursework ➔ ]` for brand-new courses (0% progress).
+  - `[ ▶ Resume Coursework ➔ ]` for in-progress courses (jumps to the exact paused video).
+* **Zero E-Commerce Distractions**: No shopping cart, no pricing badges, no "Buy Now" buttons.
+
+---
+
+### 2.3 Screen 2: The Video Learning Canvas & Syllabus (`/learn/courses/:id`)
+A distraction-free, 2-column learning environment:
+
+```
+┌────────────────────────────────────────────────────────────────────┬─────────────────────────┐
+│ ← Back to My Courses | Core Systems & Architecture                 │ PROGRESS: 75% Completed │
+├────────────────────────────────────────────────────────────────────┼─────────────────────────┤
+│ LEFT VIDEO CANVAS (75% Width)                                      │ RIGHT SYLLABUS (25%)    │
+│                                                                    │                         │
+│ ┌────────────────────────────────────────────────────────────────┐ │ SECTION 1: FOUNDATIONS  │
+│ │                                                                │ │ [✓] 1.1 Intro (12m)     │
+│ │                 [ RESPONSIVE VIDEO PLAYER ]                    │ │ [✓] 1.2 Setup (15m)     │
+│ │               (Speed: 0.75x - 2.0x | 360p-1080p)               │ │                         │
+│ │                                                                │ │ SECTION 2: ARCHITECTURE │
+│ └────────────────────────────────────────────────────────────────┘ │ [▶] 2.1 Core Flow (Now) │
+│                                                                    │ [ ] 2.2 Data Models     │
+│ LECTURE TITLE: 2.1 System Architecture & Core Data Flow            │                         │
+│ ────────────────────────────────────────────────────────────────── │ SECTION 3: ADVANCED     │
+│ [ TAB 1: Resources & Downloads ]      [ TAB 2: Cohort Discussion ] │ [ ] 3.1 Scaling         │
+│ • 📄 Download Lecture Slides PDF                                   │                         │
+│ • 💻 Download Starter Code Script (.py / .sql)                     │                         │
+└────────────────────────────────────────────────────────────────────┴─────────────────────────┘
+```
+
+1. **Responsive Video Player**: Multi-speed playback ($0.75\text{x}-2.0\text{x}$), resolution toggle ($360\text{p}-1080\text{p}$), and full-screen mode. Auto-saves playback position.
+2. **Interactive Syllabus Sidebar**: Module accordion with clear status icons (`[✓]` Completed, `[▶]` Currently Playing, `[ ]` Not Started).
+3. **Resource & PDF Downloads Tab**: 1-click download of official lecture slide decks, cheat sheets, and source code files.
+4. **Cohort Discussion Tab**: Cohort-scoped Q&A space where students can ask questions and read peer discussions.
+   - **Keyword-Restricted Filter**: Automated dictionary blacklist that blocks spam, offensive language, and unverified phone numbers.
+
+---
+
+## 3. Student Dashboard Integration (Slot 1 Dual-State Experience)
+
+On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** with a clean, dual-state experience:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                   DASHBOARD SLOT 1: DUAL-STATE EXPERIENCE              │
+├────────────────────────────────────────────────────────────────────────┤
+│  STATE A: FIRST-TIME STUDENT (0% Progress / Day 1)                     │
+│  • Badge: [ 🆕 Newly Assigned Track ]                                  │
+│  • Course: Enterprise Track: Core Systems & Architecture               │
+│  • Progress: [--------------------] 0% (0/20 Lectures Completed)       │
+│  • Next Lesson: Module 1.1 — Orientation & Foundations (12m)           │
+│  • Primary CTA: [ 🚀 START COURSEWORK ➔ ]                              │
+│                                                                        │
+│  STATE B: RETURNING STUDENT (In-Progress)                              │
+│  • Badge: [ 📚 In Progress ]                                           │
+│  • Course: Enterprise Track: Core Systems & Architecture               │
+│  • Progress: [████████████████░░░░] 75% (15/20 Lectures Completed)     │
+│  • Next Lesson: Module 2.1 — System Architecture & Data Flow (18m)     │
+│  • Primary CTA: [ ▶ RESUME COURSEWORK ➔ ]                              │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. Current Immediate Scope vs. Future Long-Term Scope
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                   DUAL-SPEED SCOPE & EXECUTION ROADMAP                 │
 ├────────────────────────────────────────────────────────────────────────┤
-│  🎯 CURRENT SCOPE (Immediate Handover: 15–20 Days)                     │
-│     Fix major UX issues, strip B2C artifacts, integrate into Dashboard │
+│  🎯 CURRENT SCOPE (Next 15–20 Days — Client Handover Ready)            │
+│     Basic assigned course list, clean player canvas, PDF downloads,    │
+│     keyword-moderated forum, silent SSO login, dashboard integration   │
 │                                                                        │
-│  🚀 FUTURE SCOPE (Long-Term Scalable Learning OS)                      │
-│     In-video checkpoints, AI study assistant, in-house video engine    │
+│  🚀 FUTURE SCOPE (Long-Term Scalable Engine)                           │
+│     AI discussion moderator, in-video quiz checkpoints, in-house video │
+│     streaming architecture, deep assessment milestone linking          │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 🎯 2.1 Current Immediate Scope (Fix & Hand Over to Clients)
-* **Goal**: Deliver a polished, client-ready learning portal that can be handed over to our pilot clients immediately within the next 15–20 days.
-* **Core Deliverables**:
-  1. **Fix Critical Brand & UX Flaws**:
-     - 100% white-labeled player container under client branding.
-     - Strip all B2C e-commerce artifacts (Refer & Earn banners, shopping cart, retail checkout, public prices).
-  2. **Context-Aware Learning Home**:
-     - Logged-in learners bypass the public storefront and land directly on their active course tracks.
-  3. **In-House Curriculum Mapping**:
-     - Pre-packaged tracks curated by our academic team mapped directly to client batches (zero authoring burden on clients).
-  4. **Student Dashboard Integration (Slot 1)**:
-     - Real-time progress bar, "Next Up" lesson title, and 1-click **`[ ▶ Resume Coursework ➔ ]`** button.
-  5. **Basic Client Admin Tools**:
-     - 1-Click track assignment to cohorts + downloadable CSV attendance/watch-time reports.
+| Feature Area | Current Immediate Scope (Next 15–20 Days)<br>*(Keep it Very Basic & Client-Ready)* | Future Long-Term Scope<br>*(Iterative Platform Enhancements)* |
+| :--- | :--- | :--- |
+| **Authentication** | **Silent SSO Handshake**: 1-Click transition from Dashboard to `Mr. Learn` with zero double login. | Unified single-session cookie across all platform subdomains. |
+| **Home Experience** | **Assigned Courses List**: Clean cards showing enrolled tracks, lecture counts, and progress bars. | AI-curated elective discovery & multi-department course browser. |
+| **Video Player** | Basic responsive player container with speed controls ($0.75\text{x}-2.0\text{x}$) and auto-save. | In-video interactive quiz checkpoints (Coursera model) and offline mobile caching. |
+| **Course Materials** | 1-Click downloadable PDF lecture slides and starter code files. | Synchronized timestamped notes with 1-click PDF study guide export. |
+| **Discussion Forum** | **Keyword-Restricted Filter**: Automated blacklist blocking profanity, spam, and phone numbers. | **AI Moderator**: Real-time automated doubt answering and toxicity sentiment shield. |
+| **Assessments Linking** | Independent modules for now. Assessment milestones referenced in syllabus overview. | **Deep Assessment Thresholds**: Direct automated unlocking of `Mr. Test` exams upon $\ge 75\%$ progress. |
+| **Admin Controls** | 1-Click track assignment to cohorts + downloadable CSV attendance & watch-time reports. | Live student watch telemetry heatmaps & automated at-risk reminder campaigns. |
 
 ---
 
-### 🚀 2.2 Future Long-Term Scope (Scalable Learning OS)
-* In-video interactive quiz checkpoints (Coursera model).
-* Pre vs. Post Skill Growth benchmarking (Pluralsight model).
-* Timestamped synchronized notes with 1-click PDF study guide export.
-* Dynamic anti-piracy learner watermarking on video canvas.
-* Real-time AI study assistant and self-serve AI Course Builder for clients wanting custom content.
-
----
-
-## 3. Product Feature Comparison Matrix
-
-| Feature Area | Current Legacy Platform (`mrlearn.in`) | Current Immediate Scope (Handover Ready) | Future Long-Term Scope |
-| :--- | :--- | :--- | :--- |
-| **Course Access Model** | Retail storefront with shopping cart & pricing. | **Assigned In-House Tracks**: Pre-mapped to cohorts with zero purchase friction. | Self-Serve Course Builder for client-authored modules. |
-| **Video Player Experience** | Basic player with third-party vendor branding. | **Clean White-Label Player**: Speeds ($0.75\text{x}-2.0\text{x}$), resolutions ($360\text{p}-1080\text{p}$). | In-video quiz checkpoints + offline mobile caching. |
-| **Dashboard Integration** | Standalone disconnected website. | **Seamless Slot 1 Card**: Live % progress + 1-click resume at last timestamp. | Skill competency graph & personalized pace forecaster. |
-| **Cohort Discussions** | Open public forum with no moderation. | **Cohort-Isolated Q&A Tab**: Keyword profanity filter + pinned announcements. | Real-time AI doubt solver synthesizing answers from video transcripts. |
-| **Admin Reporting** | Manual database queries. | **Clean Spreadsheet Export**: Student watch time, attendance, completion %. | Predictive at-risk learner alerts with automated nudge campaigns. |
-
----
-
-## 4. End-to-End User Journey (Current Scope Flowchart)
-
-```
-┌──────────────────────────────────────────────────────────────────┐
-│ STEP 1: IN-HOUSE CURRICULUM ALLOCATION (ADMIN / TRAINER)         │
-│ Admin assigns pre-packaged tracks to specific Batches / Cohorts  │
-└─────────────────────────────────┬────────────────────────────────┘
-                                  │
-┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 2: LEARNER DISCOVERY (DASHBOARD SLOT 1)                     │
-│ Learner sees active course card with progress bar & next video   │
-│ CTA: [ ▶ Resume: Lecture 3.2 — Core Concepts (18 min) ➔ ]        │
-└─────────────────────────────────┬────────────────────────────────┘
-                                  │
-┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 3: CLEAN VIDEO LEARNING PLAYER CANVAS                       │
-│ • Left Canvas (75%): Responsive player with speed controls       │
-│ • Right Sidebar (25%): Interactive syllabus with checkmarks [✓]  │
-│ • Telemetry: Auto-saves progress continuously                    │
-└─────────────────────────────────┬────────────────────────────────┘
-                                  │
-┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 4: RESOURCE ATTACHMENTS & STUDY MATERIALS                   │
-│ • Download Lecture Slides (PDF), Code Snippets & Spreadsheets    │
-└─────────────────────────────────┬────────────────────────────────┘
-                                  │
-┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 5: COHORT DISCUSSION FORUM & BASIC MODERATION               │
-│ • Cohort-scoped Q&A tab under video player                       │
-│ • Keyword Filter auto-blocks spam and inappropriate text         │
-│ • Instructor pinned announcements & verified answer badges       │
-└─────────────────────────────────┬────────────────────────────────┘
-                                  │
-┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 6: PREREQUISITE ASSESSMENT THRESHOLD UNLOCK                 │
-│ Reaching >= 75% video completion automatically unlocks:          │
-│ ➔ Comprehensive Exam (Mr. Test) / Placement Eligibility (Mr. Hire│
-└──────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 5. Student Dashboard Integration (How Mr. Learn Feeds Dashboard Slot 1)
-
-On the Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)**:
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│  CURRENT COURSEWORK & LEARNING TRACKS (SLOT 1)                         │
-├────────────────────────────────────────────────────────────────────────┤
-│  📚 Enterprise Track: Core Systems & Architecture                      │
-│  Curated by Academic Team • Cohort: Class of 2028                      │
-│                                                                        │
-│  Progress: [██████████████████████████░░░░░░░░] 75% (15/20 Lectures)   │
-│                                                                        │
-│  ▶ NEXT LESSON: Module 3.2 — Data Flow & Configuration (18m)           │
-│                                                                        │
-│  ┌──────────────────────────────────────────────────────────────────┐  │
-│  │                    [ ▶ RESUME COURSEWORK ➔ ]                     │  │
-│  └──────────────────────────────────────────────────────────────────┘  │
-│  🔓 Prerequisite Met: [ Comprehensive Assessment Unlocked ]            │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-### Key Visual & Functional Elements:
-* **Active Course Card**: Displays the title and banner of the current assigned track.
-* **Live Progress Bar**: Displays percentage and module completion count (e.g. `75% • 15/20 Lectures`).
-* **"Next Up" Lesson Reminder**: Highlights the exact upcoming lesson name and duration.
-* **1-Click Resume Button**: Jumps straight into the player at the exact second where the learner paused.
-* **Exam Gating Indicator**: Turns green when the prerequisite threshold ($\ge 75\%$) is achieved.
-
----
-
-## 6. Client Admin & Trainer Management Features (Current Scope)
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│               MR. LEARN: TRAINER & ADMIN CONTROL SUITE                 │
-├────────────────────────────────────────────────────────────────────────┤
-│  1. 1-Click Track Mapping      ──► Map pre-packaged tracks to batches  │
-│  2. Attendance & Telemetry CSV ──► Export exact watch time per learner │
-│  3. At-Risk Learner Alert      ──► Flags learners falling behind       │
-│  4. 1-Click Progress Nudge     ──► Broadcasts WhatsApp/Email reminder  │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-1. **1-Click Track-to-Cohort Mapping**: Admin assigns a ready-made curriculum to any batch without manual course authoring.
-2. **Attendance & Participation Reports**: 1-click spreadsheet export showing exact watch time and completion rates per learner.
-3. **At-Risk Learner Alerts & 1-Click Reminders**: Flags learners who have fallen behind schedule and triggers reminder notifications in 1 click.
-
----
-
-## 7. Legacy B2C Features Removed in Current Scope
+## 5. Legacy B2C Features Removed
 
 | Legacy Feature | Action | Product Rationale |
 | :--- | :---: | :--- |
@@ -188,32 +165,29 @@ On the Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)**:
 | **Shopping Cart & Retail Checkout** | 🔴 **REMOVED** | Courses are assigned directly by cohort; no individual purchase transactions. |
 | **Third-Party Vendor Badges & Links** | 🔴 **REMOVED** | Ensures complete white-label brand ownership for our client. |
 | **Public Unverified User Reviews** | 🔴 **REMOVED** | Replaced with internal structured cohort feedback forms. |
-| **Public Storefront for Logged-In Users** | 🔴 **REMOVED** | Replaced with a personalized, context-aware learning dashboard. |
+| **Public Storefront for Logged-In Users** | 🔴 **REMOVED** | Replaced with the clean "My Courses" assigned catalog. |
 
 ---
 
-## 8. Strategic Product Note: Evolution of Platform Delivery
+## 6. Strategic Architecture Note: Delivery Evolution
 
 > [!NOTE]
 > **DELIVERY EVOLUTION NOTE**  
-> * **Current Scope (Immediate Client Handover)**: We utilize our existing learning delivery infrastructure wrapped in a pure white-label interface to ensure fast, seamless onboarding for our pilot clients.  
-> * **Future Scope (Long-Term Scalable Engine)**: We will evolve toward a fully proprietary in-house learning engine with custom streaming, advanced interactive checkpoints, and AI-assisted study tools.
+> * **Current Phase (Immediate Client Handover)**: We utilize our existing learning delivery infrastructure wrapped in a pure white-label interface to ensure fast, seamless onboarding for our pilot clients.  
+> * **Future Phase (Long-Term In-House Engine)**: We will plan to systematically move away from external wrappers and build our proprietary in-house video streaming and course management infrastructure.
 
 ---
 
-## 9. Open Product Questions & Discussion Points
+## 7. Open Product Questions & Discussion Points
 
-The following product questions are open for exploration:
+The following items are flagged for team alignment:
 
-### 📌 Open Point 1: In-Video Checkpoint Experience
-* Should in-video quiz popups be mandatory before video playback can resume, or optional self-check milestones?
-* How should in-video checkpoints contribute to the learner's overall completion grade?
+### 📌 Open Point 1: Linking Coursework with Assessments (Mr. Test)
+* Currently, `Mr. Learn` and `Mr. Test` operate as distinct modular building blocks.
+* In future iterations, we will define the exact cross-module linking rules (e.g. how a course completion event triggers an official assessment in `Mr. Test`).
 
-### 📌 Open Point 2: Low-Bandwidth & Mobile Experience
-* What is the optimal experience for learners in low-connectivity areas (e.g. downloadable slide summaries, audio-first listening mode)?
+### 📌 Open Point 2: Keyword Filter Customization per Client
+* Should the keyword moderation dictionary be globally managed by our academic team, or should client admins be able to add custom blacklisted terms?
 
-### 📌 Open Point 3: Content Scheduling & Pacing
-* Should courses unlock all modules at once (self-paced) or follow a weekly schedule set by the trainer/admin?
-
-### 📌 Open Point 4: Discussion Forum Engagement
-* Should discussion response expectations (e.g. *"Instructor responds within 24 hours"*) be shown to learners on intensive upskilling tracks?
+### 📌 Open Point 3: Content Pacing Controls
+* Should all lectures in an assigned course be available immediately on Day 1 (self-paced), or should client admins have the option to schedule weekly module releases?
