@@ -44,8 +44,8 @@
 
 ---
 
-### 2.2 Universal Top Header & Navigation
-Across all pages in `Mr. Learn`, the platform maintains a **consistent, standardized institutional header** identical to the main Student OS:
+### 2.2 Universal Top Header & Single Source of Truth Profile
+Across **every module in the entire suite** (`Student Dashboard`, `Mr. Learn`, `Mr. Test`, `Mr. Hire`, `Mr. Mentor`, and any future modules), the platform maintains a **single, standardized top header and universal profile architecture**:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
@@ -54,25 +54,29 @@ Across all pages in `Mr. Learn`, the platform maintains a **consistent, standard
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#### 👤 Avatar Dropdown Menu (Quick Actions Hub):
-Clicking the user avatar in the top-right opens a lightweight, 4-item quick menu:
+#### 👤 Universal Avatar Dropdown Menu (Quick Actions Hub):
+Shared globally across all modules with zero duplication:
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  👤 Alex Morgan                                         │
 │  alex.morgan@institution.edu • Roll: 2028CS042          │
 ├─────────────────────────────────────────────────────────┤
-│  📄 My Profile & Settings                               │
-│  📜 Learning Transcript & History                       │
+│  📄 Master Profile & Settings                           │
+│  📜 Learning Transcript & Completed Records             │
 │  🌗 Theme: [ Light ☀ | Dark 🌙 | System 💻 ]            │
 ├─────────────────────────────────────────────────────────┤
 │  🚪 Log Out                                             │
 └─────────────────────────────────────────────────────────┘
 ```
-1. **🏠 [ Home / Dashboard ] Link**: Instant 1-click return to the primary Student Dashboard (`portal.institution.edu/student/dashboard`).
-2. **📄 My Profile & Settings (`/student/profile`)**: Navigates to the master profile page containing locked academic records (`Name`, `Roll No`, `Verified CGPA`), editable social links (`LinkedIn`, `GitHub`), placement resume upload, and active device sessions.
-3. **📜 Learning Transcript & History**: Shows a clean summary of completed course tracks, completion dates, and verified certificates (replaces legacy B2C "purchase history").
+1. **🏠 [ Home / Dashboard ] Link**: Instant 1-click return to the primary Student Dashboard (`portal.institution.edu/student/dashboard`) from any page or deep module.
+2. **📄 Master Profile & Settings (`/student/profile`)**: The **single universal profile page across the entire platform**:
+   - **Academic Identity (Locked / Read-Only 🔒)**: Full Name, Roll No, Branch, Semester, and Verified CGPA (`8.65 [ 🔒 Verified ]`) + `[ ⚠️ Request Correction ]` button.
+   - **Enrichment & Placement Assets (Editable ✏️)**: LinkedIn URL, GitHub URL, Portfolio Link, and active Placement Resume PDF.
+   - **Learning Transcript Vault**: Embedded transcript tab showing all completed course tracks, exam scores from `Mr. Test`, and downloadable verified certificates with QR verification codes.
+   - **Security & Device Manager**: View active logged-in devices + **`[ 🚪 Log Out of All Other Devices ]`** remote kill-switch.
+3. **📜 Learning Transcript & History**: Direct shortcut to the Transcript & Certificate tab inside the Master Profile.
 4. **🌗 Theme Toggle**: Instant 1-click toggle (`Light` / `Dark` / `System`) without leaving the current view.
-5. **🚪 Log Out**: Industry-standard 1-click logout accessible from any page across the entire platform.
+5. **🚪 Log Out**: Universal 1-click logout accessible from every module and screen.
 
 ---
 
