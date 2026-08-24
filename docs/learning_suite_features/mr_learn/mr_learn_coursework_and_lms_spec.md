@@ -44,20 +44,35 @@
 
 ---
 
-### 2.2 Universal Top Header & Back-to-Dashboard Navigation
+### 2.2 Universal Top Header & Navigation
 Across all pages in `Mr. Learn`, the platform maintains a **consistent, standardized institutional header** identical to the main Student OS:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ [LOGO] INSTITUTIONAL PORTAL   [ 🏠 Home / Dashboard ]   [ 📚 My Courses ]   [ 💬 Forum ]│
-│                                           [ 🔍 Search... ]     [🔔 (2)]  [👤 Alex M. ▼]│
+│ [LOGO] INSTITUTIONAL PORTAL   [ 🏠 Home / Dashboard ]   [ 📚 My Courses ]              │
+│                                           [ 🔍 Search my courses... ]     [👤 Alex M. ▼]│
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **🏠 [ Home / Dashboard ] Link**: Jumps straight back to the primary Student Dashboard (`portal.institution.edu/student/dashboard`) at any time in 1 click.
-* **👤 Unified Avatar Dropdown**: Contains `My Profile`, `Learning History`, `Theme`, and `[ 🚪 Log Out ]` (shared across all modules).
-* **Navigation Trail / Breadcrumbs**: In deep views, provides clear hierarchical breadcrumbs:  
-  `Dashboard > My Courses > Core Systems & Architecture > Lecture 2.1`.
+#### 👤 Avatar Dropdown Menu (Quick Actions Hub):
+Clicking the user avatar in the top-right opens a lightweight, 4-item quick menu:
+```
+┌─────────────────────────────────────────────────────────┐
+│  👤 Alex Morgan                                         │
+│  alex.morgan@institution.edu • Roll: 2028CS042          │
+├─────────────────────────────────────────────────────────┤
+│  📄 My Profile & Settings                               │
+│  📜 Learning Transcript & History                       │
+│  🌗 Theme: [ Light ☀ | Dark 🌙 | System 💻 ]            │
+├─────────────────────────────────────────────────────────┤
+│  🚪 Log Out                                             │
+└─────────────────────────────────────────────────────────┘
+```
+1. **🏠 [ Home / Dashboard ] Link**: Instant 1-click return to the primary Student Dashboard (`portal.institution.edu/student/dashboard`).
+2. **📄 My Profile & Settings (`/student/profile`)**: Navigates to the master profile page containing locked academic records (`Name`, `Roll No`, `Verified CGPA`), editable social links (`LinkedIn`, `GitHub`), placement resume upload, and active device sessions.
+3. **📜 Learning Transcript & History**: Shows a clean summary of completed course tracks, completion dates, and verified certificates (replaces legacy B2C "purchase history").
+4. **🌗 Theme Toggle**: Instant 1-click toggle (`Light` / `Dark` / `System`) without leaving the current view.
+5. **🚪 Log Out**: Industry-standard 1-click logout accessible from any page across the entire platform.
 
 ---
 
@@ -66,7 +81,7 @@ A simple, focused learning catalog displaying **only the courses assigned to the
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ [LOGO] INSTITUTIONAL PORTAL   [ 🏠 Dashboard ]   [ 📚 My Courses (Active) ]   [ 💬 Forum ]│
+│ [LOGO] INSTITUTIONAL PORTAL   [ 🏠 Dashboard ]   [ 📚 My Courses (Active) ]             │
 │                                           [ 🔍 Search my courses... ]     [👤 Alex M. ▼]│
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │ 📚 MY ASSIGNED COURSES (3 Active Tracks)                                               │
@@ -119,31 +134,29 @@ A distraction-free, 2-column learning environment:
 
 ---
 
-### 2.5 Discussion Forum Architecture: Course-Based vs. Institution-Wide
+### 2.5 Discussion Forum: Course-Specific Q&A (Current Scope)
 
-To prevent noise and keep discussions highly relevant, the forum is structured into **Two Distinct Layers**:
+To keep discussions tightly focused and eliminate moderation noise, discussion is structured as a **Course-Specific Q&A Space**:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                   DUAL-LAYER DISCUSSION ARCHITECTURE                   │
+│                   COURSE-SPECIFIC Q&A FORUM (CURRENT SCOPE)            │
 ├────────────────────────────────────────────────────────────────────────┤
-│  LAYER 1: Course-Specific Q&A (Inside Player Tab 2)                    │
-│  • Context: Directly attached to Lecture 2.1 / Specific Course Topic   │
-│  • Audience: Only students enrolled in this specific course & batch    │
-│                                                                        │
-│  LAYER 2: Institution / Cohort Community Forum (/learn/community)      │
-│  • Context: General academic discussions, announcements, peer study    │
-│  • Audience: All students in the student's batch / department          │
+│  • Location: Tab 2 directly inside the Course Canvas                   │
+│  • Audience: Only learners enrolled in this specific course & batch    │
+│  • Scope: Doubts, technical questions, and course-related discussions   │
+│  • Instructor Tools: Pin official announcements, [ ✅ Verified Answer ]│
+│  • Security: Automated Keyword Blacklist (blocks profanity & spam)     │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **Layer 1 (Course Q&A Tab under Player)**:
-  - Students ask doubts related to the specific video lecture.
-  - TAs and instructors can reply inline and pin official answers.
-* **Layer 2 (General Cohort Forum via Top Nav `[ 💬 Forum ]`)**:
-  - A clean discussion board categorized by topics (e.g. `#general-announcements`, `#interview-prep`, `#project-collab`).
-* **Automated Keyword-Restricted Blacklist**:
-  - Applied across both layers to auto-block spam, profanity, and unverified phone numbers.
+* **Course Q&A Tab under Player**:
+  - All students in the course share a single collaborative doubt-clearing thread.
+  - TAs and instructors can reply inline and pin official answers with a `[ ✅ Verified Instructor Answer ]` badge.
+* **Automated Keyword Blacklist**:
+  - Auto-blocks spam, profanity, and unverified phone numbers.
+* **Institution-Wide Community Board**:
+  - Deferred to **Future Scope (Phase 2)** to avoid operational complexity for initial client handover.
 
 ---
 
