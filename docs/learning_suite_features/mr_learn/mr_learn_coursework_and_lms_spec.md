@@ -4,7 +4,7 @@
 **Status**: `DRAFT (Ready for Team Review)`  
 **Document Type**: High-Level Product Feature Document  
 **Scope Definition**:
-* **Current Immediate Scope (Phase 1: 7–15 Days)**: Enhancing the current product for immediate client handover — stripping B2C artifacts, fixing major UX/branding flaws, and seamlessly integrating learning telemetry into the Student Dashboard.
+* **Current Immediate Scope (Phase 1: 15–20 Days)**: Enhancing the current product for immediate client handover — stripping B2C artifacts, fixing major UX/branding flaws, and seamlessly integrating learning telemetry into the Student Dashboard.
 * **Future Long-Term Scope (Phase 2)**: Scalable in-house learning operating system with advanced AI learning intelligence.
 
 ---
@@ -42,7 +42,7 @@
 ┌────────────────────────────────────────────────────────────────────────┐
 │                   DUAL-SPEED SCOPE & EXECUTION ROADMAP                 │
 ├────────────────────────────────────────────────────────────────────────┤
-│  🎯 CURRENT SCOPE (Immediate Handover: 7–15 Days)                      │
+│  🎯 CURRENT SCOPE (Immediate Handover: 15–20 Days)                     │
 │     Fix major UX issues, strip B2C artifacts, integrate into Dashboard │
 │                                                                        │
 │  🚀 FUTURE SCOPE (Long-Term Scalable Learning OS)                      │
@@ -51,7 +51,7 @@
 ```
 
 ### 🎯 2.1 Current Immediate Scope (Fix & Hand Over to Clients)
-* **Goal**: Deliver a polished, client-ready learning portal that can be handed over to our pilot clients immediately.
+* **Goal**: Deliver a polished, client-ready learning portal that can be handed over to our pilot clients immediately within the next 15–20 days.
 * **Core Deliverables**:
   1. **Fix Critical Brand & UX Flaws**:
      - 100% white-labeled player container under client branding.
