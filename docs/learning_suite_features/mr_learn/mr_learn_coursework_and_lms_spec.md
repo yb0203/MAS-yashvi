@@ -249,9 +249,9 @@ On the main Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)** wit
 ## 7. Strategic Architecture Note: Delivery Evolution
 
 > [!NOTE]
-> **DELIVERY EVOLUTION NOTE**  
-> * **Current Phase (Immediate Client Handover)**: We utilize our existing learning delivery infrastructure wrapped in a pure white-label interface to ensure fast, seamless onboarding for our pilot clients.  
-> * **Future Phase (Long-Term In-House Engine)**: We will plan to systematically move away from external wrappers and build our proprietary in-house video streaming and course management infrastructure.
+> **DELIVERY EVOLUTION & GRAPHY ROADMAP NOTE**  
+> * **Short-Term Scope (Next 15–20 Days Pilot Handover)**: Graphy will remain as the underlying video delivery infrastructure for the immediate short-term goals. We will streamline the user experience, eliminate the double login via silent SSO, and present a clean branded wrapper to onboard pilot clients quickly.  
+> * **Long-Term Scope (Future In-House Engine)**: We will systematically transition away from Graphy and build our proprietary in-house video streaming engine. Once built completely in-house, the platform will achieve **100% pure white-labeling** with zero external platform dependencies.
 
 ---
 
