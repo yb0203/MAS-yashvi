@@ -3,7 +3,9 @@
 **Module/Feature**: `Mr. Learn (Coursework & Learning Delivery Engine)`  
 **Status**: `DRAFT (Ready for Team Review)`  
 **Document Type**: High-Level Product Feature Document  
-**Scope**: User Experience, Learning Journeys, Dashboard Integration, Feature Enhancements, and Client Value.
+**Scope Definition**:
+* **Current Immediate Scope (Phase 1: 7–15 Days)**: Enhancing the current product for immediate client handover — stripping B2C artifacts, fixing major UX/branding flaws, and seamlessly integrating learning telemetry into the Student Dashboard.
+* **Future Long-Term Scope (Phase 2)**: Scalable in-house learning operating system with advanced AI learning intelligence.
 
 ---
 
@@ -34,56 +36,63 @@
 
 ---
 
-## 2. Product Feature Comparison (Current vs. Market Standards vs. Target)
+## 2. Current Immediate Scope vs. Future Vision
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               FEATURE EVOLUTION & MARKET BENCHMARK MATRIX              │
+│                   DUAL-SPEED SCOPE & EXECUTION ROADMAP                 │
 ├────────────────────────────────────────────────────────────────────────┤
-│  • Current State       ──► Retail Storefront with B2C E-Commerce Cart  │
-│  • Market Benchmarks   ──► In-Video Checks, Skill Scores, Sticky Notes │
-│  • Target Product State──► 100% White-Label Turn-Key Learning OS       │
+│  🎯 CURRENT SCOPE (Immediate Handover: 7–15 Days)                      │
+│     Fix major UX issues, strip B2C artifacts, integrate into Dashboard │
+│                                                                        │
+│  🚀 FUTURE SCOPE (Long-Term Scalable Learning OS)                      │
+│     In-video checkpoints, AI study assistant, in-house video engine    │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-| Feature Area | Current Platform (`mrlearn.in`) | Industry Best Practice | Target Product Experience in `Mr. Learn` |
+### 🎯 2.1 Current Immediate Scope (Fix & Hand Over to Clients)
+* **Goal**: Deliver a polished, client-ready learning portal that can be handed over to our pilot clients immediately.
+* **Core Deliverables**:
+  1. **Fix Critical Brand & UX Flaws**:
+     - 100% white-labeled player container under client branding.
+     - Strip all B2C e-commerce artifacts (Refer & Earn banners, shopping cart, retail checkout, public prices).
+  2. **Context-Aware Learning Home**:
+     - Logged-in learners bypass the public storefront and land directly on their active course tracks.
+  3. **In-House Curriculum Mapping**:
+     - Pre-packaged tracks curated by our academic team mapped directly to client batches (zero authoring burden on clients).
+  4. **Student Dashboard Integration (Slot 1)**:
+     - Real-time progress bar, "Next Up" lesson title, and 1-click **`[ ▶ Resume Coursework ➔ ]`** button.
+  5. **Basic Client Admin Tools**:
+     - 1-Click track assignment to cohorts + downloadable CSV attendance/watch-time reports.
+
+---
+
+### 🚀 2.2 Future Long-Term Scope (Scalable Learning OS)
+* In-video interactive quiz checkpoints (Coursera model).
+* Pre vs. Post Skill Growth benchmarking (Pluralsight model).
+* Timestamped synchronized notes with 1-click PDF study guide export.
+* Dynamic anti-piracy learner watermarking on video canvas.
+* Real-time AI study assistant and self-serve AI Course Builder for clients wanting custom content.
+
+---
+
+## 3. Product Feature Comparison Matrix
+
+| Feature Area | Current Legacy Platform (`mrlearn.in`) | Current Immediate Scope (Handover Ready) | Future Long-Term Scope |
 | :--- | :--- | :--- | :--- |
-| **Course Access Model** | Retail storefront with shopping cart & pricing. | Managed enterprise cohorts with assigned tracks. | **Assigned In-House Tracks**: Pre-mapped to student/employee batches with zero purchasing friction. |
-| **Video Player Experience** | Basic player with third-party vendor branding. | Clean, branded player with speed and resolution controls. | **100% White-Label Player**: Multi-speed playback ($0.75\text{x}-2.0\text{x}$), resolution selector ($360\text{p}-1080\text{p}$), institutional branding. |
-| **Engagement & Retention** | Passive video watching. | In-video knowledge checkpoints (Coursera model). | **In-Video Checkpoints**: Video pauses at key moments for a quick 1-question concept check. |
-| **Skill Proof for Clients** | Standard course completion certificate. | Pre vs. Post skill benchmarking (Pluralsight model). | **Pre/Post Skill Growth**: Shows client leadership concrete proof of improvement (e.g. $+35\%$ score growth). |
-| **Study Materials & Notes** | Static PDF downloads. | Timestamped notes exportable to PDF (Udemy model). | **Timestamped Notes**: Learners take notes linked to exact video moments, exportable as a study guide. |
-| **Cohort Discussions** | Open public forum with no moderation. | Filtered discussion space with verified instructor answers. | **Cohort-Isolated Q&A**: Filtered space where instructors can highlight verified solutions. |
-| **Content Security** | Unprotected video stream. | Dynamic learner identification watermark. | **Anti-Piracy Watermark**: Faint learner identifier on video canvas to protect proprietary content. |
+| **Course Access Model** | Retail storefront with shopping cart & pricing. | **Assigned In-House Tracks**: Pre-mapped to cohorts with zero purchase friction. | Self-Serve Course Builder for client-authored modules. |
+| **Video Player Experience** | Basic player with third-party vendor branding. | **Clean White-Label Player**: Speeds ($0.75\text{x}-2.0\text{x}$), resolutions ($360\text{p}-1080\text{p}$). | In-video quiz checkpoints + offline mobile caching. |
+| **Dashboard Integration** | Standalone disconnected website. | **Seamless Slot 1 Card**: Live % progress + 1-click resume at last timestamp. | Skill competency graph & personalized pace forecaster. |
+| **Cohort Discussions** | Open public forum with no moderation. | **Cohort-Isolated Q&A Tab**: Keyword profanity filter + pinned announcements. | Real-time AI doubt solver synthesizing answers from video transcripts. |
+| **Admin Reporting** | Manual database queries. | **Clean Spreadsheet Export**: Student watch time, attendance, completion %. | Predictive at-risk learner alerts with automated nudge campaigns. |
 
 ---
 
-## 3. Dual-Speed Product Roadmap (Short-Term vs. Long-Term)
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                      DUAL-SPEED PRODUCT ROADMAP                        │
-├────────────────────────────────────────────────────────────────────────┤
-│  PHASE 1: SHORT-TERM (7–15 Days) ──► Fast Client Onboarding & Demos    │
-│  PHASE 2: LONG-TERM (Quarterly)  ──► Advanced Learning Intelligence    │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-| Dimension | Phase 1: Short-Term Goal (7–15 Days)<br>*(Ready for Immediate Deployment to Pilot Clients)* | Phase 2: Long-Term Goal (Ongoing)<br>*(Next-Gen Learning Operating System)* |
-| :--- | :--- | :--- |
-| **Course Delivery** | **Pre-Packaged In-House Tracks** curated by our academic team and assigned to cohorts. | Self-Serve Course Builder for clients who wish to author custom internal modules. |
-| **Player Experience** | Clean white-label player, speed controls, notes download, anti-piracy watermark. | In-video interactive quiz checkpoints and offline mobile caching. |
-| **Assessments & Gating** | Prerequisite threshold ($\ge 75\%$ video watch $\rightarrow$ unlocks `Mr. Test` exam). | Pre vs. Post Skill Growth benchmarking with automated competency reports. |
-| **Discussions & Q&A** | Cohort-scoped Q&A tab with automated keyword profanity filter. | Real-time AI study assistant synthesizing instant answers from lecture transcripts. |
-| **Admin Reporting** | Clean spreadsheet export of student watch time, attendance, and completion %. | Predictive at-risk learner alerts with automated nudge campaigns. |
-
----
-
-## 4. End-to-End User Journey (Step-by-Step Flowchart)
+## 4. End-to-End User Journey (Current Scope Flowchart)
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│ STEP 1: CURRICULUM ALLOCATION (CLIENT ADMIN / TRAINER)           │
+│ STEP 1: IN-HOUSE CURRICULUM ALLOCATION (ADMIN / TRAINER)         │
 │ Admin assigns pre-packaged tracks to specific Batches / Cohorts  │
 └─────────────────────────────────┬────────────────────────────────┘
                                   │
@@ -96,19 +105,17 @@
 ┌─────────────────────────────────▼────────────────────────────────┐
 │ STEP 3: CLEAN VIDEO LEARNING PLAYER CANVAS                       │
 │ • Left Canvas (75%): Responsive player with speed controls       │
-│ • Floating Watermark: Learner Identifier (Anti-Piracy)           │
 │ • Right Sidebar (25%): Interactive syllabus with checkmarks [✓]  │
 │ • Telemetry: Auto-saves progress continuously                    │
 └─────────────────────────────────┬────────────────────────────────┘
                                   │
 ┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 4: RESOURCE ATTACHMENTS & SYNCHRONIZED NOTES                │
+│ STEP 4: RESOURCE ATTACHMENTS & STUDY MATERIALS                   │
 │ • Download Lecture Slides (PDF), Code Snippets & Spreadsheets    │
-│ • Timestamped Note-Taking (Clicking a timestamp jumps to video)  │
 └─────────────────────────────────┬────────────────────────────────┘
                                   │
 ┌─────────────────────────────────▼────────────────────────────────┐
-│ STEP 5: COHORT DISCUSSION FORUM & MODERATION                     │
+│ STEP 5: COHORT DISCUSSION FORUM & BASIC MODERATION               │
 │ • Cohort-scoped Q&A tab under video player                       │
 │ • Keyword Filter auto-blocks spam and inappropriate text         │
 │ • Instructor pinned announcements & verified answer badges       │
@@ -123,7 +130,7 @@
 
 ---
 
-## 5. Dashboard Integration (How Mr. Learn Feeds the Student Dashboard)
+## 5. Student Dashboard Integration (How Mr. Learn Feeds Dashboard Slot 1)
 
 On the Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)**:
 
@@ -154,7 +161,7 @@ On the Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)**:
 
 ---
 
-## 6. Client Admin & Trainer Management Features
+## 6. Client Admin & Trainer Management Features (Current Scope)
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -162,20 +169,18 @@ On the Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)**:
 ├────────────────────────────────────────────────────────────────────────┤
 │  1. 1-Click Track Mapping      ──► Map pre-packaged tracks to batches  │
 │  2. Attendance & Telemetry CSV ──► Export exact watch time per learner │
-│  3. Skill Growth Delta Report  ──► Benchmark cohort improvement (+35%) │
-│  4. At-Risk Learner Alert      ──► Flags learners falling behind       │
-│  5. 1-Click Progress Nudge     ──► Broadcasts WhatsApp/Email reminder  │
+│  3. At-Risk Learner Alert      ──► Flags learners falling behind       │
+│  4. 1-Click Progress Nudge     ──► Broadcasts WhatsApp/Email reminder  │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
 1. **1-Click Track-to-Cohort Mapping**: Admin assigns a ready-made curriculum to any batch without manual course authoring.
 2. **Attendance & Participation Reports**: 1-click spreadsheet export showing exact watch time and completion rates per learner.
-3. **Skill Growth Metrics**: View pre-course vs. post-course score improvements across the batch.
-4. **At-Risk Learner Alerts & 1-Click Reminders**: Flags learners who have fallen behind schedule and triggers reminder notifications in 1 click.
+3. **At-Risk Learner Alerts & 1-Click Reminders**: Flags learners who have fallen behind schedule and triggers reminder notifications in 1 click.
 
 ---
 
-## 7. Legacy B2C Features Removed
+## 7. Legacy B2C Features Removed in Current Scope
 
 | Legacy Feature | Action | Product Rationale |
 | :--- | :---: | :--- |
@@ -191,8 +196,8 @@ On the Student Dashboard, `Mr. Learn` drives **Slot 1 (Top-Left Card)**:
 
 > [!NOTE]
 > **DELIVERY EVOLUTION NOTE**  
-> * **Phase 1 (Immediate Pilot Deployments)**: We utilize our existing learning delivery infrastructure wrapped in a pure white-label interface to ensure fast, seamless onboarding for our pilot clients.  
-> * **Phase 2 (Long-Term Scalable Engine)**: We will evolve toward a fully proprietary in-house learning engine with custom streaming, advanced interactive checkpoints, and AI-assisted study tools.
+> * **Current Scope (Immediate Client Handover)**: We utilize our existing learning delivery infrastructure wrapped in a pure white-label interface to ensure fast, seamless onboarding for our pilot clients.  
+> * **Future Scope (Long-Term Scalable Engine)**: We will evolve toward a fully proprietary in-house learning engine with custom streaming, advanced interactive checkpoints, and AI-assisted study tools.
 
 ---
 
