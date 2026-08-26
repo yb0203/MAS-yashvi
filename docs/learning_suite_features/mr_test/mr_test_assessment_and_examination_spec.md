@@ -51,9 +51,11 @@
 
 ---
 
-### 2.1 The Silent Single Sign-On (SSO) Handshake
-* **Zero Double-Login**: When an onboarded student clicks `[ 🚀 Start Assessment ]` on their Student Dashboard, the platform executes a **silent authentication handshake**.
-* The student transitions directly into `Mr. Test` **without ever being asked for a second username or password**.
+### 2.1 The Authentication Contrast & Seamless SSO Fix
+* **Current Operational Reality**:
+  - While `Mr. Learn` supports direct authenticated transition from the current student dashboard, **`Mr. Test` currently forces the student to log in again with separate credentials** on `ezexam.in`.
+  - For the upcoming client demos, **the rest of the EzExam platform (test canvas, questions, negative marking, timer) is completely demoable as-is**.
+  - Therefore, **the primary critical deliverable for Mr. Test in the current scope is fixing this secondary login** via a **Silent SSO Handshake** so students launch exams directly from Dashboard Slot 2 without entering credentials. Deeper UI/UX revamps will be phased into later versions.
 
 ---
 
