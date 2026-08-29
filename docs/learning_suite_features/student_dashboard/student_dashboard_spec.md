@@ -65,24 +65,32 @@ Positioned directly below the top header, this section gives the student instant
 │  │ 📚 SLOT 1: Coursework & Learning LMS     │  │ 🏆 SLOT 2: Overall Standing & Score│  │
 │  │ (Powered by Mr. Learn)                   │  │ (Cohort Benchmark & Readiness)     │  │
 │  │                                          │  │                                    │  │
-│  │ Enterprise Systems & Architecture        │  │ Batch Standing: Top 15% (#14 / 120)│  │
+│  │ Most Recent: Enterprise Systems Track    │  │ Batch Standing: Top 15% (#14 / 120)│  │
 │  │ Progress: [██████████████░░░░] 75%       │  │ Readiness Score: 78 / 100          │  │
 │  │ Next: 3.2 System Architecture (18m)      │  │ Competency: Quant 80% • SQL 75%    │  │
 │  │ [ ▶ RESUME COURSEWORK ➔ ]                │  │ [ 📊 View Performance Insights ➔ ] │  │
+│  │ ──────────────────────────────────────── │  │                                    │  │
+│  │ 🔗 [ 📚 View All Enrolled Courses (3) ➔ ]│  │                                    │  │
 │  └──────────────────────────────────────────┘  └────────────────────────────────────┘  │
 │                                                                                        │
 │  ┌──────────────────────────────────────────┐  ┌────────────────────────────────────┐  │
 │  │ 📝 SLOT 3: Upcoming Quizzes & Tests      │  │ 📊 SLOT 4: Recent Results & Review │  │
 │  │ (Powered by Mr. Test)                    │  │ (Scorecards & Diagnostic Gaps)     │  │
 │  │                                          │  │                                    │  │
-│  │ test-exam-2: Comprehensive Benchmark     │  │ Recent Test: test-exam-1           │  │
+│  │ Next Due: test-exam-2 (Benchmark)        │  │ Recent Test: test-exam-1           │  │
 │  │ 30 Questions • 60 Mins • Due Aug 31      │  │ Score: 13 / 40 (Accuracy: 88%)     │  │
 │  │ [ 🚀 LAUNCH ASSESSMENT ➔ ]               │  │ Weak Spot: Python Recursion (<50%) │  │
-│  │                                          │  │ [ 📄 View Solutions & Analysis ➔ ] │  │
+│  │ ──────────────────────────────────────── │  │ [ 📄 View Solutions & Analysis ➔ ] │  │
+│  │ 📅 [ +2 More Exams Scheduled ➔ ]         │  │                                    │  │
 │  └──────────────────────────────────────────┘  └────────────────────────────────────┘  │
 │                                                                                        │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+* **Slot 1 (Coursework)**: Displays the **most recent course** the student was learning, with an active progress bar, next lesson title, 1-click `[ Resume ]` CTA, and a clear secondary link: `[ 📚 View All Enrolled Courses ➔ ]` navigating to `/learn`. (No dropdown needed).
+* **Slot 2 (Standing & Score)**: Real-time cohort standing (e.g. `Top 15% • #14 / 120`) and composite **Readiness Score (78/100)**.
+* **Slot 3 (Upcoming Assessments)**: College admins control test scheduling to prevent overlaps. Displays the immediate upcoming deadline with a count badge: `[ +N More Exams Scheduled ➔ ]` linking to `/online-exams`.
+* **Slot 4 (Results & Review)**: Most recent exam scorecard with sectional breakdown, diagnostic weak spots, and solution link.
 
 ---
 
@@ -165,15 +173,30 @@ To onboard new students without annoying modal wizards, the platform supports a 
 
 ---
 
-## 9. Open Product Questions & Discussion Points
+## 9. Client Review Questions & Implementation Answers
+
+The following operational questions reflect how institutional decision-makers evaluate the Student Dashboard:
+
+### ❓ Question 1: What if a student is enrolled in multiple courses simultaneously?
+* **Answer**: Slot 1 automatically prioritizes the **most recently accessed course** with live progress and the 1-click `[ ▶ Resume ]` button. A secondary link **`[ 📚 View All Enrolled Courses (N) ➔ ]`** allows the student to navigate to `/learn` to browse their full assigned catalog. (Zero clutter, zero complex dropdowns).
+
+### ❓ Question 2: How are exam schedule overlaps prevented?
+* **Answer**: In our institutional model, assessments and quizzes are scheduled directly by the **College Admin / Academic Coordinator**, ensuring dates do not conflict. Slot 3 displays the immediate upcoming deadline along with a count pill: **`[ +N More Exams Scheduled ➔ ]`** linking to the full `/online-exams` schedule.
+
+### ❓ Question 3: How is the "Readiness Score (78/100)" in Slot 2 calculated?
+* **Answer**: The Readiness Score is a balanced composite metric:
+  $$\text{Readiness Score} = (50\% \times \text{Coursework Completion \%}) + (50\% \times \text{Average Assessment Accuracy})$$
+  This gives the learner and faculty a single reliable index of overall academic competence.
+
+---
+
+## 10. Open Product Questions & Discussion Points
 
 The following items are flagged for team review:
 
-### 📌 Open Point 1: Readiness Score Algorithm (Slot 2)
-* Determine the exact weighting formula for the **Readiness Score (0–100)** (e.g. 50% Course Completion + 50% Assessment Accuracy).
-
-### 📌 Open Point 2: Sample Practice Quiz Availability (Slot 3)
+### 📌 Open Point 1: Sample Practice Quiz Availability (Slot 3)
 * Confirm whether the **Sample Practice Quiz** should be a standardized 10-question general aptitude test provided by our academic team for all new batches.
 
-### 📌 Open Point 3: Notification Push Channels
+### 📌 Open Point 2: Notification Push Channels
 * In addition to the top-bar notification drawer, determine if critical exam deadlines should also trigger WhatsApp template reminders.
+
