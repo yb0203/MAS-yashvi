@@ -1,0 +1,51 @@
+{
+  "display_information": {
+    "name": "MAS Standup Bot",
+    "description": "Automated Standup Coordinator & Sprint Sync Bot for MAS AI Labs",
+    "background_color": "#111827"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "MAS Standup",
+      "always_online": true
+    },
+    "slash_commands": [
+      {
+        "command": "/standup",
+        "description": "Trigger your quick 1-minute daily standup update",
+        "should_escape": false
+      },
+      {
+        "command": "/sprint-summary",
+        "description": "Generate and post the current sprint summary",
+        "should_escape": false
+      },
+      {
+        "command": "/rollover-sprint",
+        "usage_hint": "[from_sprint] [to_sprint]",
+        "description": "Roll over incomplete tasks to the next sprint",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "chat:write",
+        "chat:write.public",
+        "commands",
+        "im:write",
+        "im:history",
+        "users:read",
+        "channels:history"
+      ]
+    }
+  },
+  "settings": {
+    "socket_mode_enabled": true,
+    "interactivity": {
+      "is_enabled": true
+    },
+    "org_deploy_enabled": false
+  }
+}

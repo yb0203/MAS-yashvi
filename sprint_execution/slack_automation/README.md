@@ -1,80 +1,81 @@
-# MAS AI Labs — Automated Slack Standup & Quick Update System
+# MAS AI Labs — Automated Slack Standup & Living Sprint Engine
 
-This system automates daily standup data collection for the remote **MAS AI Labs** team, ensuring tasks, blockers, and root causes are pre-populated before the **8:00 PM IST** daily standup call.
-
----
-
-## 🏗️ System Architecture & Workflow
+## 🎯 Architecture Overview
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               DAILY SLACK AUTOMATED STANDUP TIMELINE                   │
+│                        SLACK STANDUP BOT ENGINE                        │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 7:00 PM IST ──► Automated Slack Prompt sent to #ai-labs-standup        │
-│                 Bot parses LIVE_SPRINT_BOARD.md and pings owners with  │
-│                 their assigned daily tasks & blocker form.             │
+│ 7:00 PM IST ──► [Personal DMs to Owners]                               │
+│                 No main group spam! Individual teammates get a private │
+│                 DM with ONLY their scheduled tasks for today.          │
 │                                                                        │
-│ 7:00–7:40 PM ─► Teammates submit "Quick Updates" via Slack Thread     │
-│                 or interactive modal (Done, Status, Blocker & Reason). │
+│ 7:00–7:45 PM ─► [Ultra-Fast <1 Min Update]                             │
+│                 Teammates select:                                      │
+│                 • Status Dropdown: [x] Done | [-] In Progress          │
+│                 • RAG Dropdown:    🟢 Green | 🟡 Amber | 🔴 Red        │
+│                 • Quick Note:      PR link or Blocker description      │
 │                                                                        │
-│ 7:45 PM IST ──► Bot aggregates submissions into the Pre-Standup Digest │
-│                 card with RAG indicators and Blocker highlights.       │
+│ 7:45 PM IST ──► [Main Channel Pre-Standup Card]                        │
+│                 Single high-signal summary posted to #ai-labs-standup: │
+│                 • Tasks completed today                                │
+│                 • Red/Amber blockers requiring unblocking on call      │
+│                 • Direct Google Meet link for 8:00 PM call             │
 │                                                                        │
-│ 8:00 PM IST ──► 20-min Live Standup call focuses directly on unblocking│
-│                 the pre-aggregated Amber/Red items.                    │
+│ 8:30 PM IST ──► [2-Way Living Sprint Sync]                             │
+│                 Bot writes outcomes directly into SPRINT_0X_WEEK_0X.md │
+│                 and updates active blockers in MONTH_01_MASTER_PLAN.md │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🛠️ Implementation Options
+## 🚀 Quick Setup (1-Click App Manifest)
 
-### Option 1: Lightweight Python Script + Slack Webhook (Recommended & Ready)
-* Uses `slack_standup_bot.py` via cron, GitHub Actions, or local runner.
-* Parses `LIVE_SPRINT_BOARD.md` in real-time, extracts the day's active tasks by teammate, and posts formatted Block Kit cards to your Slack webhook URL.
-
-### Option 2: Slack Interactive Modal (Slack Bolt App)
-* Enables teammates to type `/quick-update` or `/standup` in Slack to open an interactive modal with dropdowns for status, text inputs for blockers and reasons, and auto-saves to markdown.
-
-### Option 3: Slack Native Workflow Builder
-* Import the JSON payloads in `slack_block_kit_payloads.json` into Slack's built-in Workflow Builder to schedule daily prompts at 7:00 PM IST.
+1. Go to **[api.slack.com/apps](https://api.slack.com/apps)** $\rightarrow$ Click **Create New App**.
+2. Select **From an app manifest**.
+3. Choose your Slack Workspace.
+4. Copy & paste the contents of [`slack_app_manifest.json`](./slack_app_manifest.json) $\rightarrow$ Click **Create**.
+5. Generate an **App-Level Token** with `connections:write` scope (starts with `xapp-...`).
+6. Install the app to your workspace and copy the **Bot User OAuth Token** (starts with `xoxb-...`).
 
 ---
 
-## 🚀 Quick Start (Running Option 1)
+## 🔐 Environment Variables (`.env`)
 
-### 1. Setup Environment
-```bash
-cd "/Users/yashvi/Documents/MAS - AI PM/sprint_execution/slack_automation"
-export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
-```
+Create a `.env` file in `sprint_execution/slack_automation/`:
 
-### 2. Test Local Run (Dry Run Mode)
-To see the exact Block Kit payload generated from `LIVE_SPRINT_BOARD.md` without posting to Slack:
-```bash
-python3 slack_standup_bot.py --day 1 --dry-run
-```
+```ini
+SLACK_BOT_TOKEN="xoxb-your-bot-token"
+SLACK_APP_TOKEN="xapp-your-app-token"
+SLACK_STANDUP_CHANNEL="#ai-labs-standup"
 
-### 3. Send 7:00 PM Daily Task Reminder to Slack
-```bash
-python3 slack_standup_bot.py --day 1 --mode prompt
-```
-
-### 4. Generate Pre-Standup Summary for 8:00 PM Call
-```bash
-python3 slack_standup_bot.py --day 1 --mode digest
+# Mapping team member names to their Slack User IDs (Right click profile in Slack -> Copy Member ID)
+SLACK_ID_GAURAV="U01XXXXXX"
+SLACK_ID_SHUBHAM="U02XXXXXX"
+SLACK_ID_ROHAN="U03XXXXXX"
+SLACK_ID_PRAKHAR="U04XXXXXX"
+SLACK_ID_YASHVI="U05XXXXXX"
 ```
 
 ---
 
-## ⚙️ Automated Scheduling (Cron Example)
+## ⚡ Slash Commands Available to Team
 
-Add this to your server or GitHub Actions workflow to run automatically Monday through Friday:
+| Slash Command | What It Does |
+|---|---|
+| `/standup` | Opens your personal daily standup modal on demand anytime. |
+| `/sprint-summary` | Generates an instant summary card of sprint progress. |
+| `/rollover-sprint 1 2` | Moves uncompleted/delayed tasks from Sprint 1 to Sprint 2 as `[Rollover]`. |
 
-```cron
-# 7:00 PM IST (13:30 UTC): Send Daily Quick Update Prompt
-30 13 * * 1-5 cd "/Users/yashvi/Documents/MAS - AI PM/sprint_execution/slack_automation" && python3 slack_standup_bot.py --mode auto-prompt
+---
 
-# 7:45 PM IST (14:15 UTC): Send Pre-Standup Digest Card
-15 14 * * 1-5 cd "/Users/yashvi/Documents/MAS - AI PM/sprint_execution/slack_automation" && python3 slack_standup_bot.py --mode auto-digest
+## 🧪 Testing Locally (Dry Run)
+
+```bash
+# Test Day 1 Personal DMs & 7:45 PM Digest Output
+python3 sprint_execution/slack_automation/slack_bolt_app.py --day 1 --mode dry-run
+
+# Run Live Bot in Socket Mode
+python3 sprint_execution/slack_automation/slack_bolt_app.py --mode socket-mode
 ```
