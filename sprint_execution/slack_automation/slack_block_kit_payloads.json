@@ -1,0 +1,155 @@
+{
+  "slack_interactive_modal_template": {
+    "type": "modal",
+    "title": {
+      "type": "plain_text",
+      "text": "Daily Standup Update",
+      "emoji": true
+    },
+    "submit": {
+      "type": "plain_text",
+      "text": "Submit Update",
+      "emoji": true
+    },
+    "close": {
+      "type": "plain_text",
+      "text": "Cancel",
+      "emoji": true
+    },
+    "blocks": [
+      {
+        "type": "input",
+        "block_id": "task_status_block",
+        "element": {
+          "type": "static_select",
+          "action_id": "task_status",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select task status",
+            "emoji": true
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "✅ Done / Completed",
+                "emoji": true
+              },
+              "value": "done"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "⏳ In Progress",
+                "emoji": true
+              },
+              "value": "in_progress"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "🚨 Blocked / Delayed",
+                "emoji": true
+              },
+              "value": "blocked"
+            }
+          ]
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Primary Task Status",
+          "emoji": true
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "output_block",
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "output_text",
+          "multiline": true,
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Describe what you completed today + link PR or document"
+          }
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Completed Deliverable / Output",
+          "emoji": true
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "timesink_block",
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "timesink_text",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "What specific work took the most time today?"
+          }
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Primary Work Consuming Time (Time Sink)",
+          "emoji": true
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "adhoc_block",
+        "optional": true,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "adhoc_text",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Any new incoming ad-hoc or custom MAS requests? (e.g. none / HR request)"
+          }
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Incoming Ad-Hoc MAS Requests",
+          "emoji": true
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "blockers_block",
+        "optional": true,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "blocker_text",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Who or what is blocking your progress?"
+          }
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Blocker / Dependency (If any)",
+          "emoji": true
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "reason_block",
+        "optional": true,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "reason_text",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Why is it delayed/blocked and what is the required resolution?"
+          }
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Delay Reason / Root Cause",
+          "emoji": true
+        }
+      }
+    ]
+  }
+}
