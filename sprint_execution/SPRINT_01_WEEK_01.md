@@ -1,4 +1,4 @@
-# Sprint 1 (Week 1: Days 1–4) — Set Up & Understand
+# Sprint 1 (Week 1: Days 1–4) — Set Up, Bug Fixing & Understand
 
 **Sprint Window**: Tuesday, Sept 1 (Day 1) – Friday, Sept 4 (Day 4), 2026  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Review**: **Friday, Sept 4 at 8:00 PM IST**  
@@ -9,7 +9,7 @@
 ## 🎯 Sprint 1 Core Goals (High-Level & Quantifiable)
 
 * **C1: Market & Intake**: Draft Intake Format v1 + compile 3 Client Dossiers (Orane, College Vidya, Chitkara).
-* **C2: Product & Demo**: Freeze official P0 Product List + triage all P0 bugs into severity tiers (Blockers/Major/Minor).
+* **C2: Product & Demo**: Freeze P0 Product List + **Fix 100% of Critical P0 Blocker Bugs in Week 1** + **Demo #1: Sales & Admin Suite (Prakhar)**.
 * **C3: Cloud & Cost**: 100% GCP & AWS asset inventory completed + master map of all AI/API keys to modules.
 * **C4: Leadership & Enablers**: Hand over QA & PM Intern JDs to HR + launch Friday Review #1 (Sept 4, 8:00 PM).
 
@@ -33,8 +33,10 @@
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
 | **S1.7** | Freeze P0 product/module list & assign owners | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[ ] Planned` | Final P0 list with named module owners across both suites | - | None | None | 🟢 |
-| **S1.8** | Triage all P0 bugs across live suites by severity | **Shubham** *(Rohan)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Critical / blocker bug list ready with reproduction steps | - | None | None | 🟢 |
-| **S1.9** | Define clean demo environment requirements | **Shubham** *(Rohan)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Spec sheet for dummy student rosters & sanitized CRM leads | - | None | None | 🟢 |
+| **S1.8** | Triage all P0 bugs across live suites by severity | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[ ] Planned` | Critical / blocker bug list ready with reproduction steps | - | None | None | 🟢 |
+| **S1.9** | **Fix critical / blocking P0 bugs on staging** | **Rohan** *(Shubham)* | **Fri, Sept 4 (Day 4)** | `[ ] Planned` | **Critical blocker issues cleared in Week 1; verified** | - | None | None | 🟢 |
+| **S1.10**| Define clean demo environment requirements | **Shubham** *(Rohan)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Spec sheet for dummy student rosters & sanitized CRM leads | - | None | None | 🟢 |
+| **S1.11**| **Demo #1: Sales & Admin Suite Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 3 (Day 3)** | `[ ] Planned` | **Weekday baseline demo of Sales CRM & Workflow Builder** | - | None | None | 🟢 |
 
 ---
 
@@ -42,10 +44,10 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S1.10**| Inventory current GCP projects, services & VMs | **Rohan** *(Shubham)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Complete GCP infrastructure inventory with instance sizes | - | None | None | 🟢 |
-| **S1.11**| Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | 🟢 |
-| **S1.12**| Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | 🟢 |
-| **S1.13**| Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | 🟢 |
+| **S1.12**| Inventory current GCP projects, services & VMs | **Rohan** *(Shubham)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Complete GCP infrastructure inventory with instance sizes | - | None | None | 🟢 |
+| **S1.13**| Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | 🟢 |
+| **S1.14**| Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | 🟢 |
+| **S1.15**| Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | 🟢 |
 
 ---
 
@@ -53,10 +55,10 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S1.14**| Kick off QA Tester (contract/2-mo) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate pipeline with HR | - | None | None | 🟢 |
-| **S1.15**| Kick off PM Intern (25 hrs/wk) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate sourcing | - | None | None | 🟢 |
-| **S1.16**| Initial September GPU/compute sync with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Compute vendor contacts & initial workload candidate list | - | None | None | 🟢 |
-| **S1.17**| **Weekly Product & Capability Review #1 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Review minutes, RAG check & ad-hoc workload audit | - | None | None | 🟢 |
+| **S1.16**| Kick off QA Tester (contract/2-mo) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate pipeline with HR | - | None | None | 🟢 |
+| **S1.17**| Kick off PM Intern (25 hrs/wk) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate sourcing | - | None | None | 🟢 |
+| **S1.18**| Initial September GPU/compute sync with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Compute vendor contacts & initial workload candidate list | - | None | None | 🟢 |
+| **S1.19**| **Weekly Product & Capability Review #1 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Review minutes, Week 1 bug fix verification & RAG audit | - | None | None | 🟢 |
 
 ---
 

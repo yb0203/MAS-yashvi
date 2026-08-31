@@ -1,4 +1,4 @@
-# Sprint 2 (Week 2: Days 7–11) — Build the Foundation & Intake Sign-off
+# Sprint 2 (Week 2: Days 7–11) — In-House LMS Build (Part 1) & Intake Sign-off
 
 **Sprint Window**: Monday, Sept 7 (Day 7) – Friday, Sept 11 (Day 11), 2026  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Review**: **Friday, Sept 11 at 8:00 PM IST**  
@@ -8,8 +8,8 @@
 
 ## 🎯 Sprint 2 Core Goals (High-Level & Quantifiable)
 
-* **C1: Market & Intake**: Sign off Intake Process with Pranab Sir on **Thu, Sept 10 (Day 10 Milestone)** + run 3 Scoping Calls + prep **Catalogues v1 (for Sept 14/Day 14)**.
-* **C2: Product & Demo**: Fix 100% of critical P0 blocker bugs + seed clean, sanitized staging demo environments for both suites.
+* **C1: Market & Intake**: Sign off Intake Process with Pranab Sir (**Thu, Sept 10 / Day 10 Milestone**) + run 3 Scoping Calls + prep **Catalogues v1 (for Sept 14/Day 14)**.
+* **C2: Product & Demo**: **Kick off In-House LMS Prototype Build (Part 1: Core Content Delivery Engine replacing Graphy in Mr. Learn)** + clean demo envs + **Demo #2: Learning Suite (Yashvi)**.
 * **C3: Cloud & Cost**: Teardown idle cloud resources + enforce cost tagging + prototype token/latency logging middleware.
 * **C4: Leadership & Enablers**: Complete QA & PM Intern candidate interviews (offers extended) + GPU architecture review with Sajan.
 
@@ -30,14 +30,15 @@
 
 ---
 
-## 📦 Compartment 2: Product & Demo Stabilisation
+## 📦 Compartment 2: Product, In-House LMS & Demo Stabilisation
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.9** | Fix critical / blocking P0 bugs across live suites | **Rohan** *(Shubham)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Zero blocker bugs on staging; verification pass | - | None | None | 🟢 |
-| **S2.10**| Curate clean demo environment: **Learning Suite** | **Shubham** *(Rohan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Seeded with safe, client-presentable student data | - | None | None | 🟢 |
-| **S2.11**| Curate clean demo environment: **Sales CRM** | **Shubham** *(Rohan)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Stripped of internal MAS lead data; clean CRM pipeline | - | None | None | 🟢 |
-| **S2.12**| Start externalisation assessment & dependency audit | **Shubham** *(Prakhar)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Identify hardcoded auth, tenant DB & branding dependencies | - | None | None | 🟢 |
+| **S2.9** | **In-House LMS Architecture & Data Schema Design** | **Shubham** *(Rohan)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Technical architecture spec for replacing Graphy in Mr. Learn | - | None | None | 🟢 |
+| **S2.10**| **In-House LMS Core Build (Part 1: Course & Content Engine)** | **Shubham** *(Rohan)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | In-house course structure, modules & video delivery service | - | None | None | 🟢 |
+| **S2.11**| Curate clean demo environment: **Learning Suite** | **Shubham** *(Rohan)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Seeded with safe, client-presentable student data | - | None | None | 🟢 |
+| **S2.12**| Curate clean demo environment: **Sales CRM** | **Shubham** *(Rohan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Stripped of internal MAS lead data; clean CRM pipeline | - | None | None | 🟢 |
+| **S2.13**| **Demo #2: Learning Suite Walkthrough** | **Yashvi** *(Shubham)* | **Wed, Sept 9 (Day 9)** | `[ ] Planned` | **Weekday baseline demo of Mr. Learn, Mr. Test, Mr. Mentor** | - | None | None | 🟢 |
 
 ---
 
@@ -45,11 +46,11 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.13**| Identify idle, duplicate, orphaned cloud resources | **Rohan** *(Shubham)* | Mon, Sept 7 (Day 7) | `[ ] Planned` | Cloud cleanup action list (disks, IPs, test VMs) | - | None | None | 🟢 |
-| **S2.14**| Clean up unused resources & permissions in GCP/AWS | **Rohan** *(Shubham)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Reduced waste & cleaner cloud estate | - | None | None | 🟢 |
-| **S2.15**| Apply naming, ownership and cost tagging to cloud assets | **Rohan** *(Shubham)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Resources traceable by product and environment | - | None | None | 🟢 |
-| **S2.16**| Prototype token & latency tracking helper / middleware | **Rohan** *(Shubham)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Request-level token logging on suite endpoints | - | None | None | 🟢 |
-| **S2.17**| Score collected departmental automation workflows | **Rohan** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Workflows ranked by effort, impact, hours saved | - | None | None | 🟢 |
+| **S2.14**| Identify idle, duplicate, orphaned cloud resources | **Rohan** *(Shubham)* | Mon, Sept 7 (Day 7) | `[ ] Planned` | Cloud cleanup action list (disks, IPs, test VMs) | - | None | None | 🟢 |
+| **S2.15**| Clean up unused resources & permissions in GCP/AWS | **Rohan** *(Shubham)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Reduced waste & cleaner cloud estate | - | None | None | 🟢 |
+| **S2.16**| Apply naming, ownership and cost tagging to cloud assets | **Rohan** *(Shubham)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Resources traceable by product and environment | - | None | None | 🟢 |
+| **S2.17**| Prototype token & latency tracking helper / middleware | **Rohan** *(Shubham)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Request-level token logging on suite endpoints | - | None | None | 🟢 |
+| **S2.18**| Score collected departmental automation workflows | **Rohan** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Workflows ranked by effort, impact, hours saved | - | None | None | 🟢 |
 
 ---
 
@@ -57,11 +58,11 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.18**| Screen resumes & interview QA Tester candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | QA candidate shortlisted & evaluated | - | None | None | 🟢 |
-| **S2.19**| Screen resumes & interview PM Intern candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | PM Intern candidate evaluated | - | None | None | 🟢 |
-| **S2.20**| Extend offers for QA Tester and PM Intern | **Gaurav** *(HR/Admin)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Offers extended for Sept 21 onboarding | - | None | None | 🟢 |
-| **S2.21**| Define GPU model-serving architecture with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | API vs Self-hosted cost comparison note | - | None | None | 🟢 |
-| **S2.22**| **Weekly Review #2: Month 1 Mid-Point Sign-off** | **Gaurav** *(All)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Intake sign-off confirmed; Month 1 mid-point review | - | None | None | 🟢 |
+| **S2.19**| Screen resumes & interview QA Tester candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | QA candidate shortlisted & evaluated | - | None | None | 🟢 |
+| **S2.20**| Screen resumes & interview PM Intern candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | PM Intern candidate evaluated | - | None | None | 🟢 |
+| **S2.21**| Extend offers for QA Tester and PM Intern | **Gaurav** *(HR/Admin)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Offers extended for Sept 21 onboarding | - | None | None | 🟢 |
+| **S2.22**| Define GPU model-serving architecture with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | API vs Self-hosted cost comparison note | - | None | None | 🟢 |
+| **S2.23**| **Weekly Review #2: Month 1 Mid-Point Sign-off** | **Gaurav** *(All)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Intake sign-off confirmed; LMS Build Part 1 progress review | - | None | None | 🟢 |
 
 ---
 

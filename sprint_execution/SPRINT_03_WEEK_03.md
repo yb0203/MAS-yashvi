@@ -1,4 +1,4 @@
-# Sprint 3 (Week 3: Days 14–18) — Clean, Validate & Prepare
+# Sprint 3 (Week 3: Days 14–18) — In-House LMS Build (Part 2) & Scopes
 
 **Sprint Window**: Monday, Sept 14 (Day 14) – Friday, Sept 18 (Day 18), 2026 *(Extending to Day 20/21 milestones on Sept 20/21)*  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Review**: **Friday, Sept 18 at 8:00 PM IST**  
@@ -8,8 +8,8 @@
 
 ## 🎯 Sprint 3 Core Goals (High-Level & Quantifiable)
 
-* **C1: Market & Intake**: **Publish Catalogues v1 (Mon, Sept 14 / Day 14)** + Secure **3 Accepted Written POC Scopes (Day 20 Milestone)**.
-* **C2: Product & Demo**: **Publish Externalisation Gap Sheet (Fri, Sept 18 / Day 18 Milestone)** + start QA regression test suite.
+* **C1: Market & Intake**: **Publish Catalogues v1 (Mon, Sept 14 / Day 14)** + Secure **3 Accepted Written POC Scopes (Sun, Sept 20 / Day 20)**.
+* **C2: Product & Demo**: **In-House LMS Prototype Build (Part 2: Student OS & Test Integration into Mr. Learn)** + **Demo #3: Sales & Admin Suite (Prakhar)** + start QA regression. *(Gap Sheet deferred to Month 2)*.
 * **C3: Cloud & Cost**: Switch on **AI Cost Instrumentation Baseline (Mon, Sept 21 / Day 21 Milestone)** + separate dev/demo/prod + build 1st automation prototype.
 * **C4: Leadership & Enablers**: **Onboard QA Tester & PM Intern (Mon, Sept 21 / Day 21 Milestone)** + advance GPU vendor terms with Sajan.
 
@@ -30,15 +30,17 @@
 
 ---
 
-## 📦 Compartment 2: Product & Demo Stabilisation
+## 📦 Compartment 2: Product, In-House LMS & Demo Stabilisation
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S3.9** | Create short 15-min demo flow/script per suite | **Shubham** *(Prakhar, Yashvi)* | Wed, Sept 16 (Day 16) | `[ ] Planned` | Business-ready demo flow & narrative scripts | - | None | None | 🟢 |
-| **S3.10**| Classify externalisation gaps (Pilot vs Scale blocking) | **Prakhar** *(Gaurav)* | Wed, Sept 16 (Day 16) | `[ ] Planned` | Clear prioritization of what must be fixed for pilots vs scale | - | None | None | 🟢 |
-| **S3.11**| Size effort and cost-to-serve per suite | **Prakhar** *(Shubham)* | Thu, Sept 17 (Day 17) | `[ ] Planned` | Multi-tenancy, RBAC, data isolation, white-label effort sized | - | None | None | 🟢 |
-| **S3.12**| **Publish Externalisation Gap Sheet (M3)** | **Prakhar** *(Shubham, Gaurav)* | **Fri, Sept 18 (Day 18)** | `[ ] Planned` | **Gap Sheet published for Learning Suite & Sales CRM** | - | None | None | 🟢 |
+| **S3.9** | **In-House LMS Build (Part 2: Student OS & Progress Tracking)** | **Shubham** *(Rohan)* | Wed, Sept 16 (Day 16) | `[ ] Planned` | Student profile, module progress & analytics tracking module | - | None | None | 🟢 |
+| **S3.10**| **In-House LMS Integration with Mr. Learn & Mr. Test** | **Shubham** *(Rohan)* | Fri, Sept 18 (Day 18) | `[ ] Planned` | Working prototype connecting Mr. Learn UI to in-house LMS | - | None | None | 🟢 |
+| **S3.11**| Create short 15-min demo flow/script per suite | **Shubham** *(Prakhar, Yashvi)* | Wed, Sept 16 (Day 16) | `[ ] Planned` | Business-ready demo flow & narrative scripts | - | None | None | 🟢 |
+| **S3.12**| **Demo #3: Sales & Admin Suite In-Depth Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 17 (Day 17)** | `[ ] Planned` | **Weekday demo of Sales CRM, Voice Agent & Workflow Builder** | - | None | None | 🟢 |
 | **S3.13**| Start QA regression test suite on P0 products | **QA / Tester** *(Shubham)* | Fri, Sept 18 (Day 18) | `[ ] Planned` | Regression test cases drafted and executing | - | None | None | 🟢 |
+
+*(Note: Externalisation Gap Sheet is explicitly scheduled for Month 2 engineering backlog)*.
 
 ---
 
@@ -59,7 +61,7 @@
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
 | **S3.19**| Advance GPU compute/vendor discussions with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 17 (Day 17) | `[ ] Planned` | Hardware spec options, vendor terms, and cost projection | - | None | None | 🟢 |
-| **S3.20**| **Weekly Product & Capability Review #3 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 18 (Day 18) | `[ ] Planned` | Review minutes, Gap Sheet preview & ad-hoc workload audit | - | None | None | 🟢 |
+| **S3.20**| **Weekly Product & Capability Review #3 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 18 (Day 18) | `[ ] Planned` | Review minutes, LMS Prototype Part 2 preview & ad-hoc audit | - | None | None | 🟢 |
 | **S3.21**| **Onboard QA Tester & PM Intern (M8)** | **Gaurav** *(HR/Admin)* | **Mon, Sept 21 (Day 21)** | `[ ] Planned` | **QA active on P0 regression; Intern active on tasks** | - | None | None | 🟢 |
 
 ---
