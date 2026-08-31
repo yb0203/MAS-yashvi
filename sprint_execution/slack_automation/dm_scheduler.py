@@ -72,9 +72,7 @@ def dispatch_channel_digest(client, main_channel: str, meet_url: str):
     card = build_pre_standup_digest_card(
         day=day,
         sprint_num=sprint_num,
-        total_tasks=len(tasks),
-        done_count=len(done_tasks),
-        blocked_tasks=blocked_tasks,
+        all_tasks=tasks,
         meet_url=meet_url
     )
 

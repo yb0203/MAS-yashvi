@@ -37,7 +37,8 @@ from block_kit_views import (
     build_personal_dm_view,
     build_consolidated_update_modal,
     build_pre_standup_digest_card,
-    build_post_standup_gemini_card
+    build_post_standup_gemini_card,
+    map_status_to_rag
 )
 from gemini_notes_parser import process_and_sync_gemini_notes
 from dm_scheduler import start_standup_scheduler, get_current_september_day
@@ -102,7 +103,7 @@ if app:
 
         for t_id in task_ids:
             status_val = values.get(f"status_{t_id}", {}).get(f"select_status_{t_id}", {}).get("selected_option", {}).get("value", "[-] In Progress")
-            rag_val = values.get(f"rag_{t_id}", {}).get(f"select_rag_{t_id}", {}).get("selected_option", {}).get("value", "🟢")
+            rag_val = map_status_to_rag(status_val, has_blocker=(blocker.lower() != "none" and blocker != "-"))
             update_sprint_task(sprint_file, t_id, status_val, outcome, blocker, rag_val)
 
         tasks = parse_sprint_tasks(sprint_file)
@@ -205,7 +206,7 @@ def main():
             print(json.dumps(build_personal_dm_view(owner, o_tasks, args.day, sprint_num), indent=2))
 
         print(f"\n================ [7:45 PM PRE-STANDUP DIGEST CARD] ================\n")
-        print(json.dumps(build_pre_standup_digest_card(args.day, sprint_num, len(tasks), 0, [], GOOGLE_MEET_URL), indent=2))
+        print(json.dumps(build_pre_standup_digest_card(args.day, sprint_num, tasks, GOOGLE_MEET_URL), indent=2))
 
     elif args.mode == "test-gemini-notes":
         highlight = process_and_sync_gemini_notes(args.day, args.notes)

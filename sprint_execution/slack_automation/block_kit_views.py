@@ -3,10 +3,22 @@ MAS AI Labs — Slack Block Kit UI Views & Templates
 Author: MAS AI PM
 Description: Centralized UI library generating clean, modern Slack Block Kit
              cards for Personal DMs, Modals, Channel Digests, and Gemini Day Highlights.
+             - Automated Status -> RAG mapping (Zero redundant dropdowns for teammates).
+             - Structured "Planned vs Done" standup cards.
 """
 
 import json
 from typing import Dict, Any, List
+
+def map_status_to_rag(status: str, has_blocker: bool = False) -> str:
+    """Automatically maps task status to RAG indicator to eliminate manual dropdowns."""
+    s_lower = status.lower()
+    if "blocked" in s_lower or "[!]" in s_lower or has_blocker:
+        return "🔴"
+    elif "done" in s_lower or "[x]" in s_lower:
+        return "🟢"
+    else:
+        return "🟢"
 
 def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: int, sprint_num: int) -> List[Dict[str, Any]]:
     """Builds a compact, personalized 1-screen DM view for task owners."""
@@ -33,7 +45,7 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
                 "type": "mrkdwn",
                 "text": (
                     f"⏰ *Standup Call is at 8:00 PM IST.*\n"
-                    f"Please take *30–45 seconds* to update your scheduled deliverable(s) below:"
+                    f"Please take *20–30 seconds* to update your status below:"
                 )
             }
         },
@@ -53,7 +65,7 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
                     "type": "button",
                     "text": {
                         "type": "plain_text",
-                        "text": "⚡ Quick Update (< 45s)",
+                        "text": "⚡ Quick Update (< 30s)",
                         "emoji": True
                     },
                     "style": "primary",
@@ -65,13 +77,17 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
     ]
 
 def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]], sprint_num: int, day: int) -> Dict[str, Any]:
-    """Generates the single-screen consolidated modal listing all assigned tasks for today."""
+    """
+    Generates the simplified single-screen modal:
+    - Teammate selects ONLY the Status dropdown (RAG is mapped automatically).
+    - Optional PR/outcome link and blocker notes.
+    """
     blocks = [
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f"Quickly update your tasks for **Day {day}** below. Select status and health, and add any blocker note."
+                "text": f"Select status for your tasks today (**Day {day}**). RAG health is calculated automatically."
             }
         },
         {"type": "divider"}
@@ -99,27 +115,12 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
                     ],
                     "initial_option": {"text": {"type": "plain_text", "text": "⏳ In Progress"}, "value": "[-] In Progress"}
                 },
-                "label": {"type": "plain_text", "text": f"Status ({t['id']})"}
-            },
-            {
-                "type": "input",
-                "block_id": f"rag_{t['id']}",
-                "element": {
-                    "type": "static_select",
-                    "action_id": f"select_rag_{t['id']}",
-                    "options": [
-                        {"text": {"type": "plain_text", "text": "🟢 Green (On Track)"}, "value": "🟢"},
-                        {"text": {"type": "plain_text", "text": "🟡 Amber (At Risk)"}, "value": "🟡"},
-                        {"text": {"type": "plain_text", "text": "🔴 Red (Blocked)"}, "value": "🔴"}
-                    ],
-                    "initial_option": {"text": {"type": "plain_text", "text": "🟢 Green (On Track)"}, "value": "🟢"}
-                },
-                "label": {"type": "plain_text", "text": f"RAG ({t['id']})"}
-            },
-            {"type": "divider"}
+                "label": {"type": "plain_text", "text": f"Status for {t['id']}"}
+            }
         ])
 
     blocks.extend([
+        {"type": "divider"},
         {
             "type": "input",
             "block_id": "deliverable_link_block",
@@ -140,7 +141,7 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
                 "action_id": "blocker_notes_input",
                 "placeholder": {"type": "plain_text", "text": "None / Waiting for API key / Dependency"}
             },
-            "label": {"type": "plain_text", "text": "Blocker / Delay Reason (If any)"}
+            "label": {"type": "plain_text", "text": "Blocker / Dependency (If any)"}
         }
     ])
 
@@ -149,19 +150,31 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
         "callback_id": "submit_consolidated_standup_callback",
         "private_metadata": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day, "task_ids": [t["id"] for t in tasks]}),
         "title": {"type": "plain_text", "text": "Daily Standup Update", "emoji": True},
-        "submit": {"type": "plain_text", "text": "Submit Update", "emoji": True},
+        "submit": {"type": "plain_text", "text": "Submit", "emoji": True},
         "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
         "blocks": blocks
     }
 
-def build_pre_standup_digest_card(day: int, sprint_num: int, total_tasks: int, done_count: int, blocked_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
-    """Generates the 7:45 PM summary card for #all-mas-ai-labs."""
+def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
+    """
+    Generates the structured 7:45 PM Pre-Standup Card in #all-mas-ai-labs:
+    - 📌 Planned Today
+    - ✅ Done Today
+    - 🚨 Blockers / Delays
+    """
+    done_tasks = [t for t in all_tasks if "done" in t["status"].lower() or "[x]" in t["status"]]
+    in_progress = [t for t in all_tasks if "in progress" in t["status"].lower() or "[-]" in t["status"]]
+    blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"]]
+
+    planned_bullets = [f"• `{t['id']}` ({t['owner']}): {t['task']}" for t in all_tasks]
+    done_bullets = [f"• `{t['id']}` ({t['owner']}): {t['task']} ↳ _{t['actual_outcome'] or 'Completed'}_" for t in done_tasks] if done_tasks else ["• _No deliverables completed yet today_"]
+    
     blocks = [
         {
             "type": "header",
             "text": {
                 "type": "plain_text",
-                "text": f"📊 Standup Digest (Sprint {sprint_num} | Day {day})",
+                "text": f"📊 Daily Standup Digest (Sprint {sprint_num} | Day {day})",
                 "emoji": True
             }
         },
@@ -171,33 +184,42 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, total_tasks: int, d
                 "type": "mrkdwn",
                 "text": (
                     f"📞 *Google Meet Standup starts at 8:00 PM IST (in 15 mins)*\n"
-                    f"• *Progress Today:* `{done_count}/{total_tasks} tasks completed`\n"
-                    f"• *Active Blockers Flagged:* `{len(blocked_tasks)}`"
+                    f"• *Progress Today:* `{len(done_tasks)}/{len(all_tasks)} completed` | "
+                    f"`{len(in_progress)} in progress` | `{len(blocked_tasks)} blocked`"
                 )
             }
         },
-        {"type": "divider"}
+        {"type": "divider"},
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*📌 What Was Planned Today:*\n" + "\n".join(planned_bullets[:6])
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*✅ What Was Done Today:*\n" + "\n".join(done_bullets)
+            }
+        }
     ]
 
     if blocked_tasks:
         blocker_text = []
         for t in blocked_tasks:
-            blocker_text.append(f"🚨 *`{t['id']}` ({t['owner']})*: {t['task']}\n   ↳ *Blocker:* _{t['blocker']}_")
-        blocks.append({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*⚠️ Priority Items to Discuss & Unblock on Call:*\n" + "\n".join(blocker_text)
+            blocker_text.append(f"• 🚨 *`{t['id']}` ({t['owner']})*: {t['task']}\n   ↳ *Blocker:* _{t['blocker']}_")
+        blocks.extend([
+            {"type": "divider"},
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*⚠️ Priority Items to Discuss & Unblock on Call:*\n" + "\n".join(blocker_text)
+                }
             }
-        })
-    else:
-        blocks.append({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "🎉 *Zero Blockers Logged!* All active deliverables on track."
-            }
-        })
+        ])
 
     blocks.extend([
         {"type": "divider"},
@@ -224,14 +246,14 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, total_tasks: int, d
     return {"blocks": blocks}
 
 def build_post_standup_gemini_card(day: int, sprint_num: int, highlight_text: str) -> Dict[str, Any]:
-    """Generates the 8:25 PM Post-Standup Day Highlights card."""
+    """Generates the structured 8:25 PM Post-Standup Day Highlights card."""
     return {
         "blocks": [
             {
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": f"📝 Post-Standup Highlights & Decisions (Day {day})",
+                    "text": f"📝 Post-Standup Day Highlights (Sprint {sprint_num} | Day {day})",
                     "emoji": True
                 }
             },
@@ -239,7 +261,7 @@ def build_post_standup_gemini_card(day: int, sprint_num: int, highlight_text: st
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"✨ *Key Standup Takeaways (Powered by Google Meet Gemini Notes):*\n\n{highlight_text}"
+                    "text": f"✨ *Finalized Decisions & Action Items (Google Meet Gemini Notes):*\n\n{highlight_text}"
                 }
             },
             {"type": "divider"},
@@ -248,7 +270,7 @@ def build_post_standup_gemini_card(day: int, sprint_num: int, highlight_text: st
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": f"✅ Synced directly into `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` Daily Log."
+                        "text": f"✅ Daily record updated in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and `MONTH_01_MASTER_PLAN.md`."
                     }
                 ]
             }
