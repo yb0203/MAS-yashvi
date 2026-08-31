@@ -38,7 +38,7 @@
 | **S3.9** | **In-House LMS Build (Part 2: Student OS & Progress Tracking)** | **Shubham** *(Rohan)* | Wed, Sept 16 (Day 16) | `[ ] Planned` | Student profile, module progress & analytics tracking module | - | None | None | 🟢 |
 | **S3.10**| **In-House LMS Integration with Mr. Learn & Mr. Test** | **Shubham** *(Rohan)* | Fri, Sept 18 (Day 18) | `[ ] Planned` | Working prototype connecting Mr. Learn UI to in-house LMS | - | None | None | 🟢 |
 | **S3.11**| Create short 15-min demo flow/script per suite | **Shubham** *(Prakhar, Yashvi)* | Wed, Sept 16 (Day 16) | `[ ] Planned` | Business-ready demo flow & narrative scripts | - | None | None | 🟢 |
-| **S3.12**| **Demo #3: Sales & Admin Suite In-Depth Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 17 (Day 17)** | `[ ] Planned` | **Weekday demo of Sales CRM, Voice Agent & Workflow Builder** | - | None | None | 🟢 |
+| **S3.12**| **Demo #3: Sales & Admin Suite Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 17 (Day 17)** | `[ ] Planned` | **Weekday demo of Sales & Admin Suite** | - | None | None | 🟢 |
 | **S3.13**| Start QA regression test suite on P0 products | **QA / Tester** *(Shubham)* | Fri, Sept 18 (Day 18) | `[ ] Planned` | Regression test cases drafted and executing | - | None | None | 🟢 |
 
 *(Note: Externalisation Gap Sheet is explicitly scheduled for Month 2 engineering backlog)*.

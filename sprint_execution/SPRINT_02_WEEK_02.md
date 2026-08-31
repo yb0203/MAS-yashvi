@@ -39,7 +39,7 @@
 | **S2.10**| **In-House LMS Core Build (Part 1: Course & Content Engine)** | **Shubham** *(Rohan)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | In-house course structure, modules & video delivery service | - | None | None | 🟢 |
 | **S2.11**| Curate clean demo environment: **Learning Suite** | **Shubham** *(Rohan)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Seeded with safe, client-presentable student data | - | None | None | 🟢 |
 | **S2.12**| Curate clean demo environment: **Sales CRM** | **Shubham** *(Rohan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Stripped of internal MAS lead data; clean CRM pipeline | - | None | None | 🟢 |
-| **S2.13**| **Demo #2: Learning Suite Walkthrough** | **Yashvi** *(Shubham)* | **Wed, Sept 9 (Day 9)** | `[ ] Planned` | **Weekday baseline demo of Mr. Learn, Mr. Test, Mr. Mentor** | - | None | None | 🟢 |
+| **S2.13**| **Demo #2: Learning Suite Walkthrough** | **Yashvi** *(Shubham)* | **Wed, Sept 9 (Day 9)** | `[ ] Planned` | **Weekday baseline demo of Learning Suite** | - | None | None | 🟢 |
 
 ---
 

@@ -37,7 +37,7 @@
 | **S1.8** | Triage all P0 bugs across live suites by severity | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[ ] Planned` | Critical / blocker bug list ready with reproduction steps | - | None | None | 🟢 |
 | **S1.9** | **Fix critical / blocking P0 bugs on staging** | **Rohan** *(Shubham)* | **Fri, Sept 4 (Day 4)** | `[ ] Planned` | **Critical blocker issues cleared in Week 1; verified** | - | None | None | 🟢 |
 | **S1.10**| Define clean demo environment requirements | **Shubham** *(Rohan)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Spec sheet for dummy student rosters & sanitized CRM leads | - | None | None | 🟢 |
-| **S1.11**| **Demo #1: Sales & Admin Suite Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 3 (Day 3)** | `[ ] Planned` | **Weekday baseline demo of Sales CRM & Workflow Builder** | - | None | None | 🟢 |
+| **S1.11**| **Demo #1: Sales & Admin Suite Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 3 (Day 3)** | `[ ] Planned` | **Weekday baseline demo of Sales & Admin Suite** | - | None | None | 🟢 |
 
 ---
 

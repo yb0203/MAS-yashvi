@@ -31,7 +31,7 @@
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
 | **S4.4** | Execute full demo dry-runs with QA on both live suites | **Shubham** *(QA, Rohan)* | Wed, Sept 23 (Day 23) | `[ ] Planned` | End-to-end regression & flow validation pass | - | None | None | 🟢 |
-| **S4.5** | **Demo #4: Learning Suite with In-House LMS Prototype Walkthrough** | **Yashvi** *(Shubham)* | **Thu, Sept 24 (Day 24)** | `[ ] Planned` | **Weekday demo of Mr. Learn on in-house LMS + Mr. Test/Mentor** | - | None | None | 🟢 |
+| **S4.5** | **Demo #4: Learning Suite Walkthrough (with LMS Prototype)** | **Yashvi** *(Shubham)* | **Thu, Sept 24 (Day 24)** | `[ ] Planned` | **Weekday demo of Learning Suite with In-House LMS Preview** | - | None | None | 🟢 |
 | **S4.6** | Fix all remaining demo and staging edge cases | **Rohan** *(Shubham)* | Thu, Sept 24 (Day 24) | `[ ] Planned` | Zero critical bugs; staging rock solid | - | None | None | 🟢 |
 | **S4.7** | **P0 Stabilisation & Demo Readiness Sign-Off (M2)** | **Shubham** *(Rohan, QA)* | **Fri, Sept 25 (Day 25)** | `[ ] Planned` | **100% of P0 products demo-able on 24h notice; zero critical bugs** | - | None | None | 🟢 |
 
