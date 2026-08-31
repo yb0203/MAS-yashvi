@@ -1,5 +1,6 @@
 # Sprint 4 (Week 4: Days 21–30 / Month-End Close) — Sign Off & Handover
 
+**Function Head**: Gaurav (CTO) | **AI PM Lead**: Yashvi  
 **Sprint Window**: Monday, Sept 21 (Day 21) – Wednesday, Sept 30 (Day 30), 2026  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Reviews**: **Friday, Sept 25 (8:00 PM)** & **Wednesday, Sept 30 (8:00 PM)**  
 **Sprint Status**: `[ ] Planned` | **RAG**: 🟢 ON TRACK  

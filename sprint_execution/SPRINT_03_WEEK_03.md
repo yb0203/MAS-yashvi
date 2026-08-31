@@ -1,5 +1,6 @@
 # Sprint 3 (Week 3: Days 14–18) — In-House LMS Build (Part 2) & Scopes
 
+**Function Head**: Gaurav (CTO) | **AI PM Lead**: Yashvi  
 **Sprint Window**: Monday, Sept 14 (Day 14) – Friday, Sept 18 (Day 18), 2026 *(Extending to Day 20/21 milestones on Sept 20/21)*  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Review**: **Friday, Sept 18 at 8:00 PM IST**  
 **Sprint Status**: `[ ] Planned` | **RAG**: 🟢 ON TRACK  

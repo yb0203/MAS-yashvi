@@ -1,5 +1,6 @@
 # Sprint 2 (Week 2: Days 7–11) — In-House LMS Build (Part 1) & Intake Sign-off
 
+**Function Head**: Gaurav (CTO) | **AI PM Lead**: Yashvi  
 **Sprint Window**: Monday, Sept 7 (Day 7) – Friday, Sept 11 (Day 11), 2026  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Review**: **Friday, Sept 11 at 8:00 PM IST**  
 **Sprint Status**: `[ ] Planned` | **RAG**: 🟢 ON TRACK  

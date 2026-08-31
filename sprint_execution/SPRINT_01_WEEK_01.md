@@ -1,5 +1,6 @@
 # Sprint 1 (Week 1: Days 1–4) — Set Up, Bug Fixing & Understand
 
+**Function Head**: Gaurav (CTO) | **AI PM Lead**: Yashvi  
 **Sprint Window**: Tuesday, Sept 1 (Day 1) – Friday, Sept 4 (Day 4), 2026  
 **Daily Standup**: **8:00 PM IST** (Async notes by 7:30 PM) | **Weekly Review**: **Friday, Sept 4 at 8:00 PM IST**  
 **Sprint Status**: `[ ] Planned` | **RAG**: 🟢 ON TRACK  
