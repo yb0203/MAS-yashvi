@@ -49,13 +49,14 @@
   3. **First Internal AI Automation Workflow (Day 28: Mon, Sept 28)**: Launch 1 high-value departmental workflow to production with measured weekly hours saved.
 
 ### 📦 Compartment 4: Leadership, Compute & Enablers
-* **Leadership**: Gaurav (CTO)
-* **Strategic Purpose**: Maintain function-wide governance, secure critical hiring capacity, lead the GPU compute transition, and close foundational financial baselines.
+* **Leadership**: Gaurav (CTO) & Yashvi (AI PM)
+* **Strategic Purpose**: Maintain function-wide governance, secure critical hiring capacity, lead the GPU compute transition, and run the automated daily standup & weekly review rhythm.
 * **Key Month 1 Deliverables**:
-  1. **Weekly Product & Capability Review (Every Friday 8:00 PM IST)**: Enforces scope discipline, audits ad-hoc workload percentages, and resolves blockers.
-  2. **QA & PM Intern Fulfillment (Day 21: Mon, Sept 21)**: QA Tester onboarded for P0 regression; PM Intern onboarded for client and catalogue tracking.
-  3. **September GPU / Compute Track (Day 30: Wed, Sept 30)**: Hardware options, vendor discussions, and self-hosted model serving architecture evaluated with Sajan.
-  4. **Financial Baselines & Month-End Report (Day 30: Wed, Sept 30)**: Reconcile 6-month revenue target, monthly AI Labs run-rate, and publish Month 2 backlog (including Externalisation Gap Sheet).
+  1. **Daily Standup Cadence & Google Meet Gemini Notes (Daily 8:00 PM IST)**: 20-minute focused standup call. Google Meet automatically records Gemini AI meeting notes and transcripts sent to the team email, which the bot ingests to post finalized Day Highlights in `#all-mas-ai-labs` and update the Sprint Log.
+  2. **Weekly Product & Capability Review (Every Friday 8:00 PM IST)**: Enforces scope discipline, audits ad-hoc workload percentages, and resolves blockers.
+  3. **QA & PM Intern Fulfillment (Day 21: Mon, Sept 21)**: QA Tester onboarded for P0 regression; PM Intern onboarded for client and catalogue tracking.
+  4. **September GPU / Compute Track (Day 30: Wed, Sept 30)**: Hardware options, vendor discussions, and self-hosted model serving architecture evaluated with Sajan.
+  5. **Financial Baselines & Month-End Report (Day 30: Wed, Sept 30)**: Reconcile 6-month revenue target, monthly AI Labs run-rate, and publish Month 2 backlog.
 
 ---
 

@@ -50,11 +50,17 @@ An automated, lightweight **Slack Standup & Living Sprint Sync Bot** that:
 │                                                                        │
 │ 8:00 PM IST ──► [Live Standup Call (Google Meet)]                      │
 │                 Focused 20-min discussion to align and unblock tasks.  │
+│                 Google Meet Gemini AI automatically records call notes.│
 │                                                                        │
-│ 8:25 PM IST ──► [Post-Standup Day Highlights]                          │
-│                 Command: /standup-notes                                │
-│                 Official call decisions posted to #all-mas-ai-labs     │
-│                 and written into the active Sprint Doc's daily log.    │
+│ 8:20 PM IST ──► [Google Meet Gemini Notes Received by Email]          │
+│                 Gemini sends automated meeting notes & action items to │
+│                 the team mail ID.                                      │
+│                                                                        │
+│ 8:25 PM IST ──► [Post-Standup Day Highlights Published]                │
+│                 Command: /standup-notes (or automated email webhook).  │
+│                 Bot extracts key decisions & action items from Gemini  │
+│                 notes, posts the official Day Highlights to            │
+│                 #all-mas-ai-labs, and appends to the Sprint Doc.       │
 │                                                                        │
 │ Sat/Sun Aft. ─► [Weekend Sprint Rollover & Next Sprint Planning]       │
 │                 Command: /sprint-rollover                              │
