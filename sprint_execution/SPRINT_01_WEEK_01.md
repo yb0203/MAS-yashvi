@@ -9,8 +9,8 @@
 ## 🎯 Sprint 1 Core Goals (High-Level & Quantifiable)
 
 * **C1: Market & Intake**: Draft Intake Format v1 + compile 3 Client Dossiers (Orane, College Vidya, Chitkara).
-* **C2: Product & Demo**: Freeze P0 Product List + **Fix 100% of Critical P0 Blocker Bugs in Week 1** + **Demo #1: Sales & Admin Suite (Prakhar)**.
-* **C3: Cloud & Cost**: 100% GCP & AWS asset inventory completed + master map of all AI/API keys to modules.
+* **C2: Product & Demo**: Freeze P0 Product List + **Fix 100% of Critical P0 Blocker Bugs in Week 1** + **Demo #1: Sales Suite (Prakhar)**.
+* **C3: Cloud, Cost & Automation**: 100% GCP & AWS Asset Inventory + **Build & Pilot Slack Standup Bot v1.0 (Yashvi)**.
 * **C4: Leadership & Enablers**: Hand over QA & PM Intern JDs to HR + launch Friday Review #1 (Sept 4, 8:00 PM).
 
 ---
@@ -28,7 +28,7 @@
 
 ---
 
-## 📦 Compartment 2: Product & Demo Stabilisation
+## 📦 Compartment 2: Product, In-House LMS & Demo Stabilisation
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
@@ -48,6 +48,8 @@
 | **S1.13**| Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | 🟢 |
 | **S1.14**| Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | 🟢 |
 | **S1.15**| Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | 🟢 |
+| **S1.16**| **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[ ] Planned` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | - | None | None | 🟢 |
+| **S1.17**| **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[ ] Planned` | **Live test during Friday standup & Friday review #1** | - | None | None | 🟢 |
 
 ---
 
@@ -55,10 +57,10 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S1.16**| Kick off QA Tester (contract/2-mo) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate pipeline with HR | - | None | None | 🟢 |
-| **S1.17**| Kick off PM Intern (25 hrs/wk) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate sourcing | - | None | None | 🟢 |
-| **S1.18**| Initial September GPU/compute sync with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Compute vendor contacts & initial workload candidate list | - | None | None | 🟢 |
-| **S1.19**| **Weekly Product & Capability Review #1 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Review minutes, Week 1 bug fix verification & RAG audit | - | None | None | 🟢 |
+| **S1.18**| Kick off QA Tester (contract/2-mo) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate pipeline with HR | - | None | None | 🟢 |
+| **S1.19**| Kick off PM Intern (25 hrs/wk) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate sourcing | - | None | None | 🟢 |
+| **S1.20**| Initial September GPU/compute sync with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Compute vendor contacts & initial workload candidate list | - | None | None | 🟢 |
+| **S1.21**| **Weekly Product & Capability Review #1 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Review minutes, Week 1 bug fix verification & RAG audit | - | None | None | 🟢 |
 
 ---
 

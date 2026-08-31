@@ -10,7 +10,7 @@
 
 * **C1: Market & Intake**: Sign off Intake Process with Pranab Sir (**Thu, Sept 10 / Day 10 Milestone**) + run 3 Scoping Calls + prep **Catalogues v1 (for Sept 14/Day 14)**.
 * **C2: Product & Demo**: **Kick off In-House LMS Prototype Build (Part 1: Core Content Delivery Engine replacing Graphy in Mr. Learn)** + clean demo envs + **Demo #2: Learning Suite (Yashvi)**.
-* **C3: Cloud & Cost**: Teardown idle cloud resources + enforce cost tagging + prototype token/latency logging middleware.
+* **C3: Cloud & Cost**: Teardown idle cloud resources + enforce cost tagging + **Deploy Slack Standup Bot Live Across Pod (Yashvi)**.
 * **C4: Leadership & Enablers**: Complete QA & PM Intern candidate interviews (offers extended) + GPU architecture review with Sajan.
 
 ---
@@ -51,6 +51,8 @@
 | **S2.16**| Apply naming, ownership and cost tagging to cloud assets | **Rohan** *(Shubham)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Resources traceable by product and environment | - | None | None | 🟢 |
 | **S2.17**| Prototype token & latency tracking helper / middleware | **Rohan** *(Shubham)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Request-level token logging on suite endpoints | - | None | None | 🟢 |
 | **S2.18**| Score collected departmental automation workflows | **Rohan** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Workflows ranked by effort, impact, hours saved | - | None | None | 🟢 |
+| **S2.19**| **Full live pod rollout of Slack Standup Bot** | **Yashvi** *(All)* | **Mon, Sept 7 (Day 7)** | `[ ] Planned` | **100% daily standup updates captured via Slack DMs & synced** | - | None | None | 🟢 |
+| **S2.20**| **Add /standup-notes & weekend rollover handler** | **Yashvi** | **Thu, Sept 10 (Day 10)** | `[ ] Planned` | **Post-call highlight logger and weekend rollover features live** | - | None | None | 🟢 |
 
 ---
 
@@ -58,11 +60,11 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.19**| Screen resumes & interview QA Tester candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | QA candidate shortlisted & evaluated | - | None | None | 🟢 |
-| **S2.20**| Screen resumes & interview PM Intern candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | PM Intern candidate evaluated | - | None | None | 🟢 |
-| **S2.21**| Extend offers for QA Tester and PM Intern | **Gaurav** *(HR/Admin)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Offers extended for Sept 21 onboarding | - | None | None | 🟢 |
-| **S2.22**| Define GPU model-serving architecture with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | API vs Self-hosted cost comparison note | - | None | None | 🟢 |
-| **S2.23**| **Weekly Review #2: Month 1 Mid-Point Sign-off** | **Gaurav** *(All)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Intake sign-off confirmed; LMS Build Part 1 progress review | - | None | None | 🟢 |
+| **S2.21**| Screen resumes & interview QA Tester candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | QA candidate shortlisted & evaluated | - | None | None | 🟢 |
+| **S2.22**| Screen resumes & interview PM Intern candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | PM Intern candidate evaluated | - | None | None | 🟢 |
+| **S2.23**| Extend offers for QA Tester and PM Intern | **Gaurav** *(HR/Admin)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Offers extended for Sept 21 onboarding | - | None | None | 🟢 |
+| **S2.24**| Define GPU model-serving architecture with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | API vs Self-hosted cost comparison note | - | None | None | 🟢 |
+| **S2.25**| **Weekly Review #2: Month 1 Mid-Point Sign-off** | **Gaurav** *(All)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Intake sign-off confirmed; LMS Build Part 1 progress review | - | None | None | 🟢 |
 
 ---
 

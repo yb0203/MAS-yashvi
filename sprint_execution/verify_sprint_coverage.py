@@ -5,8 +5,9 @@ Author: MAS AI PM
 Description: Audits the 4 Weekly Sprint execution files against the updated
              Month 1 Work Worksheet and Functional Management Plan:
              - Week 1 P0 Bug Fixes
-             - 2-Week In-House LMS Prototype Build (replacing Graphy in Mr. Learn)
+             - In-House LMS Prototype Build (replacing Graphy in Mr. Learn)
              - 4 Weekday Demos (2 Learning Suite by Yashvi, 2 Sales Suite by Prakhar)
+             - Slack Standup Bot Build & Pod Rollout (Yashvi)
              - Externalisation Gap Sheet moved to Month 2 Backlog
 """
 
@@ -41,16 +42,18 @@ MONTH_1_SCOPE_ITEMS = [
     ("INFRA-3", "Identify idle, duplicate, orphaned resources", "Rohan", "Week 2", "S2.14"),
     ("INFRA-4", "Clean up unused resources & permissions", "Rohan", "Week 2", "S2.15"),
     ("INFRA-5", "Apply naming, ownership and cost tagging", "Rohan", "Week 2", "S2.16"),
-    ("INFRA-6", "Restructure projects/accounts & separate environments", "Rohan", "Week 3", "S3.14, S3.15"),
+    ("INFRA-6", "Restructure projects/accounts & separate environment", "Rohan", "Week 3", "S3.14, S3.15"),
     ("INFRA-7", "Document final GCP + AWS structure & ownership", "Rohan", "Day 25", "S4.8"),
     
-    # AI Cost & Compute
+    # AI Cost, Standup Automation & Compute
+    ("BOT-1", "Build, configure & test Slack Standup Bot v1.0", "Yashvi", "Week 1", "S1.16, S1.17"),
+    ("BOT-2", "Full live pod rollout of Slack Standup Bot + commands", "Yashvi", "Week 2", "S2.19, S2.20"),
     ("COST-1", "Inventory AI/API keys, endpoints & model usage", "Rohan", "Week 1", "S1.14"),
     ("COST-2", "Track token/latency data & Switch on Cost Baseline", "Rohan", "Day 21", "S2.17, S3.18"),
-    ("COST-3", "Prepare September GPU/self-hosting track with Sajan", "Gaurav", "Day 30", "S1.18, S2.22, S3.19, S4.13"),
+    ("COST-3", "Prepare September GPU/self-hosting track with Sajan", "Gaurav", "Day 30", "S1.20, S2.24, S3.19, S4.13"),
     
     # Internal AI Automation
-    ("AUTO-1", "Collect & score repetitive workflows from departments", "Rohan", "Week 1–2", "S1.15, S2.18"),
+    ("AUTO-1", "Collect & score repetitive workflows from department", "Rohan", "Week 1–2", "S1.15, S2.18"),
     ("AUTO-2", "Build, test & Launch First Internal AI Automation live", "Rohan", "Day 28", "S3.16, S3.17, S4.9, S4.10, S4.11"),
     
     # Market & Deployment: 3 Client POC Scopes & Intake
@@ -63,9 +66,9 @@ MONTH_1_SCOPE_ITEMS = [
     ("CAT-1", "Publish Product Catalogue v1 & Capability Registry v1 (M5)", "Prakhar/Yashvi", "Day 14", "S1.5, S1.6, S2.7, S2.8, S3.1, S3.2"),
     
     # Function-Wide Tasks & Backlog
-    ("MGMT-1", "QA / Tester Hiring & Onboarding (M8)", "Gaurav", "Day 21", "S1.16, S2.19, S2.21, S3.21"),
-    ("MGMT-2", "PM Intern Hiring & Onboarding (M8)", "Gaurav", "Day 21", "S1.17, S2.20, S2.21, S3.21, S4.2"),
-    ("MGMT-3", "Weekly Product & Capability Reviews (Fridays 8:00 PM)", "Gaurav", "Weekly", "S1.19, S2.23, S3.20, S4.12"),
+    ("MGMT-1", "QA / Tester Hiring & Onboarding (M8)", "Gaurav", "Day 21", "S1.18, S2.21, S2.23, S3.21"),
+    ("MGMT-2", "PM Intern Hiring & Onboarding (M8)", "Gaurav", "Day 21", "S1.19, S2.22, S2.23, S3.21, S4.2"),
+    ("MGMT-3", "Weekly Product & Capability Reviews (Fridays 8:00 PM)", "Gaurav", "Weekly", "S1.21, S2.25, S3.20, S4.12"),
     ("MGMT-4", "MAS AI Labs Website + Info ID Live (M11)", "Marketing/Vendor", "Day 30", "S4.14"),
     ("MGMT-5", "Month-End Management Report & Month 2 Backlog (incl. Gap Sheet)", "Gaurav", "Day 30", "S4.3, S4.15, S4.16")
 ]
@@ -115,7 +118,8 @@ def main():
     print("1. P0 blocker bug clearing prioritized in Week 1 (Sprint 1: Sept 1–4).")
     print("2. In-House LMS Prototype Build allocated 2 full weeks across Sprint 2 & Sprint 3.")
     print("3. 4 Weekday Demos scheduled: 2 by Yashvi (Learning Suite), 2 by Prakhar (Sales Suite).")
-    print("4. Externalisation Gap Sheet formally deferred to Month 2 Backlog.")
+    print("4. Slack Standup Bot v1.0 built & piloted in Sprint 1; live rollout in Sprint 2.")
+    print("5. Externalisation Gap Sheet formally deferred to Month 2 Backlog.")
     print("================================================================================\n")
 
 if __name__ == "__main__":
