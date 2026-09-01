@@ -1,4 +1,7 @@
 # Environment & API keys
+.env
+*.env
 .gemini/antigravity/
 .DS_Store
 *.log
+

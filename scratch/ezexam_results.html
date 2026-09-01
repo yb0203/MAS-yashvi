@@ -1,0 +1,1079 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108135108-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-108135108-2');
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="myanalyticsschool Login Page">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Login - myanalyticsschool</title>
+    <!-- Favicons-->
+    <!--link rel="shortcut icon" href="/favicon.ico?v=2" /-->
+    
+    <link rel="shortcut icon" href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/custom/myanalyticsschool-favicon.png" />
+    
+    <!-- CORE CSS-->
+    <link href="/static/static_root/css/ee-login.min.css" rel="stylesheet">
+    
+    <!--link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/themes/overlay-menu/materialize.css" rel="stylesheet"-->
+    
+    <!--link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/themes/overlay-menu/style.css" rel="stylesheet"-->
+    <!-- CSS for Overlay Menu (Layout Full Screen)>
+    <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/layouts/style-fullscreen.css" rel="stylesheet"-->
+    <!-- Custome CSS -->
+    <!--link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/fa-brands.min.css" rel="stylesheet" type="text/css">
+    <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/fa-solid.min.css" rel="stylesheet" type="text/css">
+    <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/css/custom/custom.css" rel="stylesheet"-->
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <!-- <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/noUiSlider/nouislider.css" rel="stylesheet"> -->
+    <!-- <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/prism/prism.css" rel="stylesheet">
+    <link href="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"-->
+
+    <style>
+      body { background-image: url("https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/back_black.png"), linear-gradient(to top right, #2acfff, #1c8abc); }
+      a { color:grey }
+      /* body { background-image: url("https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/back_black.png"), linear-gradient(to top right, #6387C6, #0A2E6D); } */
+      .back { display:table; margin:auto; background-color: #3D61A0; }
+      .profile-image-login { width:auto; max-height: 130px !important; height:auto !important; }
+      .btn, .btn-large { background-color: #26b8fb; border-radius: 1rem; }
+      .btn:focus, .btn-large:focus, .btn-floating:focus, .btn:hover, .btn-large:hover {
+          background-color: #1c8abc;
+      }
+      .error { color:red; font-weight:600; text-align:center; font-size:1.1rem; }
+      .ee-green { background-color: #49c98c !important; }
+      .ee-red { background-color: #f96a6a  !important; }
+      #login-card form { margin-top:2.0rem }
+      #login-form .row:last-child { margin-bottom:2.0rem !important; }
+      #phone-form p { margin: 15px 0; }
+      
+      .input-field .prefix { color:#9d9d9d; }
+      .input-field .prefix.active { color: #26b8fb }
+      input:not([type]):focus:not([readonly]),
+      input[type=text]:not(.browser-default):focus:not([readonly]),
+      input[type=password]:not(.browser-default):focus:not([readonly]),
+      input[type=tel]:not(.browser-default):focus:not([readonly]),
+      input[type=number]:not(.browser-default):focus:not([readonly]),
+      textarea.materialize-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #26b8fb;
+        box-shadow: 0 1px 0 0 #26b8fb;
+      }
+      input:not([type]):focus:not([readonly]) + label,
+      input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+      input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+      input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
+      input[type=number]:not(.browser-default):focus:not([readonly]) + label,
+      textarea.materialize-textarea:focus:not([readonly]) + label {
+        color: #26b8fb
+      }
+      [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after { border: 2px solid #26b8fb; }
+      [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after { background-color: #26b8fb; }
+      [type="radio"]:not(:checked) + label, [type="radio"]:checked + label { color: #4d4d4d; }
+      [type="radio"]:checked + label { font-weight: bold; font-size: 1.15rem; }
+      #login-error {
+        margin-bottom: 1rem;
+      }
+      #signup-form .bck, #phone-form .bck {
+        text-align: center;
+        transition-duration: 500ms;
+      }
+      #signup-form .bck a, #phone-form .bck a {
+        text-decoration: underline;
+      }
+      #signup-form .bck a:hover {
+        transform: scale(1.1);
+        transition-duration: 500ms;
+      }
+      #signup-form label.active {
+        color: #2d8df1;
+      }
+      #signup-form input:focus {
+        border-bottom: 1px solid #2d8df1;
+        box-shadow: 0 1px 0 0 #2d8df1;
+      }
+      .passEye{
+        position: relative;
+        bottom: 3.7rem;
+        left: 87%;
+        cursor: pointer;
+        color: rgb(197, 197, 197);
+      }
+      .passEye:hover{
+        transform: scale(1.2);
+      }
+      .form-error {
+        margin-top: -1rem;
+        margin-left: 3rem;
+        color: red;
+        font-size: 12px;
+        display: none;
+      }
+      .otp-inputs {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* padding-left: 52px !important; */
+        margin-bottom: 1rem;
+      }
+      .otp-inputs input {
+        width: 40px !important;
+        height: 40px !important;
+        border: 2px solid #9d9d9d !important;
+        border-radius: 5px !important;
+        font-size: 18px !important;
+        text-align: center;
+        margin: 0 !important;
+      }
+      .otp-inputs input:focus {
+        border: 2px solid #2d8df1 !important;
+        box-shadow: none !important;
+      }
+      #btn-otp, #btn-login, #btn-phone {
+        background-color: #26b8fb;
+      }
+      #btn-otp:hover, #btn-login:hover, #btn-phone:hover {
+        background-color: #1c8abc;
+      }
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+      footer {
+        display: none;
+      }
+      .view-password {
+        position: relative;
+        bottom: 4.9rem;
+        left: 85%;
+        cursor: pointer;
+        color: rgb(197, 197, 197);
+      }
+      .view-password:hover{
+        transform: scale(1.2);
+      }
+      p.input-errors {
+        font-size: 13px;
+        color: red;
+        font-weight: 400;
+        margin: 0;
+        visibility: hidden;
+      }
+      input::-ms-reveal,
+      input::-ms-clear {
+        display: none;
+      }
+      
+    </style>
+  </head>
+  <body class="back">
+    <div style="display:table-cell; vertical-align:middle">
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+    <div id="login-page" class="row">
+      <div id="login-card" class="col s12 z-depth-4 card-panel">
+
+        <form id="login-form" class="login-form" action="/login" method="POST">
+          <div class="row" style="margin-bottom:0;">
+            <div style="padding:0 1rem" class="input-field col s12 center">
+                
+                <img src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/custom/myanalyticsschool-logotext-1.png" class="responsive-img valign profile-image-login" onerror="this.onerror=null;this.src='/static/static_root/img/custom/ezexam-logotext.png';">
+                
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="col s12">
+              <p id="login-error" class="error"></p>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12" style="margin-bottom: 20px;">
+              <i class="material-icons prefix pt-3">person_outline</i>
+              <input id="username" name="username" type="text" value="" style="margin-bottom: 0;">
+              
+              <label for="username" class="center-align">Phone / Email / Student ID</label>
+              
+              <p class="input-errors" style="margin-left: 45px;">Enter a Valid Phone or Email or Student ID</p>
+            </div>
+          </div>
+          <div class="row margin" style="height: 3rem;">
+            <div class="input-field col s12" style="margin-bottom: 20px; margin-top: 0;">
+              <i class="material-icons prefix pt-3">lock_outline</i>
+              <input id="password" name="password" type="password" value="" style="margin-bottom: 0;">
+              <label for="password">Password</label>
+              <p class="input-errors" style="margin-left: 45px;">Enter Valid Password</p>
+            </div>
+            <i class="material-icons view-password">remove_red_eye</i>
+          </div>
+          <input name="next" class="next-path hide" value="">
+          <!--div class="row">
+            <div class="col s12 m12 l12 ml-2 mt-3">
+              <input type="checkbox" id="remember-me" />
+              <label for="remember-me">Remember me</label>
+            </div>
+          </div-->
+          <div class="row" style="margin-bottom:0.75rem">
+            <div class="input-field col s12" style="margin-top:0">
+              <!--input type="submit" value="Login" class="btn waves-effect waves-light col s12"-->
+              <a id="btn-login" class="btn waves-effect waves-light col s12" href="#" onclick="tryLogin()">Login</a>
+              <!--a href="/calendar" class="btn waves-effect waves-light col s12">Login</a-->
+            </div>
+          </div>
+          <div class="row" style="display:flex; align-items:baseline;">
+            
+            <div class="input-field col s6">
+              
+              <p class="margin medium-large left"><b><a href="#" onclick="showSignup()" style="font-size:1.25rem;color:#26b8fb">Sign Up</a></b></p>
+              
+            </div>
+            <div class="input-field col s6">
+              <p class="margin medium-small right"><a href="#" onclick="showPhone()" style="font-size:1rem; text-decoration: underline; color: #2d2d2d;">Forgot Password</a>
+              </p>
+            </div>
+          </div>
+          
+            
+        </form>
+
+        <form id="phone-form" class="login-form" action="/login/phone" style="display:none" method="POST">
+          <div class="row" style="margin-bottom:0;">
+            <div class="input-field col s12 center" style="margin-top:0rem !important">
+                
+                <img src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/custom/myanalyticsschool-logotext-1.png" class="responsive-img valign profile-image-login" onerror="this.onerror=null;this.src='/static/static_root/img/custom/ezexam-logotext.png';">
+                
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="col s12">
+              <p id="phone-error" class="error"></p>
+            </div>
+          </div>
+          
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="material-icons prefix pt-3">email</i>
+              <input id="phone" name="phone" type="text" value="" maxlength="100" style="margin-bottom: 0;">
+              <label for="phone" class="center-align">Email / Phone Number</label>
+              <p class="input-errors" style="margin: 0 0 0 45px;">Enter Valid Email or Number</p>
+            </div>
+          </div>
+          <div class="row margin" style="width: calc(100% - 3rem);float: right;">
+            <div class="col s12">
+              <p style="margin:5px 0">Reset Password for ...</p>
+              <p>
+                <input class="with-gap" name="usertype" type="radio" id="test1" value="student" checked/>
+                <label for="test1">Student</label>
+              </p>
+              
+              <p>
+                <input class="with-gap" name="usertype" type="radio" id="test3" value="staff"  />
+                <label for="test3">Admin</label>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <a id="btn-phone" class="btn waves-effect waves-light col s12" href="#" onclick="tryPhone()">Get OTP</a>
+            </div>
+          </div>
+          
+
+          <div class="row" style="margin-bottom:1.7rem !important">
+            <div style="margin-top: 0.3rem;" class="input-field col s6 offset-s3">
+              <p class="margin medium-small bck"><a href="#" style="font-size:1rem; color: #2d2d2d;" onclick="showLogin()">Back to Login</a></p>
+            </div>
+          </div>
+        </form>
+
+        <form id="otp-form" class="login-form" action="/login/otp" style="display:none" method="POST">
+          <div class="row" style="margin-bottom:0;">
+            <div class="input-field col s12 center" style="margin-top:0rem !important">
+                
+                <img src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/custom/myanalyticsschool-logotext-1.png" class="responsive-img valign profile-image-login" onerror="this.onerror=null;this.src='/static/static_root/img/custom/ezexam-logotext.png';">
+                
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="col s12">
+              <p id="otp-error" class="error"></p>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12 otp-inputs">
+              <!-- <input id="otp" name="otp" type="number" value=""> -->
+              <i style="width: 1rem; padding-left: 0.3rem;" class="material-icons">done_all</i>
+              <input type="number">
+              <input type="number" disabled>
+              <input type="number" disabled>
+              <input type="number" disabled>
+              <!-- <label for="otp" class="center-align">OTP</label> -->
+            </div>
+
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="material-icons prefix pt-3">lock_outline</i>
+              <input id="password1" name="password1" type="password" value="" pattern=".{8,}" title="8 characters minimum" style="margin-bottom: 0;" required>
+              <label for="password1">New Password</label>
+              <p class="input-errors" style="margin-left: 45px;">Enter 6 Letters or More</p>
+            </div>
+            <i id="sign-passEye1" class="material-icons passEye">remove_red_eye</i>
+          </div>
+          <div class="row margin" style="margin-top: -3rem !important;">
+            <div class="input-field col s12">
+              <i class="material-icons prefix pt-3">lock_outline</i>
+              <input id="password2" name="password2" type="password" value="" required>
+              <label for="password2" data-error="Passwords don't match" data-success="Passwords Match">Repeat Password</label>
+            </div>
+            <i id="sign-passEye2" class="material-icons passEye">remove_red_eye</i>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <!--input type="submit" value="Login" class="btn waves-effect waves-light col s12"-->
+              <a id="btn-otp" class="btn waves-effect waves-light col s12" href="#" onclick="tryOTP()" style="margin-top: -1.5rem;">Set Password</a>
+              <!--a href="/calendar" class="btn waves-effect waves-light col s12">Login</a-->
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:1.7rem !important">
+            <div style="margin-top: 0.3rem;" class="input-field col s6 m6 l6">
+              <p class="margin medium-small"><a href="/login" style="text-decoration: underline; color: #2d2d2d;">Cancel</a></p>
+            </div>
+            <div style="margin-top: 0.3rem;" class="input-field col s6 m6 l6">
+              <a id="resend-otp-pass" href="#" class="right" style="color: #2d2d2d;">Resend in 15</a>
+            </div>
+          </div>
+        </form>
+
+        <form id="signup-form" class="login-form" action="/login/signup" style="display:none" method="POST">
+          <div class="row" style="margin-bottom:0;">
+            <div class="input-field col s12 center" style="margin-top:0rem !important">
+                
+                <img src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/img/custom/myanalyticsschool-logotext-1.png" class="responsive-img valign profile-image-login" onerror="this.onerror=null;this.src='/static/static_root/img/custom/ezexam-logotext.png';">
+                
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="col s12">
+              <p style="font-size:1.5rem;text-align:center">Create your Student Account</p>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="col s12">
+              <p id="signup-error" class="error" style="margin-bottom:0"></p>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="material-icons prefix pt-3">person_outline</i>
+              <input name="name" type="text" value="" style="margin-bottom: 0;">
+              <label for="name" class="center-align">Your Name</label>
+              <p class="input-errors" style="margin-left: 45px;">Enter Your Full Name</p>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="material-icons prefix pt-3">phone</i>
+              <input name="phone" type="number" value="" style="margin-bottom: 0;">
+              <label for="phone" class="center-align">Phone Number</label>
+              <p class="input-errors1" style="font-size:13px; color:#2d8df1; font-weight:400; margin:0; margin-left:45px;">Use Email if NOT in India</p>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="material-icons prefix pt-3">email</i>
+              <input name="email" type="email" value="" style="margin-bottom: 0;">
+              <label for="email" class="center-align">Your Email</label>
+              <p class="input-errors" style="margin-left: 45px;">Enter Valid Email</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <a id="btn-signup" class="btn waves-effect waves-light col s12" href="#" onclick="trySignup()">Get OTP</a>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:1.7rem !important">
+            <div style="margin-top: 0.3rem;" class="input-field col s6 offset-s3">
+              <p class="margin medium-small bck"><a href="#" style="font-size:1rem; color: #2d2d2d;" onclick="showLogin()">Back to Login</a></p>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    </div>
+    <!-- ================================================
+    Scripts
+    ================================================ -->
+    <script type="text/javascript" src="/static/static_root/js/ee-base.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- jQuery Library >
+    <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/jquery-3.2.1.min.js"></script-->
+    <!--materialize js>
+    <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/js/materialize.min.js"></script-->
+    <!-- <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/prism/prism.js"></script> -->
+    <!--scrollbar>
+    <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script-->
+    <!-- <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/vendors/noUiSlider/nouislider.js"></script> -->
+
+    <!--plugins.js - Some Specific JS codes for Plugin Settings>
+    <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/js/plugins.js"></script-->
+    <!-- <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/js/scripts/form-elements.js"></script> -->
+    <!--custom-script.js - Add your own theme custom JS>
+    <script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/js/custom-script.js"></script-->
+    <!--script type="text/javascript" src="https://ezexam-mum.s3.ap-south-1.amazonaws.com/static_root/js/sec.js"></script-->
+    <script>
+      $(function() {
+        $('select').material_select();
+        if ((window.location.hash).replace('#', '') == 'signup')
+            showSignup();
+        isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+        console.log('myanalyticsschool myanalyticsschool-logotext-1.png');
+        var nxt = getUrlParameter('next');
+        if (nxt && nxt.indexOf('online-exams') > -1) {
+
+          $('#login-error').text("Login or 'Sign Up' below to take Exam!");
+        }
+        if (getUrlParameter('phone'))
+          showPhone();
+      });
+
+      var isAndroid = false;
+      $('#phone-form').on('keypress', function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        console.log(keycode);
+        if(keycode == '13') {
+          event.preventDefault();
+          return false;
+        }
+      });
+      $('#password').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == 13) {
+          event.preventDefault();
+          tryLogin();
+        }
+      });
+      var username = '';
+      var usertype = '';
+      function doNothing() { return false; }
+      var running = false;
+      function showLogin() {
+        $('#phone-error').text("");
+        $('#phone-form').hide();
+        $('#signup-form').hide();
+        $('#login-form').show();
+      }
+      function showPhone() {
+        $('#login-error').text("");
+        $('#login-form').hide();
+        $('#signup-form').hide();
+        $('#phone-form').show();
+      }
+      function showOTP() {
+        $('#login-form').hide();
+        $('#phone-form').hide();
+        $('#signup-form').hide();
+        $('#otp-form').show();
+      }
+      function showSignup() {
+        $('#login-form').hide();
+        $('#phone-form').hide();
+        $('#otp-form').hide();
+        $('#signup-form').show();
+        // $('#login-form').toggle("slide", { direction: "left" }, 500);
+        // $('#phone-form').toggle("slide", { direction: "left" }, 1000);
+        // $('#otp-form').toggle("slide", { direction: "left" }, 1000);
+        // setTimeout(() => {
+        //   $('#otp-form').toggle("slide", { direction: "right" }, 500);
+        // }, 500);
+      }
+      function resendCounterOTPPass(formNo) {
+        $('#resend-otp-pass').unbind();
+        $('#resend-otp-pass').text('Resend in 15');
+        var counter = 15;
+        setInterval(function() {
+            counter -= 1;
+            // Display 'counter' wherever you want to display it.
+            if (counter == 0) {
+              $('#resend-otp-pass').text('Resend OTP');
+              $('#resend-otp-pass').css('text-decoration', 'underline');
+              if (formNo == 0) {
+                $('#resend-otp-pass').click(function() { $('#resend-otp-pass').css('text-decoration', ''); tryPhone(); });
+              } else if (formNo == 1) {
+                $('#resend-otp-pass').click(function() { $('#resend-otp-pass').css('text-decoration', ''); trySignup(); });
+              }
+            } else if (counter < 0) {
+              clearInterval(counter);
+            } else {
+              $('#resend-otp-pass').text('Resend in '+counter);
+            }
+        }, 1000);
+      }
+
+      var phone_running = false;
+      var otp_running = false;
+      // var base_url = 'https://myanalyticsschool.ezexam.in/';
+      var base_url = window.location.origin + '/';
+
+	  $('#password1').on('focusout', function (e) {
+	    if ($(this).val() != $('#password2').val())
+    	  $('#password2').removeClass('valid').addClass('invalid');
+	    else
+    	  $('#password2').removeClass('invalid').addClass('valid');
+	  });
+
+	  $('#password2').on('keyup', function (e) {
+	    if ($('#password1').val() != $(this).val())
+    	    $(this).removeClass('valid').addClass('invalid');
+	    else
+    	    $(this).removeClass('invalid').addClass('valid');
+	  });
+
+      function tryOTP() {
+        $('#otp-error').slideUp('250ms', function () {
+          $(this).css('color', 'red');
+          // var otp = $("input[name=otp]").val();
+          var otp = '';
+          $('.otp-inputs input').each(function (index, input) {
+            otp += input.value;
+          })
+          var filter = /[0-9]{4}/;
+          var pass = $("input[name=password1]").val().trim();
+          if (pass.length > 5) {
+
+          } else {
+            $('#otp-error').slideDown('250ms');
+            $('#otp-error').text('Password must contain 6 letters or more');
+            return;
+          }
+          if (!filter.test(otp)) {
+            $('#otp-error').slideDown('250ms');
+            $('#otp-error').text("Enter 4 Digit OTP!");
+            return;
+          }
+
+          if (pass != $("input[name=password2]").val().trim()) {
+            $('#otp-error').slideDown('250ms');
+            $('#otp-error').text("Passwords don't match!");
+            return;
+          }
+          $('#btn-otp').on('click', doNothing);
+          $('#btn-otp').html('<i class="fa fa-circle-notch fa-spin"></i>');
+
+          if(otp_running)
+            return;
+          else
+            otp_running = true;
+          var url = window.location.href;
+          $.ajax({
+            url  : "/login/otp",
+            type : "POST",
+            data : {
+                    usertype : $("input[name=usertype]:checked").val(),
+                    username : username,
+                    otp : otp,
+                    password : pass,
+                    csrfmiddlewaretoken: "3sDtI4RhFaUDjCWElZVGNkAGMi64MQGXlhJefWyOHd7EhxMErKIFVKQSJGferJWk"
+                  },
+            // Success Handler
+            success : function(json) {
+              if (json.status == 'OK') {
+                var next_url = (url.indexOf('?next=/') > 0) ? url.split('?next=/')[1] : json.redirect;
+                
+                window.location.replace(base_url + next_url);
+                
+              } else {
+                $('#otp-error').slideDown('250ms');
+                if (json.msg === 'OTP Incorrect') {
+                  $('#otp-error').html('OTP invalid <br> Retry with OTP sent to '+ (($('#signup-form input[name=phone]').val() !== '') ? ($('#signup-form input[name=phone]').val()) : ($('#phone-form input[name=phone]').val())));
+                } else {
+                  $('#otp-error').text(json.msg);
+                }
+
+                $('#btn-otp').html('Forgot Password');
+              }
+              otp_running = false;
+            },
+            // Error Handler
+            error : function(xhr, errMsg, err) {
+              console.log(xhr + ' -- ' + errMsg + ' -- ' + err);
+              $('#otp-error').slideDown('250ms');
+              if (xhr.readyState == 4)
+                $('#otp-error').text("Bad Response!");
+              else if (xhr.readyState == 0)
+                $('#otp-error').text("Network Error! Check your Internet!");
+              else
+                $('#otp-error').text("Error!");
+              //$('#btn-login').on('click', tryLogin);
+              $('#btn-otp').html('Login');
+              otp_running = false;
+            }
+          });
+        })
+      }
+
+      function tryPhone() {
+        $('#phone-error').slideUp('250ms', function () {
+          $(this).css('color', 'red');
+          usertype = $("input[name=usertype]:checked").val();
+          var inp = $("input[name=phone]").val();
+          var filter = /[1-9]{1}[0-9]{9}/;
+          var email_filter = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+          var phone = '', email = '';
+          if (filter.test(inp))
+            phone = inp;
+          else if (email_filter.test(inp))
+            email = inp;
+          if (phone == '' && email == '') {
+            $('#phone-error').slideDown('250ms')
+            $('#phone-error').text("Enter Valid Email or 10 Digit Mobile Number");
+            return;
+          }
+          // before submitting, add spinner & disable onclick
+          $('#btn-phone').on('click', doNothing);
+          $('#btn-phone').html('<i class="fa fa-circle-notch fa-spin"></i>');
+          console.log(phone_running, 'phone_running');
+          if(phone_running)
+              return;
+          else
+              phone_running = true;
+          Materialize.toast('Sending OTP...', 5000, 'ee-green');
+          $.ajax({
+            url  : "/login/phone",
+            type : "POST",
+            data : {
+                    usertype : $("input[name=usertype]:checked").val(),
+                    phone : phone,
+                    email : email,
+                    csrfmiddlewaretoken: "3sDtI4RhFaUDjCWElZVGNkAGMi64MQGXlhJefWyOHd7EhxMErKIFVKQSJGferJWk"
+                  },
+            // Success Handler
+            success : function(json) {
+              if (json.status == 'OK') {
+                //console.log(json);
+                $('#login-form').hide();
+                $('#phone-form').hide();
+                $('#otp-form').show();
+                resendCounterOTPPass(0);
+                username = json.username;
+                $('#otp-error').text('OTP sent to '+ inp).css('color', '#47b749');
+                $('.otp-inputs input[type=number]')[0].focus(); // Foucus the first otp input box
+              } else {
+                $('#phone-error').slideDown('250ms')
+                $('#phone-error').text(json.msg);
+                $('#btn-phone').html('Get OTP');
+              }
+              phone_running = false;
+            },
+            // Error Handler
+            error : function(xhr, errMsg, err) {
+              console.log(xhr + ' -- ' + errMsg + ' -- ' + err);
+              $('#phone-error').slideDown('250ms')
+              if (xhr.readyState == 4)
+                $('#phone-error').text("Bad Response!");
+              else if (xhr.readyState == 0)
+                $('#phone-error').text("Network Error! Check your Internet!");
+              else
+                $('#phone-error').text("Error!");
+              $('#btn-phone').html('Login');
+              phone_running = false;
+            }
+          });
+        })
+      }
+
+      function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+      }
+
+      $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null)
+          return null;
+        return decodeURI(results[1]) || 0;
+      }
+
+      function trySignup() {
+        $('#signup-error').slideUp('250ms');
+        var name = $('#signup-form input[name=name]').val();
+        var phone = $('#signup-form input[name=phone]').val();
+        var email = $('#signup-form input[name=email]').val();
+        var errMsg = '';
+        if (name == '' && (phone == '' || email == '')) {
+          errMsg = 'Enter your Name & Phone or Email';
+          $('#signup-form input[name=name]').focus();
+        } else if (name == '') {
+          errMsg = 'Enter your Name!';
+          $('#signup-form input[name=name]').focus();
+        } else if (!/^[a-zA-Z\s]+$/.test(name)) {
+          errMsg = 'Name can only contain letters';
+          $('#signup-form input[name=name]').focus();
+        } else if  (!/^[a-zA-Z\s]{5,30}$/.test(name)) {
+          errMsg = 'Name must be between 5 and 30 letters long';
+          $('#signup-form input[name=name]').focus();
+        } else if (phone == '' && email == '') {
+          errMsg = 'Enter Mobile Number or Email';
+          $('#signup-form input[name=phone]').focus();
+        } else if (phone != '' && (!/^[1-9][0-9]{9}$/.test(phone))) {
+          errMsg = 'Enter 10 digit Indian Mobile!';
+          $('#signup-form input[name=phone]').focus();
+        } else if (email != '' && !isEmail(email)) {
+          errMsg = 'Enter Valid Email!';
+          $('#signup-form input[name=email]').focus();
+        } else {
+          errMsg = '';
+          $('#signup-form input[name=name]').focus();
+        }
+        $('#signup-error').slideDown('250ms');
+        $('#signup-error').text(errMsg);
+        if (errMsg != '')
+          return;
+        $('#btn-signup').on('click', doNothing);
+        $('#btn-signup').html('<i class="fa fa-circle-notch fa-spin"></i>');
+        if (running)
+          return;
+        else
+          running = true;
+        var next = '';
+        if ($.urlParam('next') != null && $.urlParam('next').split('/online-exams/').length > 1) {
+          next = $.urlParam('next').split('/online-exams/')[1];
+        }
+        $.ajax({
+          url  : "/login/signup",
+          type : "POST",
+          data : {
+            name: name,
+            phone: phone,
+            email: email,
+            next : next,
+            csrfmiddlewaretoken: "3sDtI4RhFaUDjCWElZVGNkAGMi64MQGXlhJefWyOHd7EhxMErKIFVKQSJGferJWk"
+          },
+          // Success Handler
+          success : function(json) {
+            if (json.status == 'OK') {
+              $('#signup-form').hide();
+              $('#otp-form').show();
+              username = json.username;
+              resendCounterOTPPass(1);
+              $('#otp-error').text('OTP sent to '+ (phone !== '' ? phone : email) +'').css('color', '#47b749');
+              $('.otp-inputs input[type=number]')[0].focus(); // Foucus the first otp input box
+            } else {
+              $('#signup-error').slideDown('250ms');
+              $('#signup-error').text(json.msg);
+              $('#btn-signup').html('Get OTP');
+            }
+            running = false;
+
+          },
+          // Error Handler
+          error : function(xhr, errMsg, err) {
+            console.log(xhr + ' -- ' + errMsg + ' -- ' + err);
+            $('#signup-error').slideDown('250ms');
+            if (xhr.readyState == 4)
+              $('#signup-error').text("Bad Response!");
+            else if (xhr.readyState == 0)
+              $('#signup-error').text("Network Error! Check your Internet!");
+            else
+              $('#signup-error').text("Error!");
+
+            //$('#btn-login').on('click', tryLogin);
+            $('#btn-signup').html('Get OTP');
+            running = false;
+          }
+        });
+      }
+      function tryLogin() {
+        if ($('#login-error').height() > 0) {
+          $('#login-error').slideUp('250ms');
+        }
+        var uname = $('#username').val().replaceAll(' ', '');
+        var pass  = $('#password').val().trim();
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (uname == "" && pass == "") {
+          $('#login-error').slideDown('250ms');
+          $('#login-error').text("Enter Username & Password!");
+        } else if (pass == "") {
+          $('#login-error').slideDown('250ms');
+          $('#login-error').text("Enter Password!");
+        } else if (uname == "") {
+          $('#login-error').slideDown('250ms');
+          $('#login-error').text("Enter Username!");
+        } else {
+          $('#login-error').text("");
+        }
+        if (uname == "" || pass == "")
+            return;
+        if (uname.includes('@')) {
+          if (emailRegex.test(uname)) {
+            // console.log('Email');
+          } else {
+            Materialize.toast('Enter a Valid Email', 5000, 'orange');
+            return;
+          }
+        } else if (uname.includes('+')) {
+          if (uname.length < 10 || uname.length > 13) {
+            Materialize.toast('Enter a Valid Phone Number', 5000, 'orange');
+            return;
+          }
+        }
+        // before submitting, add spinner & disable onclick
+        $('#btn-login').on('click', doNothing);
+        $('#btn-login').html('<i class="fa fa-circle-notch fa-spin"></i>');
+
+        if (running)
+            return;
+        else
+            running = true;
+        $('#btn-login').addClass('disabled');
+        var url = window.location.href;
+        $.ajax({
+          url  : "/login",
+          type : "POST",
+          data : {
+                  username : $('#username').val(),
+                  password : $('#password').val(),
+                  csrfmiddlewaretoken: "3sDtI4RhFaUDjCWElZVGNkAGMi64MQGXlhJefWyOHd7EhxMErKIFVKQSJGferJWk"
+                },
+          // Success Handler
+          success : function(json) {
+            if (json.login_status == 'OK') {
+              var next_url = (url.indexOf('?next=/') > 0) ? url.split('?next=/')[1] : json.redirect;
+              
+              window.location.replace(base_url + next_url);
+              
+            } else {
+              $('#login-error').slideDown('250ms');
+              $('#login-error').text(json.error);
+              //$('#btn-login').on('click', tryLogin);
+              $('#btn-login').html('Login');
+              $('#btn-login').removeClass('disabled');
+            }
+            running = false;
+          },
+          // Error Handler
+          error : function(xhr, errMsg, err) {
+            console.log(xhr + ' -- ' + errMsg + ' -- ' + err);
+            $('#login-error').slideDown('250ms');
+            if (xhr.readyState == 4)
+              $('#login-error').text("Can't Connect, Check your Internet!");
+            else if (xhr.readyState == 0)
+              $('#login-error').text("Network Error! Check your Internet!");
+            else
+              $('#login-error').text("Error!");
+
+            //$('#btn-login').on('click', tryLogin);
+            $('#btn-login').html('Login');
+            running = false;
+            $('#btn-login').removeClass('disabled');
+          },
+        });
+      }
+      var getUrlParameter = function getUrlParameter(sParam) {
+  	    var sPageURL = window.location.search.substring(1),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+            return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+          }
+        }
+	      return false;
+	    };
+
+        //Password Eye
+        var signEyeClicked1 = false;
+        var signEyeClicked2 = false;
+        $("#otp-form #sign-passEye1").click(function () {
+          if(!signEyeClicked1) {
+            $(this).css("color", "#2d8df1");
+            signEyeClicked1 = true;
+          } else {
+            $(this).css("color", "rgb(197, 197, 197)");
+            signEyeClicked1 = false;
+          }
+          if ($("#password1").attr("type") == "password") {
+            $("#password1").attr("type", "text");
+          } else {
+            $("#password1").attr("type", "password");
+          }
+        });
+
+        $("#otp-form #sign-passEye2").click(function () {
+          if(!signEyeClicked2) {
+            $(this).css("color", "#2d8df1");
+            signEyeClicked2 = true;
+          } else {
+            $(this).css("color", "rgb(197, 197, 197)");
+            signEyeClicked2 = false;
+          }
+          if ($("#password2").attr("type") == "password") {
+            $("#password2").attr("type", "text");
+          } else {
+            $("#password2").attr("type", "password");
+          }
+        });
+
+        $(document).ready(function () {
+          $('#signup-form input').blur(function () {
+            var inputName = $(this).attr('name');
+            var value = $(this).val();
+            if (inputName === 'name') {
+              var regexName = /^[a-zA-Z\s]+$/;
+              var regexResult = regexName.test(value);
+              if (value == '') {
+                $(this).closest('.input-field').children('.form-error').show().text('Enter Your Full Name');
+              } else {
+                if (regexResult) {
+                  $(this).closest('.input-field').children('.form-error').hide();
+                } else {
+                  $(this).closest('.input-field').children('.form-error').show().text('Name can not contain special characters or numbers');
+                }
+              }
+            } else if (inputName === 'phone') {
+              if ($('#signup-form input[name=email]').val() == '' && value.length < 10) {
+                $(this).closest('.input-field').children('.form-error').show();
+              } else {
+                $(this).closest('.input-field').children('.form-error').hide();
+              }
+            } else if ($('#signup-form input[name=phone]').val() == '' && inputName === 'email') {
+              var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+              var regexResult = regex.test(value);
+              if (!regexResult) {
+                $(this).closest('.input-field').children('.form-error').show();
+              } else {
+                $(this).closest('.input-field').children('.form-error').hide();
+              }
+            }
+          })
+          $('#otp-form input').blur(function () {
+            var inputName = $(this).attr('name');
+            var value = $(this).val();
+            if (inputName === 'password1') {
+              if (value.length > 5) {
+                $(this).closest('.input-field').children('.form-error').hide();
+              } else {
+                $(this).closest('.input-field').children('.form-error').show();
+              }
+            }
+          })
+
+          // OTP Inputs (Four Different)
+          var otpInputs = $('.otp-inputs input[type=number]');
+          // var button = $('#btn-otp');
+          otpInputs.each((index1, input) => {
+            input.addEventListener('keyup', function (e) {
+              var currentInput = input,
+                nextInput = input.nextElementSibling,
+                prevInput = input.previousElementSibling;
+                if (currentInput.value.length > 1) {
+                  // currentInput.value = '';
+                  currentInput.value = currentInput.value.split('')[1];
+                  nextInput.focus();
+                }
+                if (nextInput && nextInput.hasAttribute('disabled') && currentInput.value !== '') {
+                  nextInput.removeAttribute('disabled');
+                  nextInput.focus();
+                }
+                // if backspace pressed
+                if (e.key === 'Backspace') {
+                  otpInputs.each((index2, input) => {
+                    if (index1 <= index2  && prevInput) {
+                      if (index1 == 0 ) {
+
+                      } else {
+                        input.setAttribute('disabled', true);
+                      }
+                      currentInput.value = '';
+                      prevInput.focus();
+                    }
+                  })
+                } else {
+                  if (index1 == 3) {
+                    $('#password1').focus();
+                  }
+                }
+                // if (!otpInputs[3].disabled && otpInputs[3].value !== '') {  // disable the verify otp button
+                //   button.classlist.add('active');
+                //   return;
+                // }
+                // button.classlist.remove('active');
+            })
+          });
+          // otpInputs[0].focus();
+          otpInputs.focus(function () {
+            $('.otp-inputs i').css('color', '#2d8df1');
+          })
+          otpInputs.blur(function () {
+            $('.otp-inputs i').css('color', '#9d9d9d');
+          })
+
+          $(".view-password").click(function () {
+            // if(!eyeClicked1) {
+            //   $(this).css("color", "#2d8df1");
+            //   eyeClicked1 = true;
+            // } else {
+            //   $(this).css("color", "rgb(197, 197, 197)");
+            //   eyeClicked1 = false;
+            // }
+            var input = $(this).closest('.row').find('input');
+            if (input.attr("type") == "password") {
+              input.attr("type", "text");
+              $(this).css("color", "#2d8df1");
+            } else {
+              input.attr("type", "password");
+              $(this).css("color", "rgb(197, 197, 197)");
+            }
+          })
+
+        });
+
+        setTimeout(() => {  // Active label for Materialize Inputs when autofilling...
+          $('input:-webkit-autofill').each(function() {
+            if ($(this).val().length !== "") {
+              $(this).siblings('label, i').addClass('active');
+            }
+          });
+        }, 1000);
+
+        $('input').blur(function () {
+          if ($(this).val().length == 0) {
+            $(this).closest('.row').find('.input-errors').css('visibility','visible');
+            // $(this).closest('.row').find('.view-password').css('bottom', '4.7rem');
+          }
+        })
+        $('input').focus(function () {
+          $(this).closest('.row').find('.input-errors').css('visibility','hidden');
+          // $(this).closest('.row').find('.view-password').css('bottom', '3.7rem');
+        });
+    </script>
+  </body>
+</html>

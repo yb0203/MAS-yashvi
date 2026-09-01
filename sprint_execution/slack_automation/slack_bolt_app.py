@@ -12,18 +12,30 @@ Features:
 
 import os
 import sys
+import ssl
 import json
 import logging
+import certifi
 from datetime import datetime
 from typing import Dict, Any, List
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+ENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(ENV_PATH)
+
+# SSL context for macOS certificate verification
+ssl_context = ssl.create_default_context(cafile=certifi.where())
 
 # Slack Bolt & SDK
 try:
     from slack_bolt import App
     from slack_bolt.adapter.socket_mode import SocketModeHandler
+    from slack_sdk import WebClient
 except ImportError:
     App = None
     SocketModeHandler = None
+    WebClient = None
 
 from sprint_sync_engine import (
     get_sprint_file_for_day,
@@ -62,8 +74,9 @@ TEAM_SLACK_IDS = {
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("MAS_StandupBot")
 
-if App:
-    app = App(token=SLACK_BOT_TOKEN)
+if App and WebClient:
+    slack_client = WebClient(token=SLACK_BOT_TOKEN, ssl=ssl_context)
+    app = App(client=slack_client)
 else:
     app = None
 
@@ -189,7 +202,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="MAS AI Labs Slack Standup Bot")
     parser.add_argument("--day", type=int, default=1, help="Day in September 2026 (1 to 30)")
-    parser.add_argument("--mode", choices=["dry-run", "socket-mode", "test-gemini-notes"], default="dry-run")
+    parser.add_argument("--mode", choices=["dry-run", "socket-mode", "test-gemini-notes", "test-dm", "test-channel"], default="dry-run")
     parser.add_argument("--notes", type=str, default="Decisions: Resolved P0 bug on staging. Action items: Yashvi to finalize Orane scope.", help="Sample Gemini notes for test")
 
     args = parser.parse_args()
@@ -207,6 +220,34 @@ def main():
 
         print(f"\n================ [7:45 PM PRE-STANDUP DIGEST CARD] ================\n")
         print(json.dumps(build_pre_standup_digest_card(args.day, sprint_num, tasks, GOOGLE_MEET_URL), indent=2))
+
+    elif args.mode == "test-dm":
+        if not app:
+            print("Error: Slack app not initialized.")
+            sys.exit(1)
+        target_user = TEAM_SLACK_IDS.get("Yashvi")
+        yashvi_tasks = [t for t in tasks if t["owner"] == "Yashvi"]
+        dm_blocks = build_personal_dm_view("Yashvi", yashvi_tasks, args.day, sprint_num)
+        print(f"🚀 Sending live test DM to Yashvi ({target_user})...")
+        resp = app.client.chat_postMessage(
+            channel=target_user,
+            text=f"Daily Quick Standup Update (Day {args.day})",
+            blocks=dm_blocks
+        )
+        print(f"✅ Test DM dispatched successfully! Slack ts: {resp.get('ts')}")
+
+    elif args.mode == "test-channel":
+        if not app:
+            print("Error: Slack app not initialized.")
+            sys.exit(1)
+        print(f"🚀 Sending live pre-standup digest to {MAIN_STANDUP_CHANNEL}...")
+        card = build_pre_standup_digest_card(args.day, sprint_num, tasks, GOOGLE_MEET_URL)
+        resp = app.client.chat_postMessage(
+            channel=MAIN_STANDUP_CHANNEL,
+            text=f"Daily Standup Digest (Sprint {sprint_num} | Day {args.day})",
+            blocks=card["blocks"]
+        )
+        print(f"✅ Test Channel Digest dispatched successfully! Slack ts: {resp.get('ts')}")
 
     elif args.mode == "test-gemini-notes":
         highlight = process_and_sync_gemini_notes(args.day, args.notes)
