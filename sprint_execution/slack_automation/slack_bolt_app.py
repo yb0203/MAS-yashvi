@@ -123,6 +123,17 @@ if app:
         sync_active_blockers_to_master(tasks, sprint_num)
         logger.info(f"✅ Successfully updated {len(task_ids)} tasks in {os.path.basename(sprint_file)}")
 
+        # Send confirmation DM to teammate
+        user_id = body.get("user", {}).get("id")
+        if user_id:
+            try:
+                client.chat_postMessage(
+                    channel=user_id,
+                    text=f"✅ *Daily Standup Update Saved!* Updated {len(task_ids)} tasks in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and the master Excel tracker."
+                )
+            except Exception as e:
+                logger.error(f"Failed to send confirmation DM: {e}")
+
     @app.command("/standup")
     def handle_standup_command(ack, body, client):
         ack()
@@ -207,6 +218,19 @@ if app:
         client.chat_postMessage(
             channel=MAIN_STANDUP_CHANNEL,
             text=f"📝 Post-Standup Highlights (Day {day})",
+            blocks=card["blocks"]
+        )
+
+    @app.command("/sprint-summary")
+    def handle_sprint_summary(ack, body, client):
+        ack()
+        day = get_current_september_day()
+        sprint_file, sprint_num = get_sprint_file_for_day(day)
+        all_tasks = parse_sprint_tasks(sprint_file)
+        card = build_pre_standup_digest_card(day, sprint_num, all_tasks, GOOGLE_MEET_URL)
+        client.chat_postMessage(
+            channel=body.get("channel_id", MAIN_STANDUP_CHANNEL),
+            text=f"📊 Daily Standup Summary (Sprint {sprint_num} | Day {day})",
             blocks=card["blocks"]
         )
 
