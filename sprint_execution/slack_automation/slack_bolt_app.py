@@ -149,6 +149,53 @@ if app:
             except Exception as e:
                 logger.error(f"Failed to send confirmation DM: {e}")
 
+    @app.event("message")
+    def handle_direct_messages(ack, body, client, logger):
+        ack()
+        event = body.get("event", {})
+        # Only respond to 1-on-1 direct messages (channel_type == 'im') and ignore bot messages
+        if event.get("channel_type") == "im" and not event.get("bot_id"):
+            user_id = event.get("user")
+            day = get_current_september_day()
+            sprint_file, sprint_num = get_sprint_file_for_day(day)
+            all_tasks = parse_sprint_tasks(sprint_file)
+
+            matched_owner = None
+            for name, u_id in TEAM_SLACK_IDS.items():
+                if u_id == user_id:
+                    matched_owner = name
+                    break
+
+            if not matched_owner:
+                try:
+                    user_info = client.users_info(user=user_id)
+                    user_obj = user_info.get("user", {})
+                    real_name = user_obj.get("real_name", "").lower()
+                    display_name = user_obj.get("profile", {}).get("display_name", "").lower()
+                    email = user_obj.get("profile", {}).get("email", "").lower()
+                    for name in ["Yashvi", "Prakhar", "Shubham", "Rohan", "Gaurav"]:
+                        if name.lower() in real_name or name.lower() in display_name or name.lower() in email:
+                            matched_owner = name
+                            TEAM_SLACK_IDS[name] = user_id
+                            break
+                except Exception as e:
+                    logger.error(f"Error resolving user {user_id}: {e}")
+
+            if not matched_owner:
+                matched_owner = "Yashvi"
+
+            owner_tasks = [t for t in all_tasks if t["owner"] == matched_owner] or all_tasks[:5]
+            dm_blocks = build_personal_dm_view(matched_owner, owner_tasks, day, sprint_num)
+
+            try:
+                client.chat_postMessage(
+                    channel=user_id,
+                    text=f"Daily Quick Standup Update (Day {day})",
+                    blocks=dm_blocks
+                )
+            except Exception as e:
+                logger.error(f"Failed to reply to DM: {e}")
+
     @app.command("/standup")
     def handle_standup_command(ack, body, client):
         # 1. Acknowledge immediately to avoid Slack 3000ms timeout

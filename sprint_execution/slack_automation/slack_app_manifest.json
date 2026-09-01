@@ -5,6 +5,11 @@
     "background_color": "#111827"
   },
   "features": {
+    "app_home": {
+      "home_tab_enabled": false,
+      "messages_tab_enabled": true,
+      "messages_tab_read_only_enabled": false
+    },
     "bot_user": {
       "display_name": "MAS Standup",
       "always_online": true
@@ -16,12 +21,18 @@
         "should_escape": false
       },
       {
+        "command": "/standup-notes",
+        "usage_hint": "[paste Google Meet Gemini summary]",
+        "description": "Post Day Highlights and sync decisions to Sprint doc",
+        "should_escape": false
+      },
+      {
         "command": "/sprint-summary",
         "description": "Generate and post the current sprint summary",
         "should_escape": false
       },
       {
-        "command": "/rollover-sprint",
+        "command": "/sprint-rollover",
         "usage_hint": "[from_sprint] [to_sprint]",
         "description": "Roll over incomplete tasks to the next sprint",
         "should_escape": false
@@ -36,12 +47,18 @@
         "commands",
         "im:write",
         "im:history",
+        "im:read",
         "users:read",
         "channels:history"
       ]
     }
   },
   "settings": {
+    "event_subscriptions": {
+      "bot_events": [
+        "message.im"
+      ]
+    },
     "socket_mode_enabled": true,
     "interactivity": {
       "is_enabled": true
