@@ -84,7 +84,7 @@
 
 | Log ID | Date Flagged | Source Sprint | Task ID & Owner | Blocker Description | Root Cause / Reason | Impact & Target Resolution Date | Status |
 |:---:|:---:|:---:|:---:|---|---|---|:---:|
-| - | - | - | - | *No active blockers logged yet* | - | - | `🟢 Clear` |
+| - | - | - | - | *No active blockers logged* | - | - | `🟢 Clear` |
 
 ---
 

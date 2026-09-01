@@ -3,8 +3,9 @@ MAS AI Labs — Slack Block Kit UI Views & Templates
 Author: MAS AI PM
 Description: Centralized UI library generating clean, modern Slack Block Kit
              cards for Personal DMs, Modals, Channel Digests, and Gemini Day Highlights.
-             - Automated Status -> RAG mapping (Zero redundant dropdowns for teammates).
-             - Structured "Planned vs Done" standup cards.
+             - 3-Tier Data Architecture: "Tasks Picked Today" selector.
+             - Automated Status -> RAG mapping (Zero redundant dropdowns).
+             - Clean multi-teammate standup summary.
 """
 
 import json
@@ -26,7 +27,6 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
     for t in tasks:
         task_bullets.append(
             f"• *`{t['id']}`*: {t['task']}\n"
-            f"   ↳ *Target:* _{t['expected_outcome']}_\n"
             f"   ↳ *Status:* `{t['status']}` | *RAG:* {t['rag']}"
         )
 
@@ -35,7 +35,7 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
             "type": "header",
             "text": {
                 "type": "plain_text",
-                "text": f"👋 Hey {owner_name}! Daily Standup Quick Update (Day {day})",
+                "text": f"👋 Hey {owner_name}! Daily Standup (Day {day})",
                 "emoji": True
             }
         },
@@ -44,8 +44,8 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
             "text": {
                 "type": "mrkdwn",
                 "text": (
-                    f"⏰ *Standup Call is at 8:00 PM IST.*\n"
-                    f"Please take *20–30 seconds* to update your status below:"
+                    f"⏰ *Google Meet Standup is at 8:00 PM IST.*\n"
+                    f"Which tasks did you pick and work on today? Take *20 seconds* to update:"
                 )
             }
         },
@@ -54,7 +54,7 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "*📌 Your Scheduled Deliverables Today:*\n" + "\n".join(task_bullets)
+                "text": "*📌 Your Sprint Deliverables:*\n" + "\n".join(task_bullets)
             }
         },
         {"type": "divider"},
@@ -65,7 +65,7 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
                     "type": "button",
                     "text": {
                         "type": "plain_text",
-                        "text": "⚡ Quick Update (< 30s)",
+                        "text": "⚡ Update Today's Focus (< 20s)",
                         "emoji": True
                     },
                     "style": "primary",
@@ -76,51 +76,60 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
         }
     ]
 
-def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]], sprint_num: int, day: int) -> Dict[str, Any]:
+def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[str, Any]], sprint_num: int, day: int) -> Dict[str, Any]:
     """
-    Generates the simplified single-screen modal:
-    - Teammate selects ONLY the Status dropdown (RAG is mapped automatically).
-    - Optional PR/outcome link and blocker notes.
+    Tier 2 Modal: 'What Did You Pick Today?'
+    Allows teammates to select only the specific tasks they worked on today.
     """
+    task_options = []
+    for t in all_owner_tasks:
+        task_options.append({
+            "text": {
+                "type": "plain_text",
+                "text": f"{t['id']}: {t['task'][:60]}"
+            },
+            "value": t["id"]
+        })
+
+    # Default to first task if available
+    initial_options = [task_options[0]] if task_options else []
+
     blocks = [
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f"Select status for your tasks today (**Day {day}**). RAG health is calculated automatically."
+                "text": f"👋 *Hi {owner_name}!* Select the deliverable(s) you picked and worked on today (**Day {day}**):"
             }
         },
-        {"type": "divider"}
-    ]
-
-    for t in tasks:
-        blocks.extend([
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": f"*`{t['id']}`*: {t['task']}"
-                }
-            },
-            {
-                "type": "input",
-                "block_id": f"status_{t['id']}",
-                "element": {
-                    "type": "static_select",
-                    "action_id": f"select_status_{t['id']}",
-                    "options": [
-                        {"text": {"type": "plain_text", "text": "✅ Done / Completed"}, "value": "[x] Done"},
-                        {"text": {"type": "plain_text", "text": "⏳ In Progress"}, "value": "[-] In Progress"},
-                        {"text": {"type": "plain_text", "text": "🚨 Blocked / Delayed"}, "value": "[!] Blocked"}
-                    ],
-                    "initial_option": {"text": {"type": "plain_text", "text": "⏳ In Progress"}, "value": "[-] In Progress"}
-                },
-                "label": {"type": "plain_text", "text": f"Status for {t['id']}"}
-            }
-        ])
-
-    blocks.extend([
         {"type": "divider"},
+        {
+            "type": "input",
+            "block_id": "picked_tasks_block",
+            "element": {
+                "type": "multi_static_select",
+                "action_id": "select_picked_tasks",
+                "placeholder": {"type": "plain_text", "text": "Select task(s) worked on today"},
+                "options": task_options,
+                "initial_options": initial_options
+            },
+            "label": {"type": "plain_text", "text": "Tasks Picked / Worked on Today"}
+        },
+        {
+            "type": "input",
+            "block_id": "today_status_block",
+            "element": {
+                "type": "static_select",
+                "action_id": "select_today_status",
+                "options": [
+                    {"text": {"type": "plain_text", "text": "✅ Done / Completed Today"}, "value": "[x] Done"},
+                    {"text": {"type": "plain_text", "text": "⏳ In Progress / Ongoing"}, "value": "[-] In Progress"},
+                    {"text": {"type": "plain_text", "text": "🚨 Blocked / Need Help"}, "value": "[!] Blocked"}
+                ],
+                "initial_option": {"text": {"type": "plain_text", "text": "⏳ In Progress / Ongoing"}, "value": "[-] In Progress"}
+            },
+            "label": {"type": "plain_text", "text": "Today's Status (RAG is mapped automatically)"}
+        },
         {
             "type": "input",
             "block_id": "deliverable_link_block",
@@ -128,9 +137,9 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
             "element": {
                 "type": "plain_text_input",
                 "action_id": "deliverable_link_input",
-                "placeholder": {"type": "plain_text", "text": "PR # / Doc link / Quick output summary"}
+                "placeholder": {"type": "plain_text", "text": "PR # / Doc link / Quick progress summary"}
             },
-            "label": {"type": "plain_text", "text": "Completed Output / PR Link"}
+            "label": {"type": "plain_text", "text": "Outcome Note / Link"}
         },
         {
             "type": "input",
@@ -143,13 +152,13 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
             },
             "label": {"type": "plain_text", "text": "Blocker / Dependency (If any)"}
         }
-    ])
+    ]
 
     return {
         "type": "modal",
         "callback_id": "submit_consolidated_standup_callback",
-        "private_metadata": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day, "task_ids": [t["id"] for t in tasks]}),
-        "title": {"type": "plain_text", "text": "Daily Standup Update", "emoji": True},
+        "private_metadata": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day}),
+        "title": {"type": "plain_text", "text": "Today's Standup Focus", "emoji": True},
         "submit": {"type": "plain_text", "text": "Submit", "emoji": True},
         "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
         "blocks": blocks
@@ -157,15 +166,15 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
 
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
     """
-    Generates the comprehensive 7:45 PM Pre-Standup Card in #all-mas-ai-labs:
-    - Displays all active tasks across all teammates (Yashvi, Prakhar, Shubham, Rohan, Gaurav).
-    - Highlights Done, In Progress, and Blocked items.
+    Generates the 7:45 PM Standup Digest Card in #all-mas-ai-labs:
+    - Lists all team members and their deliverables.
+    - Flags active blockers in Red/Amber.
     """
     done_tasks = [t for t in all_tasks if "done" in t["status"].lower() or "[x]" in t["status"]]
     in_progress = [t for t in all_tasks if "in progress" in t["status"].lower() or "[-]" in t["status"]]
     blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"]]
 
-    # Group all tasks by Owner
+    # Group tasks by Owner
     owner_groups = {}
     for t in all_tasks:
         owner_groups.setdefault(t["owner"], []).append(t)
@@ -231,7 +240,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
                 {
                     "type": "button",
                     "text": {"type": "plain_text", "text": "🟢 Join Google Meet (8:00 PM)", "emoji": True},
-                    "url": meet_url or "https://meet.google.com",
+                    "url": meet_url or "https://meet.google.com/iek-smrh-zgg?authuser=0&hl=en_GB",
                     "style": "primary",
                     "action_id": "join_meet_button"
                 },

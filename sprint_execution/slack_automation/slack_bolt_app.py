@@ -3,11 +3,12 @@
 MAS AI Labs — Interactive Slack Standup & Living Sprint Sync Bot
 Author: MAS AI PM
 Features:
-  1. Personalized 7:00 PM DMs with consolidated single-screen update modal (< 45s).
-  2. Real-time 2-way sync into SPRINT_0X_WEEK_0X.md & MONTH_01_MASTER_PLAN.md.
-  3. 7:45 PM Pre-Standup Digest in #all-mas-ai-labs with direct Google Meet link.
-  4. Google Meet Gemini Notes Ingestion via `/standup-notes` (Day Highlights auto-sync).
-  5. Weekend Living Sprint Rollover via `/sprint-rollover`.
+  1. 3-Tier Data Architecture: Teammates select only the tasks picked today (< 20s).
+  2. Immediate ack() response to prevent Slack command timeouts.
+  3. Real-time 2-way sync into SPRINT_0X_WEEK_0X.md, sprint_tasks.csv & Excel.
+  4. 7:45 PM Pre-Standup Digest in #all-mas-ai-labs with direct Google Meet link.
+  5. Google Meet Gemini Notes Ingestion via `/standup-notes` (Day Highlights auto-sync).
+  6. Weekend Living Sprint Rollover via `/sprint-rollover`.
 """
 
 import os
@@ -59,16 +60,16 @@ from dm_scheduler import start_standup_scheduler, get_current_september_day
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN", "xoxb-dummy-token")
 SLACK_APP_TOKEN = os.environ.get("SLACK_APP_TOKEN", "xapp-dummy-token")
 MAIN_STANDUP_CHANNEL = os.environ.get("SLACK_STANDUP_CHANNEL", "#all-mas-ai-labs")
-GOOGLE_MEET_URL = os.environ.get("GOOGLE_MEET_URL", "https://meet.google.com")
+GOOGLE_MEET_URL = os.environ.get("GOOGLE_MEET_URL", "https://meet.google.com/iek-smrh-zgg?authuser=0&hl=en_GB")
 
 TEAM_SLACK_IDS = {
-    "Gaurav": os.environ.get("SLACK_ID_GAURAV", "U_GAURAV"),
-    "Shubham": os.environ.get("SLACK_ID_SHUBHAM", "U_SHUBHAM"),
-    "Rohan": os.environ.get("SLACK_ID_ROHAN", "U_ROHAN"),
-    "Prakhar": os.environ.get("SLACK_ID_PRAKHAR", "U_PRAKHAR"),
-    "Yashvi": os.environ.get("SLACK_ID_YASHVI", "U_YASHVI"),
-    "QA / Tester": os.environ.get("SLACK_ID_QA", "U_QA"),
-    "PM Intern": os.environ.get("SLACK_ID_INTERN", "U_INTERN"),
+    "Gaurav": os.environ.get("SLACK_ID_GAURAV", "U0B276XBATB"),
+    "Shubham": os.environ.get("SLACK_ID_SHUBHAM", "U0B276XBATB"),
+    "Rohan": os.environ.get("SLACK_ID_ROHAN", "U0B276XBATB"),
+    "Prakhar": os.environ.get("SLACK_ID_PRAKHAR", "U0B276XBATB"),
+    "Yashvi": os.environ.get("SLACK_ID_YASHVI", "U0B276XBATB"),
+    "QA / Tester": os.environ.get("SLACK_ID_QA", "U0B276XBATB"),
+    "PM Intern": os.environ.get("SLACK_ID_INTERN", "U0B276XBATB"),
 }
 
 logging.basicConfig(level=logging.INFO)
@@ -85,6 +86,14 @@ else:
 # ==============================================================================
 
 if app:
+    @app.action("open_sprint_link")
+    def handle_sprint_link_click(ack, body):
+        ack()
+
+    @app.action("join_meet_button")
+    def handle_meet_button_click(ack, body):
+        ack()
+
     @app.action("open_consolidated_modal_action")
     def handle_open_consolidated_modal(ack, body, client):
         ack()
@@ -95,7 +104,7 @@ if app:
 
         sprint_file, _ = get_sprint_file_for_day(day)
         all_tasks = parse_sprint_tasks(sprint_file)
-        owner_tasks = [t for t in all_tasks if t["owner"] == owner_name]
+        owner_tasks = [t for t in all_tasks if t["owner"] == owner_name] or all_tasks[:5]
 
         modal = build_consolidated_update_modal(owner_name, owner_tasks, sprint_num, day)
         client.views_open(trigger_id=body["trigger_id"], view=modal)
@@ -104,53 +113,60 @@ if app:
     def handle_consolidated_modal_submit(ack, body, view, client):
         ack()
         meta = json.loads(view["private_metadata"])
+        owner_name = meta["owner"]
         sprint_num = meta["sprint"]
         day = meta["day"]
-        task_ids = meta["task_ids"]
 
         values = view["state"]["values"]
+        
+        # Selected tasks from multi-select
+        selected_options = values.get("picked_tasks_block", {}).get("select_picked_tasks", {}).get("selected_options", [])
+        task_ids = [opt["value"] for opt in selected_options]
+
+        status_val = values.get("today_status_block", {}).get("select_today_status", {}).get("selected_option", {}).get("value", "[-] In Progress")
         outcome = values.get("deliverable_link_block", {}).get("deliverable_link_input", {}).get("value") or "-"
         blocker = values.get("blocker_notes_block", {}).get("blocker_notes_input", {}).get("value") or "None"
 
+        rag_val = map_status_to_rag(status_val, has_blocker=(blocker.lower() != "none" and blocker != "-"))
         sprint_file, _ = get_sprint_file_for_day(day)
 
         for t_id in task_ids:
-            status_val = values.get(f"status_{t_id}", {}).get(f"select_status_{t_id}", {}).get("selected_option", {}).get("value", "[-] In Progress")
-            rag_val = map_status_to_rag(status_val, has_blocker=(blocker.lower() != "none" and blocker != "-"))
             update_sprint_task(sprint_file, t_id, status_val, outcome, blocker, rag_val)
 
         tasks = parse_sprint_tasks(sprint_file)
         sync_active_blockers_to_master(tasks, sprint_num)
-        logger.info(f"✅ Successfully updated {len(task_ids)} tasks in {os.path.basename(sprint_file)}")
+        logger.info(f"✅ Successfully updated {len(task_ids)} tasks for {owner_name} in {os.path.basename(sprint_file)}")
 
         # Send confirmation DM to teammate
         user_id = body.get("user", {}).get("id")
         if user_id:
             try:
+                task_list_str = ", ".join(task_ids) if task_ids else "Tasks"
                 client.chat_postMessage(
                     channel=user_id,
-                    text=f"✅ *Daily Standup Update Saved!* Updated {len(task_ids)} tasks in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and the master Excel tracker."
+                    text=f"✅ *Daily Standup Update Saved!* Updated `{task_list_str}` as `{status_val}` in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and the master tracker."
                 )
             except Exception as e:
                 logger.error(f"Failed to send confirmation DM: {e}")
 
     @app.command("/standup")
     def handle_standup_command(ack, body, client):
+        # 1. Acknowledge immediately to avoid Slack 3000ms timeout
         ack()
+
         user_id = body["user_id"]
         trigger_id = body["trigger_id"]
         day = get_current_september_day()
         sprint_file, sprint_num = get_sprint_file_for_day(day)
         all_tasks = parse_sprint_tasks(sprint_file)
 
-        # 1. First try matching configured Slack User IDs
+        # 2. Match owner name
         matched_owner = None
         for name, u_id in TEAM_SLACK_IDS.items():
             if u_id == user_id:
                 matched_owner = name
                 break
 
-        # 2. If not matched by static ID, dynamically fetch Slack profile name & email
         if not matched_owner:
             try:
                 user_info = client.users_info(user=user_id)
@@ -162,39 +178,24 @@ if app:
                 for name in ["Yashvi", "Prakhar", "Shubham", "Rohan", "Gaurav"]:
                     if name.lower() in real_name or name.lower() in display_name or name.lower() in email:
                         matched_owner = name
-                        TEAM_SLACK_IDS[name] = user_id  # Cache dynamic user ID
-                        logger.info(f"🔍 Dynamically matched {user_id} to owner {matched_owner}")
+                        TEAM_SLACK_IDS[name] = user_id
                         break
             except Exception as e:
                 logger.error(f"Error fetching user info for {user_id}: {e}")
 
-        # Default to Yashvi if still unassigned for immediate ease of use
         if not matched_owner:
             matched_owner = "Yashvi"
             TEAM_SLACK_IDS["Yashvi"] = user_id
 
         # 3. Filter tasks for this owner
-        owner_tasks = [t for t in all_tasks if t["owner"] == matched_owner]
-        if not owner_tasks:
-            owner_tasks = all_tasks[:3]  # Fallback sample tasks
+        owner_tasks = [t for t in all_tasks if t["owner"] == matched_owner] or all_tasks[:5]
 
-        # 4. Open the modal directly in front of the user
+        # 4. Open the modal directly
         try:
             modal = build_consolidated_update_modal(matched_owner, owner_tasks, sprint_num, day)
             client.views_open(trigger_id=trigger_id, view=modal)
         except Exception as e:
             logger.error(f"Failed to open modal: {e}")
-
-        # 5. Also send them a personal DM so the bot appears pinned in their sidebar
-        try:
-            dm_blocks = build_personal_dm_view(matched_owner, owner_tasks, day, sprint_num)
-            client.chat_postMessage(
-                channel=user_id,
-                text=f"Daily Quick Standup Update (Day {day})",
-                blocks=dm_blocks
-            )
-        except Exception as e:
-            logger.error(f"Failed to send DM: {e}")
 
     @app.command("/standup-notes")
     def handle_standup_notes_command(ack, body, client):
