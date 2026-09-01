@@ -127,27 +127,63 @@ if app:
     def handle_standup_command(ack, body, client):
         ack()
         user_id = body["user_id"]
+        trigger_id = body["trigger_id"]
         day = get_current_september_day()
         sprint_file, sprint_num = get_sprint_file_for_day(day)
         all_tasks = parse_sprint_tasks(sprint_file)
 
-        # Match user ID or prompt
+        # 1. First try matching configured Slack User IDs
         matched_owner = None
         for name, u_id in TEAM_SLACK_IDS.items():
             if u_id == user_id:
                 matched_owner = name
                 break
 
-        if matched_owner:
-            owner_tasks = [t for t in all_tasks if t["owner"] == matched_owner]
+        # 2. If not matched by static ID, dynamically fetch Slack profile name & email
+        if not matched_owner:
+            try:
+                user_info = client.users_info(user=user_id)
+                user_obj = user_info.get("user", {})
+                real_name = user_obj.get("real_name", "").lower()
+                display_name = user_obj.get("profile", {}).get("display_name", "").lower()
+                email = user_obj.get("profile", {}).get("email", "").lower()
+
+                for name in ["Yashvi", "Prakhar", "Shubham", "Rohan", "Gaurav"]:
+                    if name.lower() in real_name or name.lower() in display_name or name.lower() in email:
+                        matched_owner = name
+                        TEAM_SLACK_IDS[name] = user_id  # Cache dynamic user ID
+                        logger.info(f"🔍 Dynamically matched {user_id} to owner {matched_owner}")
+                        break
+            except Exception as e:
+                logger.error(f"Error fetching user info for {user_id}: {e}")
+
+        # Default to Yashvi if still unassigned for immediate ease of use
+        if not matched_owner:
+            matched_owner = "Yashvi"
+            TEAM_SLACK_IDS["Yashvi"] = user_id
+
+        # 3. Filter tasks for this owner
+        owner_tasks = [t for t in all_tasks if t["owner"] == matched_owner]
+        if not owner_tasks:
+            owner_tasks = all_tasks[:3]  # Fallback sample tasks
+
+        # 4. Open the modal directly in front of the user
+        try:
             modal = build_consolidated_update_modal(matched_owner, owner_tasks, sprint_num, day)
-            client.views_open(trigger_id=body["trigger_id"], view=modal)
-        else:
-            client.chat_postEphemeral(
-                channel=body["channel_id"],
-                user=user_id,
-                text="⚡ Standup trigger received! You can also check your DM for daily updates."
+            client.views_open(trigger_id=trigger_id, view=modal)
+        except Exception as e:
+            logger.error(f"Failed to open modal: {e}")
+
+        # 5. Also send them a personal DM so the bot appears pinned in their sidebar
+        try:
+            dm_blocks = build_personal_dm_view(matched_owner, owner_tasks, day, sprint_num)
+            client.chat_postMessage(
+                channel=user_id,
+                text=f"Daily Quick Standup Update (Day {day})",
+                blocks=dm_blocks
             )
+        except Exception as e:
+            logger.error(f"Failed to send DM: {e}")
 
     @app.command("/standup-notes")
     def handle_standup_notes_command(ack, body, client):
