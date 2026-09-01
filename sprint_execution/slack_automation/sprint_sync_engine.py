@@ -96,6 +96,31 @@ def update_sprint_task(file_path: str, task_id: str, new_status: str, actual_out
         with open(file_path, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
+        # Also update structured CSV database
+        try:
+            csv_file = os.path.join(SPRINT_DIR, "sprint_tasks.csv")
+            if os.path.exists(csv_file):
+                import csv
+                rows = []
+                with open(csv_file, "r", encoding="utf-8") as cf:
+                    reader = csv.DictReader(cf)
+                    for r in reader:
+                        if r["id"] == task_id:
+                            r["status"] = new_status
+                            if actual_outcome and actual_outcome != "-":
+                                r["actual"] = actual_outcome
+                            if blocker and blocker.lower() != "none" and blocker != "-":
+                                r["blocker"] = blocker
+                            r["rag"] = rag
+                        rows.append(r)
+                if rows:
+                    with open(csv_file, "w", newline="", encoding="utf-8") as cf:
+                        writer = csv.DictWriter(cf, fieldnames=rows[0].keys())
+                        writer.writeheader()
+                        writer.writerows(rows)
+        except Exception:
+            pass
+
     return updated
 
 def append_daily_log_entry(file_path: str, date_header: str, summary_text: str):
