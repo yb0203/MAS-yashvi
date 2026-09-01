@@ -157,24 +157,33 @@ def build_consolidated_update_modal(owner_name: str, tasks: List[Dict[str, Any]]
 
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
     """
-    Generates the structured 7:45 PM Pre-Standup Card in #all-mas-ai-labs:
-    - 📌 Planned Today
-    - ✅ Done Today
-    - 🚨 Blockers / Delays
+    Generates the comprehensive 7:45 PM Pre-Standup Card in #all-mas-ai-labs:
+    - Displays all active tasks across all teammates (Yashvi, Prakhar, Shubham, Rohan, Gaurav).
+    - Highlights Done, In Progress, and Blocked items.
     """
     done_tasks = [t for t in all_tasks if "done" in t["status"].lower() or "[x]" in t["status"]]
     in_progress = [t for t in all_tasks if "in progress" in t["status"].lower() or "[-]" in t["status"]]
     blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"]]
 
-    planned_bullets = [f"• `{t['id']}` ({t['owner']}): {t['task']}" for t in all_tasks]
-    done_bullets = [f"• `{t['id']}` ({t['owner']}): {t['task']} ↳ _{t['actual_outcome'] or 'Completed'}_" for t in done_tasks] if done_tasks else ["• _No deliverables completed yet today_"]
-    
+    # Group all tasks by Owner
+    owner_groups = {}
+    for t in all_tasks:
+        owner_groups.setdefault(t["owner"], []).append(t)
+
+    owner_summary_blocks = []
+    for owner, tasks in owner_groups.items():
+        task_lines = []
+        for t in tasks:
+            status_emoji = "✅" if ("done" in t["status"].lower() or "[x]" in t["status"]) else ("🚨" if ("[!]" in t["status"] or t["rag"] == "🔴") else "⏳")
+            task_lines.append(f"   {status_emoji} *`{t['id']}`*: {t['task']} `[{t['status']}]`")
+        owner_summary_blocks.append(f"*👤 {owner}:*\n" + "\n".join(task_lines))
+
     blocks = [
         {
             "type": "header",
             "text": {
                 "type": "plain_text",
-                "text": f"📊 Daily Standup Digest (Sprint {sprint_num} | Day {day})",
+                "text": f"📊 MAS AI Labs — Standup Summary (Sprint {sprint_num} | Day {day})",
                 "emoji": True
             }
         },
@@ -184,7 +193,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
                 "type": "mrkdwn",
                 "text": (
                     f"📞 *Google Meet Standup starts at 8:00 PM IST (in 15 mins)*\n"
-                    f"• *Progress Today:* `{len(done_tasks)}/{len(all_tasks)} completed` | "
+                    f"• *Sprint Progress:* `{len(done_tasks)}/{len(all_tasks)} completed` | "
                     f"`{len(in_progress)} in progress` | `{len(blocked_tasks)} blocked`"
                 )
             }
@@ -194,14 +203,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "*📌 What Was Planned Today:*\n" + "\n".join(planned_bullets[:6])
-            }
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*✅ What Was Done Today:*\n" + "\n".join(done_bullets)
+                "text": "*📋 Pod Deliverables & Live Status:*\n\n" + "\n\n".join(owner_summary_blocks)
             }
         }
     ]
