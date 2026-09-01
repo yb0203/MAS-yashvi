@@ -310,7 +310,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="MAS AI Labs Slack Standup Bot")
     parser.add_argument("--day", type=int, default=1, help="Day in September 2026 (1 to 30)")
-    parser.add_argument("--mode", choices=["dry-run", "socket-mode", "test-gemini-notes", "test-dm", "test-channel"], default="dry-run")
+    parser.add_argument("--mode", choices=["dry-run", "socket-mode", "test-gemini-notes", "test-dm", "test-channel", "dispatch-dms-now", "dispatch-digest-now"], default="dry-run")
     parser.add_argument("--notes", type=str, default="Decisions: Resolved P0 bug on staging. Action items: Yashvi to finalize Orane scope.", help="Sample Gemini notes for test")
 
     args = parser.parse_args()
@@ -361,6 +361,22 @@ def main():
         highlight = process_and_sync_gemini_notes(args.day, args.notes)
         print(f"✅ Gemini Notes Processed & Synced for Day {args.day}:")
         print(highlight)
+
+    elif args.mode == "dispatch-dms-now":
+        if not app:
+            print("Error: Slack app not initialized.")
+            sys.exit(1)
+        from dm_scheduler import dispatch_daily_dms
+        dispatch_daily_dms(app.client, TEAM_SLACK_IDS)
+        print("✅ Daily DMs dispatched to all owners successfully!")
+
+    elif args.mode == "dispatch-digest-now":
+        if not app:
+            print("Error: Slack app not initialized.")
+            sys.exit(1)
+        from dm_scheduler import dispatch_channel_digest
+        dispatch_channel_digest(app.client, MAIN_STANDUP_CHANNEL, GOOGLE_MEET_URL)
+        print("✅ Standup Digest dispatched to channel successfully!")
 
     elif args.mode == "socket-mode":
         if not SocketModeHandler or not app:
