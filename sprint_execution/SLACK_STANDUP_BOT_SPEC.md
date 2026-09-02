@@ -145,7 +145,7 @@ scheduler.add_job(
 
 ```
 sprint_execution/slack_automation/
-├── slack_bolt_app.py        # [Main App] Socket Mode listener, command routing & modal handling
+├── slack_bot_app.py         # [Main App] Socket Mode listener, command routing & modal handling
 ├── block_kit_views.py       # [UI Library] Generates JSON Block Kit cards for DMs, Modals & Summaries
 ├── sprint_sync_engine.py    # [Markdown Engine] Reads & updates SPRINT_0X.md and Master Plan tables
 ├── gemini_notes_parser.py   # [Gemini Engine] Ingests and parses Google Meet notes for Day Highlights

@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run bot daemon in Socket Mode
-CMD ["python3", "slack_bolt_app.py", "--mode", "socket-mode"]
+CMD ["python3", "slack_bot_app.py", "--mode", "socket-mode"]

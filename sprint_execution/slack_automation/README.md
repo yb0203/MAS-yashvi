@@ -74,8 +74,8 @@ SLACK_ID_YASHVI="U05XXXXXX"
 
 ```bash
 # Test Day 1 Personal DMs & 7:45 PM Digest Output
-python3 sprint_execution/slack_automation/slack_bolt_app.py --day 1 --mode dry-run
+python3 sprint_execution/slack_automation/slack_bot_app.py --day 1 --mode dry-run
 
 # Run Live Bot in Socket Mode
-python3 sprint_execution/slack_automation/slack_bolt_app.py --mode socket-mode
+python3 sprint_execution/slack_automation/slack_bot_app.py --mode socket-mode
 ```
