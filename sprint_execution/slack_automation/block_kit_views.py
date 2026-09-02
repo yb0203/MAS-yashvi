@@ -314,10 +314,11 @@ def build_deprioritize_modal(sprint_num: int, all_tasks: List[Dict[str, Any]]) -
     }
 
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
-    """Generates the 7:45 PM Pre-Standup Card in #all-mas-ai-labs."""
-    done_tasks = [t for t in all_tasks if "done" in t["status"].lower() or "[x]" in t["status"]]
+    """Generates the 7:45 PM Pre-Standup Task Summary Card from Teammates in #all-mas-ai-labs."""
+    completed_tasks = [t for t in all_tasks if "completed" in t["status"].lower() or "done" in t["status"].lower() or "[x]" in t["status"]]
     in_progress = [t for t in all_tasks if "in progress" in t["status"].lower() or "[-]" in t["status"]]
-    blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"]]
+    planned_tasks = [t for t in all_tasks if "planned" in t["status"].lower() or "[ ]" in t["status"]]
+    blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"] or t["rag"] == "🔴"]
 
     owner_groups = {}
     for t in all_tasks:
@@ -327,8 +328,12 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
     for owner, tasks in owner_groups.items():
         task_lines = []
         for t in tasks:
-            status_emoji = "✅" if ("done" in t["status"].lower() or "[x]" in t["status"]) else ("🚨" if ("[!]" in t["status"] or t["rag"] == "🔴") else "⏳")
-            task_lines.append(f"   {status_emoji} *`{t['id']}`*: {t['task']} `[{t['status']}]`")
+            rag = t.get("rag", "🟡")
+            status_clean = t["status"].replace("`", "").strip()
+            task_line = f"   {rag} *`{t['id']}`*: {t['task']} `[{status_clean}]`"
+            if t.get("actual_outcome") and t["actual_outcome"] != "-" and t["actual_outcome"].strip():
+                task_line += f"\n      ↳ *Update:* _{t['actual_outcome'].strip()}_"
+            task_lines.append(task_line)
         owner_summary_blocks.append(f"*👤 {owner}:*\n" + "\n".join(task_lines))
 
     blocks = [
@@ -336,7 +341,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
             "type": "header",
             "text": {
                 "type": "plain_text",
-                "text": f"📊 MAS AI Labs — Standup Summary (Sprint {sprint_num} | Day {day})",
+                "text": f"📊 Pre-Standup Task Summary from Teammates (Day {day})",
                 "emoji": True
             }
         },
@@ -346,8 +351,8 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
                 "type": "mrkdwn",
                 "text": (
                     f"📞 *Google Meet Standup starts at 8:00 PM IST (in 15 mins)*\n"
-                    f"• *Sprint Progress:* `{len(done_tasks)}/{len(all_tasks)} completed` | "
-                    f"`{len(in_progress)} in progress` | `{len(blocked_tasks)} blocked`"
+                    f"• *Sprint {sprint_num} Overview:* 🟢 `{len(completed_tasks)} Completed` | "
+                    f"🟡 `{len(in_progress)} In Progress` | 🟡 `{len(planned_tasks)} Planned` | 🔴 `{len(blocked_tasks)} Blocked`"
                 )
             }
         },
@@ -356,7 +361,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "*📋 Pod Deliverables & Live Status:*\n\n" + "\n\n".join(owner_summary_blocks)
+                "text": "*📋 Teammate Task Updates & RAG Status:*\n\n" + "\n\n".join(owner_summary_blocks)
             }
         }
     ]

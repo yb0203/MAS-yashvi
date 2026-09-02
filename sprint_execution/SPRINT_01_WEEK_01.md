@@ -21,11 +21,11 @@
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
 | **S1.1** | Draft Business $\rightarrow$ Tech Intake Format v1 | **Prakhar** *(Yashvi)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Standard intake format defining: Who $\rightarrow$ Wants What $\rightarrow$ Context $\rightarrow$ POC $\rightarrow$ Scale $\rightarrow$ Tech expectation | - | None | None | 🟡 |
-| **S1.2** | Collect client context: **Orane** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Complete background, target audience, scale, missing items identified | - | None | None | 🟡 |
-| **S1.3** | Collect client context: **College Vidya** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Complete admissions/CRM context, scale, integration requirements | - | None | None | 🟡 |
-| **S1.4** | Collect client context: **Chitkara** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Complete placement/academic scope, 100-student cohort context | - | None | None | 🟡 |
+| **S1.2** | Collect client context: **Orane** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete background, target audience, scale, missing items identified | - | None | None | 🟡 |
+| **S1.3** | Collect client context: **College Vidya** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete admissions/CRM context, scale, integration requirements | - | None | None | 🟡 |
+| **S1.4** | Collect client context: **Chitkara** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete placement/academic scope, 100-student cohort context | - | None | None | 🟡 |
 | **S1.5** | Define schema & draft **Product Catalogue v1** | **Prakhar** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Product, buyer, use case, maturity, demo readiness, limitations | - | None | None | 🟡 |
-| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | - | Need to discuss the artifacts required for capability mapping | None | 🔴 |
+| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | Need to understand the deliverable | Need to discuss the artifacts required for capability mapping | None | 🟡 |
 
 ---
 
@@ -50,8 +50,8 @@
 | **S1.13** | Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | 🟡 |
 | **S1.14** | Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | 🟡 |
 | **S1.15** | Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | 🟡 |
-| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | - | Need to discuss the artifacts required for capability mapping | None | 🔴 |
-| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | - | Need to discuss the artifacts required for capability mapping | None | 🔴 |
+| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | - | Need to discuss the artifacts required for capability mapping | None | 🟡 |
+| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | - | Need to discuss the artifacts required for capability mapping | None | 🟡 |
 
 ---
 
