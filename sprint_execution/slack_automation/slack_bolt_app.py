@@ -87,9 +87,13 @@ NAME_ALIASES = {
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("MAS_StandupBot")
 
-if App and WebClient:
-    slack_client = WebClient(token=SLACK_BOT_TOKEN, ssl=ssl_context)
-    app = App(client=slack_client)
+if App and WebClient and SLACK_BOT_TOKEN:
+    try:
+        slack_client = WebClient(token=SLACK_BOT_TOKEN, ssl=ssl_context)
+        app = App(client=slack_client, token_verification_enabled=False)
+    except Exception as e:
+        logger.warning(f"Slack client initialization warning: {e}")
+        app = None
 else:
     app = None
 
