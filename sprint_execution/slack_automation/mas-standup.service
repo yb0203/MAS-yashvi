@@ -1,0 +1,15 @@
+[Unit]
+Description=MAS AI Labs Standup Bot Socket Mode Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/MAS-yashvi
+ExecStart=/usr/bin/python3 sprint_execution/slack_automation/slack_bolt_app.py --mode socket-mode
+Restart=always
+RestartSec=10
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target

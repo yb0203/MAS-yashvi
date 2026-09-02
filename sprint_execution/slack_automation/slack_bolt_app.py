@@ -42,6 +42,8 @@ from sprint_sync_engine import (
     get_sprint_file_for_day,
     parse_sprint_tasks,
     update_sprint_task,
+    add_new_sprint_task,
+    deprioritize_sprint_task,
     append_daily_log_entry,
     sync_active_blockers_to_master,
     rollover_incomplete_tasks
@@ -49,6 +51,8 @@ from sprint_sync_engine import (
 from block_kit_views import (
     build_personal_dm_view,
     build_consolidated_update_modal,
+    build_add_task_modal,
+    build_deprioritize_modal,
     build_pre_standup_digest_card,
     build_post_standup_structured_summary_card,
     map_status_to_rag
@@ -156,6 +160,57 @@ if app:
                 )
             except Exception as e:
                 logger.error(f"Failed to send confirmation DM: {e}")
+
+    @app.view("submit_add_task_callback")
+    def handle_add_task_modal_submit(ack, body, view, client):
+        ack()
+        meta = json.loads(view["private_metadata"])
+        sprint_num = meta["sprint"]
+
+        values = view["state"]["values"]
+        owner = values.get("add_owner_block", {}).get("select_add_owner", {}).get("selected_option", {}).get("value", "Yashvi")
+        comp_num = int(values.get("add_comp_block", {}).get("select_add_comp", {}).get("selected_option", {}).get("value", "2"))
+        title = values.get("add_title_block", {}).get("add_title_input", {}).get("value", "New Task")
+        outcome = values.get("add_outcome_block", {}).get("add_outcome_input", {}).get("value", "Completed deliverable")
+        date_str = values.get("add_date_block", {}).get("add_date_input", {}).get("value", "Fri, Sept 4 (Day 4)")
+
+        new_id = add_new_sprint_task(sprint_num, comp_num, owner, title, date_str, outcome)
+        logger.info(f"✨ Created new task {new_id} assigned to {owner}")
+
+        # Post announcement to channel
+        client.chat_postMessage(
+            channel=MAIN_STANDUP_CHANNEL,
+            text=f"✨ *New Sprint Task Added:* `{new_id}` *assigned to {owner}*\n• *Deliverable:* {title}\n• *Deadline:* `{date_str}` | *Target:* _{outcome}_"
+        )
+
+        # Notify owner via DM
+        owner_slack_id = TEAM_SLACK_IDS.get(owner)
+        if owner_slack_id:
+            try:
+                client.chat_postMessage(
+                    channel=owner_slack_id,
+                    text=f"📌 *New Task Assigned to You:* `{new_id}`: *{title}*\n• *Target Date:* {date_str}\n• *Expected Outcome:* {outcome}\n(It will now appear in your daily standup card!)"
+                )
+            except Exception as e:
+                logger.error(f"Failed to DM new task to {owner}: {e}")
+
+    @app.view("submit_deprioritize_callback")
+    def handle_deprioritize_modal_submit(ack, body, view, client):
+        ack()
+        meta = json.loads(view["private_metadata"])
+        sprint_num = meta["sprint"]
+
+        values = view["state"]["values"]
+        task_id = values.get("deprioritize_task_block", {}).get("select_deprioritize_task", {}).get("selected_option", {}).get("value")
+        reason = values.get("deprioritize_reason_block", {}).get("deprioritize_reason_input", {}).get("value", "De-prioritised in standup")
+
+        if task_id:
+            deprioritize_sprint_task(sprint_num, task_id, reason)
+            logger.info(f"🟡 Task {task_id} marked as de-prioritised: {reason}")
+            client.chat_postMessage(
+                channel=MAIN_STANDUP_CHANNEL,
+                text=f"🟡 *Task De-prioritised / Deferred:* `{task_id}`\n• *Reason:* _{reason}_\n• *Status:* Updated to `[-] De-prioritised` in sprint plan and tracker."
+            )
 
     @app.event("message")
     def handle_direct_messages(ack, body, client, logger):
@@ -308,6 +363,29 @@ if app:
                 user=body["user_id"],
                 text="Usage: `/sprint-rollover <from_sprint> <to_sprint>` (e.g. `/sprint-rollover 1 2`)"
             )
+
+    @app.command("/add-task")
+    def handle_add_task_command(ack, body, client):
+        ack()
+        day = get_current_september_day()
+        _, sprint_num = get_sprint_file_for_day(day)
+        modal = build_add_task_modal(sprint_num)
+        try:
+            client.views_open(trigger_id=body["trigger_id"], view=modal)
+        except Exception as e:
+            logger.error(f"Failed to open add task modal: {e}")
+
+    @app.command("/deprioritize-task")
+    def handle_deprioritize_command(ack, body, client):
+        ack()
+        day = get_current_september_day()
+        sprint_file, sprint_num = get_sprint_file_for_day(day)
+        all_tasks = parse_sprint_tasks(sprint_file)
+        modal = build_deprioritize_modal(sprint_num, all_tasks)
+        try:
+            client.views_open(trigger_id=body["trigger_id"], view=modal)
+        except Exception as e:
+            logger.error(f"Failed to open deprioritize modal: {e}")
 
 # ==============================================================================
 # CLI Testing & Execution

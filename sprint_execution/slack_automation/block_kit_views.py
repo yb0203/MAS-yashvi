@@ -157,6 +157,133 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         "blocks": blocks
     }
 
+def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
+    """Generates the modal to add a brand-new sprint task dynamically."""
+    return {
+        "type": "modal",
+        "callback_id": "submit_add_task_callback",
+        "private_metadata": json.dumps({"sprint": sprint_num}),
+        "title": {"type": "plain_text", "text": "Add New Sprint Task", "emoji": True},
+        "submit": {"type": "plain_text", "text": "Add Task", "emoji": True},
+        "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
+        "blocks": [
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": f"Add a new deliverable to **Sprint {sprint_num}**. It will immediately be assigned and synced to the markdown file and Excel tracker."}
+            },
+            {"type": "divider"},
+            {
+                "type": "input",
+                "block_id": "add_owner_block",
+                "element": {
+                    "type": "static_select",
+                    "action_id": "select_add_owner",
+                    "options": [
+                        {"text": {"type": "plain_text", "text": "👤 Yashvi"}, "value": "Yashvi"},
+                        {"text": {"type": "plain_text", "text": "👤 Prakhar"}, "value": "Prakhar"},
+                        {"text": {"type": "plain_text", "text": "👤 Shubham"}, "value": "Shubham"},
+                        {"text": {"type": "plain_text", "text": "👤 Rohan"}, "value": "Rohan"},
+                        {"text": {"type": "plain_text", "text": "👤 Gaurav"}, "value": "Gaurav"}
+                    ],
+                    "initial_option": {"text": {"type": "plain_text", "text": "👤 Yashvi"}, "value": "Yashvi"}
+                },
+                "label": {"type": "plain_text", "text": "Task Owner"}
+            },
+            {
+                "type": "input",
+                "block_id": "add_comp_block",
+                "element": {
+                    "type": "static_select",
+                    "action_id": "select_add_comp",
+                    "options": [
+                        {"text": {"type": "plain_text", "text": "📦 C1: Market, Intake & Client POCs"}, "value": "1"},
+                        {"text": {"type": "plain_text", "text": "📦 C2: Product, In-House LMS & Demos"}, "value": "2"},
+                        {"text": {"type": "plain_text", "text": "📦 C3: Cloud, Cost & Internal Automation"}, "value": "3"},
+                        {"text": {"type": "plain_text", "text": "📦 C4: Leadership, Compute & Enablers"}, "value": "4"}
+                    ],
+                    "initial_option": {"text": {"type": "plain_text", "text": "📦 C2: Product, In-House LMS & Demos"}, "value": "2"}
+                },
+                "label": {"type": "plain_text", "text": "Compartment"}
+            },
+            {
+                "type": "input",
+                "block_id": "add_title_block",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "add_title_input",
+                    "placeholder": {"type": "plain_text", "text": "e.g. Document Sales Suite setup & research plan"}
+                },
+                "label": {"type": "plain_text", "text": "Task Title / Description"}
+            },
+            {
+                "type": "input",
+                "block_id": "add_outcome_block",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "add_outcome_input",
+                    "placeholder": {"type": "plain_text", "text": "e.g. Architecture document ready for review"}
+                },
+                "label": {"type": "plain_text", "text": "Expected Outcome"}
+            },
+            {
+                "type": "input",
+                "block_id": "add_date_block",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "add_date_input",
+                    "placeholder": {"type": "plain_text", "text": "Fri, Sept 4 (Day 4)"}
+                },
+                "label": {"type": "plain_text", "text": "Target Deadline"}
+            }
+        ]
+    }
+
+def build_deprioritize_modal(sprint_num: int, all_tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Generates the modal to de-prioritize or defer an active task."""
+    task_options = []
+    for t in all_tasks:
+        task_options.append({
+            "text": {"type": "plain_text", "text": f"{t['id']} ({t['owner']}): {t['task'][:50]}"},
+            "value": t["id"]
+        })
+
+    return {
+        "type": "modal",
+        "callback_id": "submit_deprioritize_callback",
+        "private_metadata": json.dumps({"sprint": sprint_num}),
+        "title": {"type": "plain_text", "text": "De-prioritize Task", "emoji": True},
+        "submit": {"type": "plain_text", "text": "De-prioritize", "emoji": True},
+        "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
+        "blocks": [
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": "Select a task discussed in standup to mark as **De-prioritised / Deferred**."}
+            },
+            {"type": "divider"},
+            {
+                "type": "input",
+                "block_id": "deprioritize_task_block",
+                "element": {
+                    "type": "static_select",
+                    "action_id": "select_deprioritize_task",
+                    "options": task_options[:100],
+                    "placeholder": {"type": "plain_text", "text": "Select task to defer"}
+                },
+                "label": {"type": "plain_text", "text": "Select Task"}
+            },
+            {
+                "type": "input",
+                "block_id": "deprioritize_reason_block",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "deprioritize_reason_input",
+                    "placeholder": {"type": "plain_text", "text": "e.g. Scope deferred to Month 2 engineering backlog"}
+                },
+                "label": {"type": "plain_text", "text": "Reason for De-prioritisation"}
+            }
+        ]
+    }
+
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
     """Generates the 7:45 PM Pre-Standup Card in #all-mas-ai-labs."""
     done_tasks = [t for t in all_tasks if "done" in t["status"].lower() or "[x]" in t["status"]]

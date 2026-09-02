@@ -25,7 +25,7 @@
 | **S1.3** | Collect client context: **College Vidya** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Complete admissions/CRM context, scale, integration requirements | - | None | None | 🟢 |
 | **S1.4** | Collect client context: **Chitkara** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Complete placement/academic scope, 100-student cohort context | - | None | None | 🟢 |
 | **S1.5** | Define schema & draft **Product Catalogue v1** | **Prakhar** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Product, buyer, use case, maturity, demo readiness, limitations | - | None | None | 🟢 |
-| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[!] Blocked` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | - | None | None | 🔴 |
+| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | - | Need to discuss the artifacts required for capability mapping | None | 🔴 |
 
 ---
 
@@ -35,9 +35,10 @@
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
 | **S1.7** | Freeze P0 product/module list & assign owners | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[-] In Progress` | Final P0 list with named module owners across both suites | - | None | None | 🟢 |
 | **S1.8** | Triage all P0 bugs across live suites by severity | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[-] In Progress` | Critical / blocker bug list ready with reproduction steps | - | None | None | 🟢 |
-| **S1.9** | **Fix critical / blocking P0 bugs on staging** | **Rohan** *(Shubham)* | **Fri, Sept 4 (Day 4)** | `[ ] Planned` | **Critical blocker issues cleared in Week 1; verified** | - | None | None | 🟢 |
+| **S1.9** | **Fix critical / blocking P0 bugs on staging** | **Rohan** *(Shubham)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Critical blocker issues cleared in Week 1; verified** | - | working on bug hunterz pipeline migrating it to new email and also improving the pipeline | None | 🔴 |
 | **S1.10** | Define clean demo environment requirements | **Shubham** *(Rohan)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Spec sheet for dummy student rosters & sanitized CRM leads | - | None | None | 🟢 |
 | **S1.11**| **Demo #1: Sales & Admin Suite Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 3 (Day 3)** | `[ ] Planned` | **Weekday baseline demo of Sales & Admin Suite** | - | None | None | 🟢 |
+| **S1.22** | Sales Suite technical documentation & research plan | **Shubham** | Fri, Sept 4 (Day 4) | `[ ] Planned` | Technical architecture doc & generalized setup plan | - | None | None | 🟢 |
 
 ---
 
@@ -49,8 +50,8 @@
 | **S1.13**| Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | 🟢 |
 | **S1.14**| Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | 🟢 |
 | **S1.15**| Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | 🟢 |
-| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | - | None | None | 🟢 |
-| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | - | None | None | 🟢 |
+| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | - | Need to discuss the artifacts required for capability mapping | None | 🔴 |
+| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | - | Need to discuss the artifacts required for capability mapping | None | 🔴 |
 
 ---
 

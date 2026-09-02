@@ -36,6 +36,16 @@
         "usage_hint": "[from_sprint] [to_sprint]",
         "description": "Roll over incomplete tasks to the next sprint",
         "should_escape": false
+      },
+      {
+        "command": "/add-task",
+        "description": "Add a new task to the active sprint plan",
+        "should_escape": false
+      },
+      {
+        "command": "/deprioritize-task",
+        "description": "Mark a sprint task as de-prioritised / deferred",
+        "should_escape": false
       }
     ]
   },
