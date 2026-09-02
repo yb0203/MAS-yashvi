@@ -9,13 +9,15 @@ import json
 from typing import Dict, Any, List
 
 def map_status_to_rag(status: str, has_blocker: bool = False) -> str:
-    """Automatically maps task status to RAG indicator to eliminate manual dropdowns."""
+    """Automatically maps the 4 task statements (Planned, In Progress, Blocked, Completed) to RAG indicator."""
     s_lower = status.lower()
     if "blocked" in s_lower or "[!]" in s_lower or has_blocker:
         return "🔴"
-    elif "done" in s_lower or "[x]" in s_lower:
+    elif "completed" in s_lower or "done" in s_lower or "[x]" in s_lower:
         return "🟢"
-    else:
+    elif "in progress" in s_lower or "[-]" in s_lower:
+        return "🟢"
+    else:  # Planned
         return "🟢"
 
 def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: int, sprint_num: int) -> List[Dict[str, Any]]:
@@ -90,10 +92,10 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
     ]
 
     status_options = [
-        {"text": {"type": "plain_text", "text": "✅ Done / Completed"}, "value": "[x] Done"},
-        {"text": {"type": "plain_text", "text": "⏳ In Progress / Ongoing"}, "value": "[-] In Progress"},
-        {"text": {"type": "plain_text", "text": "⚪ Planned / Not Started"}, "value": "[ ] Planned"},
-        {"text": {"type": "plain_text", "text": "🚨 Blocked / Need Help"}, "value": "[!] Blocked"}
+        {"text": {"type": "plain_text", "text": "⚪ Planned"}, "value": "[ ] Planned"},
+        {"text": {"type": "plain_text", "text": "⏳ In Progress"}, "value": "[-] In Progress"},
+        {"text": {"type": "plain_text", "text": "🚨 Blocked"}, "value": "[!] Blocked"},
+        {"text": {"type": "plain_text", "text": "✅ Completed"}, "value": "[x] Completed"}
     ]
 
     for t in all_owner_tasks:
@@ -102,13 +104,13 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         curr_status = t.get("status", "[ ] Planned")
 
         # Match initial option
-        initial_opt = status_options[2] # Default Planned
-        if "done" in curr_status.lower() or "[x]" in curr_status:
-            initial_opt = status_options[0]
+        initial_opt = status_options[0] # Default Planned
+        if "completed" in curr_status.lower() or "done" in curr_status.lower() or "[x]" in curr_status:
+            initial_opt = status_options[3]
         elif "in progress" in curr_status.lower() or "[-]" in curr_status:
             initial_opt = status_options[1]
         elif "blocked" in curr_status.lower() or "[!]" in curr_status:
-            initial_opt = status_options[3]
+            initial_opt = status_options[2]
 
         curr_outcome = t.get("actual_outcome", "")
         if curr_outcome == "-":
