@@ -58,7 +58,7 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S1.18**| Kick off QA Tester (contract/2-mo) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate pipeline with HR | - | None | None | 🟢 |
+| **S1.18** | Kick off QA Tester (contract/2-mo) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[-] In Progress` | Active job description & candidate pipeline with HR | - | None | None | 🟢 |
 | **S1.19**| Kick off PM Intern (25 hrs/wk) hiring | **Gaurav** *(HR/Admin)* | Tue, Sept 1 (Day 1) | `[ ] Planned` | Active job description & candidate sourcing | - | None | None | 🟢 |
 | **S1.20**| Initial September GPU/compute sync with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Compute vendor contacts & initial workload candidate list | - | None | None | 🟢 |
 | **S1.21**| **Weekly Product & Capability Review #1 (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Review minutes, Week 1 bug fix verification & RAG audit | - | None | None | 🟢 |
@@ -72,7 +72,20 @@
 
 ---
 
-## 📝 Daily Quick Updates Log (Bot & Owner Feed)
+## 📝 Daily Quick Updates Log
+* **Tue, Sept 1 (Day 1)**: **Daily Scrum Highlights (Day 1 — Google Meet Gemini)**:
+   ↳ **Summary**: The meeting covered team leadership changes, technical infrastructure updates, and consensus on video content standards.
+   ↳ **Key Decisions & Alignment**:
+   • Bug hunter response time: The bug hunter response time interval is set to 48 hours.
+   • Social Media Video: Adopt 16:9 aspect ratio for all social media video content.
+   • Daily Scrum Leadership: Yashvi Bansal to lead daily scrum and manage task updates via GitHub/Excel.
+   ↳ **Assigned Next Steps**:
+   • [The group] Triage P0 Bugs: Triage all P0 bugs across the live suite by severity levels.
+   • [The group] Define Requirements: Define the requirements for a clean demo environment.
+   • [Shubham Patel] Document Salesuit Plan: Create a technical documentation and research plan for the salesuit code and generalized setup.
+   • [Rohan kr. pandey] Understand GCP Scope: Review current Google Cloud Platform project services and virtual machines to understand the project scope.
+   • [Rohan kr. pandey] Review Learning Suite: Evaluate the learning suite and second based pipeline.
+ (Bot & Owner Feed)
 * *Tue, Sept 1 (Day 1)*: 
 * *Wed, Sept 2 (Day 2)*: 
 * *Thu, Sept 3 (Day 3)*: 
