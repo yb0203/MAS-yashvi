@@ -63,13 +63,21 @@ MAIN_STANDUP_CHANNEL = os.environ.get("SLACK_STANDUP_CHANNEL", "#all-mas-ai-labs
 GOOGLE_MEET_URL = os.environ.get("GOOGLE_MEET_URL", "https://meet.google.com/iek-smrh-zgg?authuser=0&hl=en_GB")
 
 TEAM_SLACK_IDS = {
-    "Gaurav": os.environ.get("SLACK_ID_GAURAV", "U0B276XBATB"),
-    "Shubham": os.environ.get("SLACK_ID_SHUBHAM", "U0B276XBATB"),
-    "Rohan": os.environ.get("SLACK_ID_ROHAN", "U0B276XBATB"),
-    "Prakhar": os.environ.get("SLACK_ID_PRAKHAR", "U0B276XBATB"),
-    "Yashvi": os.environ.get("SLACK_ID_YASHVI", "U0B276XBATB"),
-    "QA / Tester": os.environ.get("SLACK_ID_QA", "U0B276XBATB"),
-    "PM Intern": os.environ.get("SLACK_ID_INTERN", "U0B276XBATB"),
+    "Gaurav": os.environ.get("SLACK_ID_GAURAV", "U0B276EJLUR"),
+    "Shubham": os.environ.get("SLACK_ID_SHUBHAM", "U0BD1GVPEDD"),
+    "Rohan": os.environ.get("SLACK_ID_ROHAN", "U0BD10ZGWD6"),
+    "Prakhar": os.environ.get("SLACK_ID_PRAKHAR", "U0BFMKFTWTH"),
+    "Yashvi": os.environ.get("SLACK_ID_YASHVI", "U0BRJ6L8ASJ"),
+    "QA / Tester": os.environ.get("SLACK_ID_QA", "U0BRJ6L8ASJ"),
+    "PM Intern": os.environ.get("SLACK_ID_INTERN", "U0BFMKFTWTH"),
+}
+
+NAME_ALIASES = {
+    "Rohan": ["rohan", "githubsindia", "githubindia", "rohan.kr.pandey"],
+    "Shubham": ["shubham", "shubham.kumar.patel"],
+    "Prakhar": ["prakhar", "prakhar.goswami"],
+    "Yashvi": ["yashvi", "bansaly0203", "bansal"],
+    "Gaurav": ["gaurav", "admin", "kg262005", "kumar gaurav"]
 }
 
 logging.basicConfig(level=logging.INFO)
@@ -222,10 +230,10 @@ if app:
                 display_name = user_obj.get("profile", {}).get("display_name", "").lower()
                 email = user_obj.get("profile", {}).get("email", "").lower()
 
-                for name in ["Yashvi", "Prakhar", "Shubham", "Rohan", "Gaurav"]:
-                    if name.lower() in real_name or name.lower() in display_name or name.lower() in email:
-                        matched_owner = name
-                        TEAM_SLACK_IDS[name] = user_id
+                for owner, aliases in NAME_ALIASES.items():
+                    if any(a in real_name or a in display_name or a in email for a in aliases):
+                        matched_owner = owner
+                        TEAM_SLACK_IDS[owner] = user_id
                         break
             except Exception as e:
                 logger.error(f"Error fetching user info for {user_id}: {e}")
