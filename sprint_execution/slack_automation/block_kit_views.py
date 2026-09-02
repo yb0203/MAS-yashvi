@@ -9,16 +9,24 @@ import json
 from typing import Dict, Any, List
 
 def map_status_to_rag(status: str, has_blocker: bool = False) -> str:
-    """Automatically maps the 4 task statements (Planned, In Progress, Blocked, Completed) to RAG indicator."""
+    """
+    Automatically maps the 4 task statements to RAG indicator:
+    - Completed: 🟢 (Green)
+    - In Progress: 🟡 (Yellow / Amber)
+    - Planned: 🟡 (Yellow / Amber)
+    - Blocked: 🔴 (Red)
+    """
     s_lower = status.lower()
     if "blocked" in s_lower or "[!]" in s_lower or has_blocker:
         return "🔴"
     elif "completed" in s_lower or "done" in s_lower or "[x]" in s_lower:
         return "🟢"
     elif "in progress" in s_lower or "[-]" in s_lower:
-        return "🟢"
-    else:  # Planned
-        return "🟢"
+        return "🟡"
+    elif "planned" in s_lower or "[ ]" in s_lower:
+        return "🟡"
+    else:
+        return "🟡"
 
 def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: int, sprint_num: int) -> List[Dict[str, Any]]:
     """Builds a compact, personalized 1-screen DM view for task owners."""

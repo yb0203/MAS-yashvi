@@ -20,14 +20,14 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.1** | Walkthrough Intake Process with Pranab Sir | **Prakhar** *(Gaurav)* | Mon, Sept 7 (Day 7) | `[ ] Planned` | Business alignment on mandatory intake rules | - | None | None | 🟢 |
-| **S2.2** | **Sign off Business $\rightarrow$ Tech Intake Format (M6)** | **Prakhar** *(Pranab Sir)* | **Thu, Sept 10 (Day 10)** | `[ ] Planned` | **Joint intake format signed off; live for Fri, Sept 11** | - | None | None | 🟢 |
-| **S2.3** | Conduct structured scoping call: **Orane** | **Yashvi** *(Prakhar)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Scope v1 draft for Orane (scale, features, timeline) | - | None | None | 🟢 |
-| **S2.4** | Conduct structured scoping call: **College Vidya** | **Yashvi** *(Prakhar)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Scope v1 draft for College Vidya (CRM/voice needs) | - | None | None | 🟢 |
-| **S2.5** | Conduct structured scoping call: **Chitkara** | **Yashvi** *(Prakhar)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Scope v1 draft for Chitkara (100-student placement cohort) | - | None | None | 🟢 |
-| **S2.6** | Consolidate 3 Client Scope v1 drafts | **Yashvi** *(Shubham)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | 3 Scopes ready for technical feasibility review | - | None | None | 🟢 |
-| **S2.7** | Finalize & format **Product Catalogue v1** | **Prakhar** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Published catalogue ready for official release (Due Sept 14) | - | None | None | 🟢 |
-| **S2.8** | Finalize & format **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Seed registry ready for official release (Due Sept 14) | - | None | None | 🟢 |
+| **S2.1** | Walkthrough Intake Process with Pranab Sir | **Prakhar** *(Gaurav)* | Mon, Sept 7 (Day 7) | `[ ] Planned` | Business alignment on mandatory intake rules | - | None | None | 🟡 |
+| **S2.2** | **Sign off Business $\rightarrow$ Tech Intake Format (M6)** | **Prakhar** *(Pranab Sir)* | **Thu, Sept 10 (Day 10)** | `[ ] Planned` | **Joint intake format signed off; live for Fri, Sept 11** | - | None | None | 🟡 |
+| **S2.3** | Conduct structured scoping call: **Orane** | **Yashvi** *(Prakhar)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Scope v1 draft for Orane (scale, features, timeline) | - | None | None | 🟡 |
+| **S2.4** | Conduct structured scoping call: **College Vidya** | **Yashvi** *(Prakhar)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Scope v1 draft for College Vidya (CRM/voice needs) | - | None | None | 🟡 |
+| **S2.5** | Conduct structured scoping call: **Chitkara** | **Yashvi** *(Prakhar)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Scope v1 draft for Chitkara (100-student placement cohort) | - | None | None | 🟡 |
+| **S2.6** | Consolidate 3 Client Scope v1 drafts | **Yashvi** *(Shubham)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | 3 Scopes ready for technical feasibility review | - | None | None | 🟡 |
+| **S2.7** | Finalize & format **Product Catalogue v1** | **Prakhar** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Published catalogue ready for official release (Due Sept 14) | - | None | None | 🟡 |
+| **S2.8** | Finalize & format **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Seed registry ready for official release (Due Sept 14) | - | None | None | 🟡 |
 
 ---
 
@@ -35,11 +35,11 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.9** | **In-House LMS Architecture & Data Schema Design** | **Shubham** *(Rohan)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Technical architecture spec for replacing Graphy in Mr. Learn | - | None | None | 🟢 |
-| **S2.10**| **In-House LMS Core Build (Part 1: Course & Content Engine)** | **Shubham** *(Rohan)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | In-house course structure, modules & video delivery service | - | None | None | 🟢 |
-| **S2.11**| Curate clean demo environment: **Learning Suite** | **Shubham** *(Rohan)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Seeded with safe, client-presentable student data | - | None | None | 🟢 |
-| **S2.12**| Curate clean demo environment: **Sales CRM** | **Shubham** *(Rohan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Stripped of internal MAS lead data; clean CRM pipeline | - | None | None | 🟢 |
-| **S2.13**| **Demo #2: Learning Suite Walkthrough** | **Yashvi** *(Shubham)* | **Wed, Sept 9 (Day 9)** | `[ ] Planned` | **Weekday baseline demo of Learning Suite** | - | None | None | 🟢 |
+| **S2.9** | **In-House LMS Architecture & Data Schema Design** | **Shubham** *(Rohan)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Technical architecture spec for replacing Graphy in Mr. Learn | - | None | None | 🟡 |
+| **S2.10** | **In-House LMS Core Build (Part 1: Course & Content Engine)** | **Shubham** *(Rohan)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | In-house course structure, modules & video delivery service | - | None | None | 🟡 |
+| **S2.11** | Curate clean demo environment: **Learning Suite** | **Shubham** *(Rohan)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Seeded with safe, client-presentable student data | - | None | None | 🟡 |
+| **S2.12** | Curate clean demo environment: **Sales CRM** | **Shubham** *(Rohan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Stripped of internal MAS lead data; clean CRM pipeline | - | None | None | 🟡 |
+| **S2.13** | **Demo #2: Learning Suite Walkthrough** | **Yashvi** *(Shubham)* | **Wed, Sept 9 (Day 9)** | `[ ] Planned` | **Weekday baseline demo of Learning Suite** | - | None | None | 🟡 |
 
 ---
 
@@ -47,13 +47,13 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.14**| Identify idle, duplicate, orphaned cloud resources | **Rohan** *(Shubham)* | Mon, Sept 7 (Day 7) | `[ ] Planned` | Cloud cleanup action list (disks, IPs, test VMs) | - | None | None | 🟢 |
-| **S2.15**| Clean up unused resources & permissions in GCP/AWS | **Rohan** *(Shubham)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Reduced waste & cleaner cloud estate | - | None | None | 🟢 |
-| **S2.16**| Apply naming, ownership and cost tagging to cloud assets | **Rohan** *(Shubham)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Resources traceable by product and environment | - | None | None | 🟢 |
-| **S2.17**| Prototype token & latency tracking helper / middleware | **Rohan** *(Shubham)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Request-level token logging on suite endpoints | - | None | None | 🟢 |
-| **S2.18**| Score collected departmental automation workflows | **Rohan** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Workflows ranked by effort, impact, hours saved | - | None | None | 🟢 |
-| **S2.19**| **Full live pod rollout of Slack Standup Bot** | **Yashvi** *(All)* | **Mon, Sept 7 (Day 7)** | `[ ] Planned` | **100% daily standup updates captured via Slack DMs & synced** | - | None | None | 🟢 |
-| **S2.20**| **Add /standup-notes & weekend rollover handler** | **Yashvi** | **Thu, Sept 10 (Day 10)** | `[ ] Planned` | **Post-call highlight logger and weekend rollover features live** | - | None | None | 🟢 |
+| **S2.14** | Identify idle, duplicate, orphaned cloud resources | **Rohan** *(Shubham)* | Mon, Sept 7 (Day 7) | `[ ] Planned` | Cloud cleanup action list (disks, IPs, test VMs) | - | None | None | 🟡 |
+| **S2.15** | Clean up unused resources & permissions in GCP/AWS | **Rohan** *(Shubham)* | Tue, Sept 8 (Day 8) | `[ ] Planned` | Reduced waste & cleaner cloud estate | - | None | None | 🟡 |
+| **S2.16** | Apply naming, ownership and cost tagging to cloud assets | **Rohan** *(Shubham)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | Resources traceable by product and environment | - | None | None | 🟡 |
+| **S2.17** | Prototype token & latency tracking helper / middleware | **Rohan** *(Shubham)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | Request-level token logging on suite endpoints | - | None | None | 🟡 |
+| **S2.18** | Score collected departmental automation workflows | **Rohan** *(Gaurav)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Workflows ranked by effort, impact, hours saved | - | None | None | 🟡 |
+| **S2.19** | **Full live pod rollout of Slack Standup Bot** | **Yashvi** *(All)* | **Mon, Sept 7 (Day 7)** | `[ ] Planned` | **100% daily standup updates captured via Slack DMs & synced** | - | None | None | 🟡 |
+| **S2.20** | **Add /standup-notes & weekend rollover handler** | **Yashvi** | **Thu, Sept 10 (Day 10)** | `[ ] Planned` | **Post-call highlight logger and weekend rollover features live** | - | None | None | 🟡 |
 
 ---
 
@@ -61,11 +61,11 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S2.21**| Screen resumes & interview QA Tester candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | QA candidate shortlisted & evaluated | - | None | None | 🟢 |
-| **S2.22**| Screen resumes & interview PM Intern candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | PM Intern candidate evaluated | - | None | None | 🟢 |
-| **S2.23**| Extend offers for QA Tester and PM Intern | **Gaurav** *(HR/Admin)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Offers extended for Sept 21 onboarding | - | None | None | 🟢 |
-| **S2.24**| Define GPU model-serving architecture with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | API vs Self-hosted cost comparison note | - | None | None | 🟢 |
-| **S2.25**| **Weekly Review #2: Month 1 Mid-Point Sign-off** | **Gaurav** *(All)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Intake sign-off confirmed; LMS Build Part 1 progress review | - | None | None | 🟢 |
+| **S2.21** | Screen resumes & interview QA Tester candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | QA candidate shortlisted & evaluated | - | None | None | 🟡 |
+| **S2.22** | Screen resumes & interview PM Intern candidates | **Gaurav** *(HR/Admin)* | Wed, Sept 9 (Day 9) | `[ ] Planned` | PM Intern candidate evaluated | - | None | None | 🟡 |
+| **S2.23** | Extend offers for QA Tester and PM Intern | **Gaurav** *(HR/Admin)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Offers extended for Sept 21 onboarding | - | None | None | 🟡 |
+| **S2.24** | Define GPU model-serving architecture with Sajan | **Gaurav** *(Sajan)* | Thu, Sept 10 (Day 10) | `[ ] Planned` | API vs Self-hosted cost comparison note | - | None | None | 🟡 |
+| **S2.25** | **Weekly Review #2: Month 1 Mid-Point Sign-off** | **Gaurav** *(All)* | Fri, Sept 11 (Day 11) | `[ ] Planned` | Intake sign-off confirmed; LMS Build Part 1 progress review | - | None | None | 🟡 |
 
 ---
 
@@ -80,3 +80,4 @@
 
 ---
 *(Bot automatically appends the single final daily summary after each evening's standup)* 
+

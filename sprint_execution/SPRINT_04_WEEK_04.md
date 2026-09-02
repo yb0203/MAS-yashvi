@@ -20,9 +20,9 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S4.1** | Hand over accepted POC scopes to Tech Lead | **Yashvi** *(Shubham)* | Tue, Sept 22 (Day 22) | `[ ] Planned` | Clear deployment handoff for Orane, CV, Chitkara | - | None | None | 🟢 |
-| **S4.2** | Deploy PM Intern on catalogue & client tracking | **Yashvi** *(PM Intern)* | Thu, Sept 24 (Day 24) | `[ ] Planned` | PM Intern operational on tracking & meeting logs | - | None | None | 🟢 |
-| **S4.3** | Publish Month 2 Backlog (including Externalisation Gap Sheet) | **Prakhar** *(Gaurav)* | Sat, Sept 26 (Day 26) | `[ ] Planned` | Prioritized engineering sprint backlog for Month 2 | - | None | None | 🟢 |
+| **S4.1** | Hand over accepted POC scopes to Tech Lead | **Yashvi** *(Shubham)* | Tue, Sept 22 (Day 22) | `[ ] Planned` | Clear deployment handoff for Orane, CV, Chitkara | - | None | None | 🟡 |
+| **S4.2** | Deploy PM Intern on catalogue & client tracking | **Yashvi** *(PM Intern)* | Thu, Sept 24 (Day 24) | `[ ] Planned` | PM Intern operational on tracking & meeting logs | - | None | None | 🟡 |
+| **S4.3** | Publish Month 2 Backlog (including Externalisation Gap Sheet) | **Prakhar** *(Gaurav)* | Sat, Sept 26 (Day 26) | `[ ] Planned` | Prioritized engineering sprint backlog for Month 2 | - | None | None | 🟡 |
 
 ---
 
@@ -30,10 +30,10 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S4.4** | Execute full demo dry-runs with QA on both live suites | **Shubham** *(QA, Rohan)* | Wed, Sept 23 (Day 23) | `[ ] Planned` | End-to-end regression & flow validation pass | - | None | None | 🟢 |
-| **S4.5** | **Demo #4: Learning Suite Walkthrough (with LMS Prototype)** | **Yashvi** *(Shubham)* | **Thu, Sept 24 (Day 24)** | `[ ] Planned` | **Weekday demo of Learning Suite with In-House LMS Preview** | - | None | None | 🟢 |
-| **S4.6** | Fix all remaining demo and staging edge cases | **Rohan** *(Shubham)* | Thu, Sept 24 (Day 24) | `[ ] Planned` | Zero critical bugs; staging rock solid | - | None | None | 🟢 |
-| **S4.7** | **P0 Stabilisation & Demo Readiness Sign-Off (M2)** | **Shubham** *(Rohan, QA)* | **Fri, Sept 25 (Day 25)** | `[ ] Planned` | **100% of P0 products demo-able on 24h notice; zero critical bugs** | - | None | None | 🟢 |
+| **S4.4** | Execute full demo dry-runs with QA on both live suites | **Shubham** *(QA, Rohan)* | Wed, Sept 23 (Day 23) | `[ ] Planned` | End-to-end regression & flow validation pass | - | None | None | 🟡 |
+| **S4.5** | **Demo #4: Learning Suite Walkthrough (with LMS Prototype)** | **Yashvi** *(Shubham)* | **Thu, Sept 24 (Day 24)** | `[ ] Planned` | **Weekday demo of Learning Suite with In-House LMS Preview** | - | None | None | 🟡 |
+| **S4.6** | Fix all remaining demo and staging edge cases | **Rohan** *(Shubham)* | Thu, Sept 24 (Day 24) | `[ ] Planned` | Zero critical bugs; staging rock solid | - | None | None | 🟡 |
+| **S4.7** | **P0 Stabilisation & Demo Readiness Sign-Off (M2)** | **Shubham** *(Rohan, QA)* | **Fri, Sept 25 (Day 25)** | `[ ] Planned` | **100% of P0 products demo-able on 24h notice; zero critical bugs** | - | None | None | 🟡 |
 
 ---
 
@@ -41,10 +41,10 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S4.8** | **Document final GCP + AWS architecture & ownership** | **Rohan** *(Shubham)* | **Fri, Sept 25 (Day 25)** | `[ ] Planned` | Shared cloud infra map with cost attribution by product | - | None | None | 🟢 |
-| **S4.9** | Deploy & test internal automation with actual department users | **Rohan** | Fri, Sept 25 (Day 25) | `[ ] Planned` | Live end-to-end workflow execution | - | None | None | 🟢 |
-| **S4.10**| Measure baseline vs post-automation hours saved per week | **Rohan** *(Finance)* | Mon, Sept 28 (Day 28) | `[ ] Planned` | Measured internal service value metric | - | None | None | 🟢 |
-| **S4.11**| **Launch First Internal AI Automation Workflow Live (M7)** | **Rohan** *(Gaurav)* | **Mon, Sept 28 (Day 28)** | `[ ] Planned` | **Workflow live in production; weekly hours saved tracked** | - | None | None | 🟢 |
+| **S4.8** | **Document final GCP + AWS architecture & ownership** | **Rohan** *(Shubham)* | **Fri, Sept 25 (Day 25)** | `[ ] Planned` | Shared cloud infra map with cost attribution by product | - | None | None | 🟡 |
+| **S4.9** | Deploy & test internal automation with actual department users | **Rohan** | Fri, Sept 25 (Day 25) | `[ ] Planned` | Live end-to-end workflow execution | - | None | None | 🟡 |
+| **S4.10** | Measure baseline vs post-automation hours saved per week | **Rohan** *(Finance)* | Mon, Sept 28 (Day 28) | `[ ] Planned` | Measured internal service value metric | - | None | None | 🟡 |
+| **S4.11** | **Launch First Internal AI Automation Workflow Live (M7)** | **Rohan** *(Gaurav)* | **Mon, Sept 28 (Day 28)** | `[ ] Planned` | **Workflow live in production; weekly hours saved tracked** | - | None | None | 🟡 |
 
 ---
 
@@ -52,11 +52,11 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S4.12**| **Weekly Review #4: P0 Demo Readiness Sign-off (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 25 (Day 25) | `[ ] Planned` | Review minutes, Demo sign-off & LMS prototype verification | - | None | None | 🟢 |
-| **S4.13**| **Finalize September GPU / Compute Setup Track (M10)** | **Gaurav** *(Sajan)* | **Wed, Sept 30 (Day 30)** | `[ ] Planned` | **Compute option, vendor contact, architecture & cost plan ready** | - | None | None | 🟢 |
-| **S4.14**| **MAS AI Labs Website & Info ID Live (M11)** | **Marketing / Vendor** *(Prakhar, Gaurav)* | **Wed, Sept 30 (Day 30)** | `[ ] Planned` | **Website live + Info ID routed to named owner** | - | None | None | 🟢 |
-| **S4.15**| Close 3 financial baselines (Revenue target, run-rate, hiring) | **Gaurav** *(Finance, HR)* | Wed, Sept 30 (Day 30) | `[ ] Planned` | Closed financial baselines with Jitin Sir & Pranab Sir | - | None | None | 🟢 |
-| **S4.16**| **Publish Month-End Management Report & Month 2 Backlog** | **Gaurav** *(Team)* | **Wed, Sept 30 (Day 30)** | `[ ] Planned` | **Comprehensive Month 1 closure report & Month 2 plan** | - | None | None | 🟢 |
+| **S4.12** | **Weekly Review #4: P0 Demo Readiness Sign-off (8:00 PM)** | **Gaurav** *(All)* | Fri, Sept 25 (Day 25) | `[ ] Planned` | Review minutes, Demo sign-off & LMS prototype verification | - | None | None | 🟡 |
+| **S4.13** | **Finalize September GPU / Compute Setup Track (M10)** | **Gaurav** *(Sajan)* | **Wed, Sept 30 (Day 30)** | `[ ] Planned` | **Compute option, vendor contact, architecture & cost plan ready** | - | None | None | 🟡 |
+| **S4.14** | **MAS AI Labs Website & Info ID Live (M11)** | **Marketing / Vendor** *(Prakhar, Gaurav)* | **Wed, Sept 30 (Day 30)** | `[ ] Planned` | **Website live + Info ID routed to named owner** | - | None | None | 🟡 |
+| **S4.15** | Close 3 financial baselines (Revenue target, run-rate, hiring) | **Gaurav** *(Finance, HR)* | Wed, Sept 30 (Day 30) | `[ ] Planned` | Closed financial baselines with Jitin Sir & Pranab Sir | - | None | None | 🟡 |
+| **S4.16** | **Publish Month-End Management Report & Month 2 Backlog** | **Gaurav** *(Team)* | **Wed, Sept 30 (Day 30)** | `[ ] Planned` | **Comprehensive Month 1 closure report & Month 2 plan** | - | None | None | 🟡 |
 
 ---
 
@@ -79,3 +79,4 @@
 * *Mon, Sept 28 (Day 28)*: 
 * *Tue, Sept 29 (Day 29)*: 
 * *Wed, Sept 30 (Day 30)*:
+
