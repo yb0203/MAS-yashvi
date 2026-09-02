@@ -1,8 +1,7 @@
 """
 MAS AI Labs — Slack Block Kit UI Views & Templates
 Author: MAS AI PM
-Description: Centralized UI library generating clean, modern Slack Block Kit
-             cards for Personal DMs, Modals, Pre-Standup Digests, and Structured Post-Standup Summaries.
+Description: Clean, sleek, high-signal Slack Block Kit views with zero visual noise.
 """
 
 import json
@@ -29,52 +28,38 @@ def map_status_to_rag(status: str, has_blocker: bool = False) -> str:
         return "⚪"
 
 def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: int, sprint_num: int) -> List[Dict[str, Any]]:
-    """Builds a compact, personalized 1-screen DM view for task owners."""
+    """Compact, sleek DM view for teammates."""
     task_bullets = []
     for t in tasks:
-        task_bullets.append(
-            f"• *`{t['id']}`*: {t['task']}\n"
-            f"   ↳ *Status:* `{t['status']}` | *RAG:* {t['rag']}"
-        )
+        rag = t.get("rag", "⚪")
+        status = t.get("status", "Planned").replace("`", "").replace("[ ]", "").replace("[-]", "").replace("[x]", "").replace("[!]", "").strip()
+        task_bullets.append(f"{rag} *`{t['id']}`*: {t['task']} `({status})`")
 
     return [
         {
             "type": "header",
+            "text": {"type": "plain_text", "text": f"👋 Standup Update • Day {day}", "emoji": True}
+        },
+        {
+            "type": "section",
             "text": {
-                "type": "plain_text",
-                "text": f"👋 Hey {owner_name}! Daily Standup (Day {day})",
-                "emoji": True
+                "type": "mrkdwn",
+                "text": f"Hi *{owner_name}*! Google Meet Standup is at *8:00 PM IST*.\nPlease take 15 seconds to update your deliverables:"
             }
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": (
-                    f"⏰ *Google Meet Standup is at 8:00 PM IST.*\n"
-                    f"Which tasks did you pick and work on today? Take *20 seconds* to update:"
-                )
+                "text": "\n".join(task_bullets)
             }
         },
-        {"type": "divider"},
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*📌 Your Sprint Deliverables:*\n" + "\n".join(task_bullets)
-            }
-        },
-        {"type": "divider"},
         {
             "type": "actions",
             "elements": [
                 {
                     "type": "button",
-                    "text": {
-                        "type": "plain_text",
-                        "text": "⚡ Update Today's Focus (< 20s)",
-                        "emoji": True
-                    },
+                    "text": {"type": "plain_text", "text": "⚡ Update Status (< 20s)", "emoji": True},
                     "style": "primary",
                     "value": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day}),
                     "action_id": "open_consolidated_modal_action"
@@ -84,23 +69,16 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
     ]
 
 def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[str, Any]], sprint_num: int, day: int) -> Dict[str, Any]:
-    """
-    Tier 2 Modal: Task-Wise Progress & Status Update Form.
-    Provides dedicated completion & progress tracking for EVERY task assigned to the person.
-    """
+    """Sleek, compact task update modal with zero clutter."""
     blocks = [
         {
             "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f"👋 *Hi {owner_name}!* Update today's progress & status for each of your deliverables (**Day {day}**):"
-            }
-        },
-        {"type": "divider"}
+            "text": {"type": "mrkdwn", "text": f"Update status for your active deliverables (**Day {day}**):"}
+        }
     ]
 
     status_options = [
-        {"text": {"type": "plain_text", "text": "⚪ Planned"}, "value": "[ ] Planned"},
+        {"text": {"type": "plain_text", "text": "⚪ Not Started"}, "value": "[ ] Planned"},
         {"text": {"type": "plain_text", "text": "⏳ In Progress"}, "value": "[-] In Progress"},
         {"text": {"type": "plain_text", "text": "🚨 Blocked"}, "value": "[!] Blocked"},
         {"text": {"type": "plain_text", "text": "✅ Completed"}, "value": "[x] Completed"}
@@ -111,8 +89,8 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         t_task = t["task"]
         curr_status = t.get("status", "[ ] Planned")
 
-        # Match initial option
-        initial_opt = status_options[0] # Default Planned
+        # Initial option match
+        initial_opt = status_options[0]
         if "completed" in curr_status.lower() or "done" in curr_status.lower() or "[x]" in curr_status:
             initial_opt = status_options[3]
         elif "in progress" in curr_status.lower() or "[-]" in curr_status:
@@ -127,19 +105,12 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         outcome_element = {
             "type": "plain_text_input",
             "action_id": f"input_outcome_{t_id}",
-            "placeholder": {"type": "plain_text", "text": "e.g. Completed draft / 50% done / PR link"}
+            "placeholder": {"type": "plain_text", "text": "Progress note / outcome / PR link (optional)"}
         }
         if curr_outcome and isinstance(curr_outcome, str) and curr_outcome.strip():
             outcome_element["initial_value"] = curr_outcome.strip()
 
         blocks.extend([
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": f"*📌 `{t_id}`: {t_task}*\n*Target:* _{t.get('expected_outcome', '-')}_"
-                }
-            },
             {
                 "type": "input",
                 "block_id": f"status_block_{t_id}",
@@ -149,16 +120,15 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
                     "options": status_options,
                     "initial_option": initial_opt
                 },
-                "label": {"type": "plain_text", "text": f"Status for {t_id}"}
+                "label": {"type": "plain_text", "text": f"{t_id}: {t_task[:60]}"}
             },
             {
                 "type": "input",
                 "block_id": f"outcome_block_{t_id}",
                 "optional": True,
                 "element": outcome_element,
-                "label": {"type": "plain_text", "text": f"Today's Progress / Outcome for {t_id}"}
-            },
-            {"type": "divider"}
+                "label": {"type": "plain_text", "text": f"Note for {t_id}"}
+            }
         ])
 
     # Global Blocker input
@@ -169,9 +139,9 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         "element": {
             "type": "plain_text_input",
             "action_id": "input_global_blocker",
-            "placeholder": {"type": "plain_text", "text": "None / Waiting on API key / Need sync with Rohan"}
+            "placeholder": {"type": "plain_text", "text": "Any blocker or help needed on 8 PM call (optional)"}
         },
-        "label": {"type": "plain_text", "text": "🚨 Active Blocker / Help Needed on Call (If any)"}
+        "label": {"type": "plain_text", "text": "🚨 Blockers / Dependencies"}
     })
 
     task_ids_json = json.dumps([t["id"] for t in all_owner_tasks])
@@ -180,27 +150,22 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         "type": "modal",
         "callback_id": "submit_consolidated_standup_callback",
         "private_metadata": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day, "tasks": task_ids_json}),
-        "title": {"type": "plain_text", "text": "Daily Standup Update", "emoji": True},
-        "submit": {"type": "plain_text", "text": "Submit All", "emoji": True},
+        "title": {"type": "plain_text", "text": "Standup Update", "emoji": True},
+        "submit": {"type": "plain_text", "text": "Save Update", "emoji": True},
         "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
         "blocks": blocks[:100]
     }
 
 def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
-    """Generates the modal to add a brand-new sprint task dynamically."""
+    """Modal to add a sprint task."""
     return {
         "type": "modal",
         "callback_id": "submit_add_task_callback",
         "private_metadata": json.dumps({"sprint": sprint_num}),
-        "title": {"type": "plain_text", "text": "Add New Sprint Task", "emoji": True},
+        "title": {"type": "plain_text", "text": "Add New Task", "emoji": True},
         "submit": {"type": "plain_text", "text": "Add Task", "emoji": True},
         "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
         "blocks": [
-            {
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": f"Add a new deliverable to **Sprint {sprint_num}**. It will immediately be assigned and synced to the markdown file and Excel tracker."}
-            },
-            {"type": "divider"},
             {
                 "type": "input",
                 "block_id": "add_owner_block",
@@ -216,7 +181,7 @@ def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
                     ],
                     "initial_option": {"text": {"type": "plain_text", "text": "👤 Yashvi"}, "value": "Yashvi"}
                 },
-                "label": {"type": "plain_text", "text": "Task Owner"}
+                "label": {"type": "plain_text", "text": "Assignee"}
             },
             {
                 "type": "input",
@@ -225,12 +190,12 @@ def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
                     "type": "static_select",
                     "action_id": "select_add_comp",
                     "options": [
-                        {"text": {"type": "plain_text", "text": "📦 C1: Market, Intake & Client POCs"}, "value": "1"},
-                        {"text": {"type": "plain_text", "text": "📦 C2: Product, In-House LMS & Demos"}, "value": "2"},
-                        {"text": {"type": "plain_text", "text": "📦 C3: Cloud, Cost & Internal Automation"}, "value": "3"},
-                        {"text": {"type": "plain_text", "text": "📦 C4: Leadership, Compute & Enablers"}, "value": "4"}
+                        {"text": {"type": "plain_text", "text": "📦 C1: Market & Intake"}, "value": "1"},
+                        {"text": {"type": "plain_text", "text": "📦 C2: Product & Demos"}, "value": "2"},
+                        {"text": {"type": "plain_text", "text": "📦 C3: Cloud & Automation"}, "value": "3"},
+                        {"text": {"type": "plain_text", "text": "📦 C4: Leadership & Compute"}, "value": "4"}
                     ],
-                    "initial_option": {"text": {"type": "plain_text", "text": "📦 C2: Product, In-House LMS & Demos"}, "value": "2"}
+                    "initial_option": {"text": {"type": "plain_text", "text": "📦 C2: Product & Demos"}, "value": "2"}
                 },
                 "label": {"type": "plain_text", "text": "Compartment"}
             },
@@ -240,9 +205,9 @@ def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
                 "element": {
                     "type": "plain_text_input",
                     "action_id": "add_title_input",
-                    "placeholder": {"type": "plain_text", "text": "e.g. Document Sales Suite setup & research plan"}
+                    "placeholder": {"type": "plain_text", "text": "e.g. Sales Suite architecture plan"}
                 },
-                "label": {"type": "plain_text", "text": "Task Title / Description"}
+                "label": {"type": "plain_text", "text": "Task Title"}
             },
             {
                 "type": "input",
@@ -250,9 +215,9 @@ def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
                 "element": {
                     "type": "plain_text_input",
                     "action_id": "add_outcome_input",
-                    "placeholder": {"type": "plain_text", "text": "e.g. Architecture document ready for review"}
+                    "placeholder": {"type": "plain_text", "text": "e.g. Architecture doc ready for review"}
                 },
-                "label": {"type": "plain_text", "text": "Expected Outcome"}
+                "label": {"type": "plain_text", "text": "Target Outcome"}
             },
             {
                 "type": "input",
@@ -262,13 +227,13 @@ def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:
                     "action_id": "add_date_input",
                     "placeholder": {"type": "plain_text", "text": "Fri, Sept 4 (Day 4)"}
                 },
-                "label": {"type": "plain_text", "text": "Target Deadline"}
+                "label": {"type": "plain_text", "text": "Deadline"}
             }
         ]
     }
 
 def build_deprioritize_modal(sprint_num: int, all_tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Generates the modal to de-prioritize or defer an active task."""
+    """Modal to de-prioritize a task."""
     task_options = []
     for t in all_tasks:
         task_options.append({
@@ -285,20 +250,15 @@ def build_deprioritize_modal(sprint_num: int, all_tasks: List[Dict[str, Any]]) -
         "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
         "blocks": [
             {
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": "Select a task discussed in standup to mark as **De-prioritised / Deferred**."}
-            },
-            {"type": "divider"},
-            {
                 "type": "input",
                 "block_id": "deprioritize_task_block",
                 "element": {
                     "type": "static_select",
                     "action_id": "select_deprioritize_task",
                     "options": task_options[:100],
-                    "placeholder": {"type": "plain_text", "text": "Select task to defer"}
+                    "placeholder": {"type": "plain_text", "text": "Select task"}
                 },
-                "label": {"type": "plain_text", "text": "Select Task"}
+                "label": {"type": "plain_text", "text": "Task to De-prioritize"}
             },
             {
                 "type": "input",
@@ -306,53 +266,59 @@ def build_deprioritize_modal(sprint_num: int, all_tasks: List[Dict[str, Any]]) -
                 "element": {
                     "type": "plain_text_input",
                     "action_id": "deprioritize_reason_input",
-                    "placeholder": {"type": "plain_text", "text": "e.g. Scope deferred to Month 2 engineering backlog"}
+                    "placeholder": {"type": "plain_text", "text": "Reason for deferral"}
                 },
-                "label": {"type": "plain_text", "text": "Reason for De-prioritisation"}
+                "label": {"type": "plain_text", "text": "Reason"}
             }
         ]
     }
 
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
-    """Generates the 7:45 PM Pre-Standup Task Summary Card from Teammates in #all-mas-ai-labs."""
-    completed_tasks = [t for t in all_tasks if "completed" in t["status"].lower() or "done" in t["status"].lower() or "[x]" in t["status"]]
-    in_progress = [t for t in all_tasks if "in progress" in t["status"].lower() or "[-]" in t["status"]]
-    planned_tasks = [t for t in all_tasks if "planned" in t["status"].lower() or "[ ]" in t["status"]]
-    blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"] or t["rag"] == "🔴"]
+    """Sleek, high-signal Pre-Standup Summary Card for #all-mas-ai-labs."""
+    completed = [t for t in all_tasks if "completed" in t["status"].lower() or "done" in t["status"].lower() or "[x]" in t["status"]]
+    in_progress = [t for t in all_tasks if ("in progress" in t["status"].lower() or "[-]" in t["status"]) and t.get("rag") != "🔴"]
+    not_started = [t for t in all_tasks if ("planned" in t["status"].lower() or "[ ]" in t["status"]) and t.get("rag") != "🔴"]
+    blocked = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"] or t.get("rag") == "🔴"]
 
     owner_groups = {}
     for t in all_tasks:
         owner_groups.setdefault(t["owner"], []).append(t)
 
-    owner_summary_blocks = []
+    owner_sections = []
     for owner, tasks in owner_groups.items():
-        task_lines = []
-        for t in tasks:
+        lines = []
+        # Show active & blocked tasks individually
+        active = [t for t in tasks if t in in_progress or t in blocked or t in completed]
+        planned = [t for t in tasks if t in not_started]
+
+        for t in active:
             rag = t.get("rag", "🟡")
-            status_clean = t["status"].replace("`", "").strip()
-            task_line = f"   {rag} *`{t['id']}`*: {t['task']} `[{status_clean}]`"
+            status_clean = t["status"].replace("`", "").replace("[-]", "").replace("[x]", "").replace("[!]", "").strip()
+            line = f"• {rag} *`{t['id']}`*: {t['task']} `[{status_clean}]`"
             if t.get("actual_outcome") and t["actual_outcome"] != "-" and t["actual_outcome"].strip():
-                task_line += f"\n      ↳ *Update:* _{t['actual_outcome'].strip()}_"
-            task_lines.append(task_line)
-        owner_summary_blocks.append(f"*👤 {owner}:*\n" + "\n".join(task_lines))
+                line += f"\n  ↳ _{t['actual_outcome'].strip()}_"
+            if t.get("blocker") and t["blocker"].lower() != "none" and t["blocker"] != "-":
+                line += f"\n  ↳ 🚨 *Blocker:* _{t['blocker'].strip()}_"
+            lines.append(line)
+
+        if planned:
+            p_ids = ", ".join([f"`{t['id']}`" for t in planned])
+            lines.append(f"• ⚪ *Planned ({len(planned)}):* {p_ids}")
+
+        owner_sections.append(f"*{owner}:*\n" + "\n".join(lines))
 
     blocks = [
         {
             "type": "header",
-            "text": {
-                "type": "plain_text",
-                "text": f"📊 Pre-Standup Task Summary from Teammates (Day {day})",
-                "emoji": True
-            }
+            "text": {"type": "plain_text", "text": f"📊 Pre-Standup Task Summary • Day {day}", "emoji": True}
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
                 "text": (
-                    f"📞 *Google Meet Standup starts at 8:00 PM IST (in 15 mins)*\n"
-                    f"• *Sprint {sprint_num} Overview:* 🟢 `{len(completed_tasks)} Completed` | "
-                    f"🟡 `{len(in_progress)} In Progress` | ⚪ `{len(planned_tasks)} Not Started` | 🔴 `{len(blocked_tasks)} Blocked`"
+                    f"📞 *Google Meet starts at 8:00 PM IST*\n"
+                    f"🟢 `{len(completed)} Done`  |  🟡 `{len(in_progress)} Active`  |  ⚪ `{len(not_started)} Planned`  |  🔴 `{len(blocked)} Blocked`"
                 )
             }
         },
@@ -361,23 +327,20 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "*📋 Teammate Task Updates & RAG Status:*\n\n" + "\n\n".join(owner_summary_blocks)
+                "text": "\n\n".join(owner_sections)
             }
         }
     ]
 
-    if blocked_tasks:
-        blocker_text = []
-        for t in blocked_tasks:
-            blocker_text.append(f"• 🚨 *`{t['id']}` ({t['owner']})*: {t['task']}\n   ↳ *Blocker:* _{t['blocker']}_")
+    if blocked:
+        b_lines = []
+        for t in blocked:
+            b_lines.append(f"• 🔴 *{t['owner']} (`{t['id']}`)*: {t['blocker']}")
         blocks.extend([
             {"type": "divider"},
             {
                 "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "*⚠️ Priority Items to Discuss & Unblock on Call:*\n" + "\n".join(blocker_text)
-                }
+                "text": {"type": "mrkdwn", "text": "*🚨 Priority Blockers for 8:00 PM Call:*\n" + "\n".join(b_lines)}
             }
         ])
 
@@ -388,14 +351,14 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
             "elements": [
                 {
                     "type": "button",
-                    "text": {"type": "plain_text", "text": "🟢 Join Google Meet (8:00 PM)", "emoji": True},
+                    "text": {"type": "plain_text", "text": "🟢 Join Google Meet", "emoji": True},
                     "url": meet_url or "https://meet.google.com/iek-smrh-zgg?authuser=0&hl=en_GB",
                     "style": "primary",
                     "action_id": "join_meet_button"
                 },
                 {
                     "type": "button",
-                    "text": {"type": "plain_text", "text": "📂 Open Sprint Plan", "emoji": True},
+                    "text": {"type": "plain_text", "text": "📂 Sprint Plan", "emoji": True},
                     "url": "https://github.com/yb0203/MAS-yashvi/tree/main/sprint_execution",
                     "action_id": "open_sprint_link"
                 }
@@ -414,86 +377,64 @@ def build_post_standup_structured_summary_card(
     blockers: List[str]
 ) -> Dict[str, Any]:
     """
-    Generates the high-signal, beautifully formatted Post-Standup Card in #all-mas-ai-labs:
-    1. Person-by-Person Task Highlights & Discussions
-    2. 🆕 New Tasks / Action Items Added from the Call
-    3. 🎯 Agreed Decisions & Alignment
-    4. 🚨 Active Blockers
+    Sleek, executive Post-Standup Highlights Card.
+    Zero clutter, high readability, and clean formatting.
     """
     blocks = [
         {
             "type": "header",
-            "text": {
-                "type": "plain_text",
-                "text": f"📝 MAS AI Labs — Post-Standup Highlights (Sprint {sprint_num} | Day {day})",
-                "emoji": True
-            }
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f"✨ *Daily Standup Call Summary & Pod Alignments (Day {day})*"
-            }
-        },
-        {"type": "divider"}
+            "text": {"type": "plain_text", "text": f"📝 Standup Call Summary • Day {day}", "emoji": True}
+        }
     ]
 
-    # 1. Person-by-person task updates
-    owner_sections = []
+    # 1. Pod Updates (Clean single bullets)
+    owner_bullets = []
     for owner, bullets in owner_updates.items():
         if bullets:
-            b_text = "\n".join([f"   {b}" for b in bullets])
-            owner_sections.append(f"*👤 {owner}:*\n{b_text}")
+            clean_bullets = "; ".join(bullets)
+            owner_bullets.append(f"• *{owner}*: {clean_bullets}")
 
-    if owner_sections:
-        blocks.append({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*📋 Updates & Discussions on Active Tasks:*\n\n" + "\n\n".join(owner_sections)
-            }
-        })
-
-    # 2. 🆕 New tasks added from the call
-    if new_tasks:
-        new_bullets = "\n".join([f"• 🆕 {t}" for t in new_tasks])
+    if owner_bullets:
         blocks.extend([
-            {"type": "divider"},
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*✨ New Tasks & Action Items Added from Call:*\n" + new_bullets
+                    "text": "*🚀 Today's Progress & Discussions:*\n" + "\n".join(owner_bullets)
                 }
             }
         ])
 
-    # 3. 🎯 Key decisions
+    # 2. Key Decisions
     if call_decisions:
-        decisions_bullets = "\n".join([f"• {d}" for d in call_decisions])
+        dec_bullets = "\n".join([f"• {d}" for d in call_decisions])
         blocks.extend([
             {"type": "divider"},
             {
                 "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "*🎯 Key Decisions & Pod Alignment:*\n" + decisions_bullets
-                }
+                "text": {"type": "mrkdwn", "text": "*🎯 Decisions & Alignment:*\n" + dec_bullets}
             }
         ])
 
-    # 4. 🚨 Blockers
-    if blockers:
-        blockers_bullets = "\n".join([f"• 🚨 {b}" for b in blockers])
+    # 3. New Tasks Added
+    if new_tasks:
+        nt_bullets = "\n".join([f"• 🆕 {t}" for t in new_tasks])
         blocks.extend([
             {"type": "divider"},
             {
                 "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "*⚠️ Active Blockers & Dependencies:*\n" + blockers_bullets
-                }
+                "text": {"type": "mrkdwn", "text": "*✨ New Scope / Action Items:*\n" + nt_bullets}
+            }
+        ])
+
+    # 4. Blockers
+    if blockers:
+        blk_bullets = "\n".join([f"• 🔴 {b}" for b in blockers])
+        blocks.extend([
+            {"type": "divider"},
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": "*🚨 Open Blockers:*\n" + blk_bullets}
             }
         ])
 
@@ -504,7 +445,7 @@ def build_post_standup_structured_summary_card(
             "elements": [
                 {
                     "type": "mrkdwn",
-                    "text": f"✅ Synced directly into `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and `MAS_AI_LABS_SPRINT_TRACKER.xlsx`."
+                    "text": f"✅ Synced with `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and master Excel tracker."
                 }
             ]
         }
