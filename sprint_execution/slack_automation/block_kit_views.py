@@ -74,87 +74,103 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
     ]
 
 def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[str, Any]], sprint_num: int, day: int) -> Dict[str, Any]:
-    """Tier 2 Modal: 'What Did You Pick Today?'"""
-    task_options = []
-    for t in all_owner_tasks:
-        task_options.append({
-            "text": {
-                "type": "plain_text",
-                "text": f"{t['id']}: {t['task'][:60]}"
-            },
-            "value": t["id"]
-        })
-
-    initial_options = [task_options[0]] if task_options else []
-
+    """
+    Tier 2 Modal: Task-Wise Progress & Status Update Form.
+    Provides dedicated completion & progress tracking for EVERY task assigned to the person.
+    """
     blocks = [
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f"👋 *Hi {owner_name}!* Select the deliverable(s) you picked and worked on today (**Day {day}**):"
+                "text": f"👋 *Hi {owner_name}!* Update today's progress & status for each of your deliverables (**Day {day}**):"
             }
         },
-        {"type": "divider"},
-        {
-            "type": "input",
-            "block_id": "picked_tasks_block",
-            "element": {
-                "type": "multi_static_select",
-                "action_id": "select_picked_tasks",
-                "placeholder": {"type": "plain_text", "text": "Select task(s) worked on today"},
-                "options": task_options,
-                "initial_options": initial_options
-            },
-            "label": {"type": "plain_text", "text": "Tasks Picked / Worked on Today"}
-        },
-        {
-            "type": "input",
-            "block_id": "today_status_block",
-            "element": {
-                "type": "static_select",
-                "action_id": "select_today_status",
-                "options": [
-                    {"text": {"type": "plain_text", "text": "✅ Done / Completed Today"}, "value": "[x] Done"},
-                    {"text": {"type": "plain_text", "text": "⏳ In Progress / Ongoing"}, "value": "[-] In Progress"},
-                    {"text": {"type": "plain_text", "text": "🚨 Blocked / Need Help"}, "value": "[!] Blocked"}
-                ],
-                "initial_option": {"text": {"type": "plain_text", "text": "⏳ In Progress / Ongoing"}, "value": "[-] In Progress"}
-            },
-            "label": {"type": "plain_text", "text": "Today's Status (RAG is mapped automatically)"}
-        },
-        {
-            "type": "input",
-            "block_id": "deliverable_link_block",
-            "optional": True,
-            "element": {
-                "type": "plain_text_input",
-                "action_id": "deliverable_link_input",
-                "placeholder": {"type": "plain_text", "text": "PR # / Doc link / Quick progress summary"}
-            },
-            "label": {"type": "plain_text", "text": "Outcome Note / Link"}
-        },
-        {
-            "type": "input",
-            "block_id": "blocker_notes_block",
-            "optional": True,
-            "element": {
-                "type": "plain_text_input",
-                "action_id": "blocker_notes_input",
-                "placeholder": {"type": "plain_text", "text": "None / Waiting for API key / Dependency"}
-            },
-            "label": {"type": "plain_text", "text": "Blocker / Dependency (If any)"}
-        }
+        {"type": "divider"}
     ]
+
+    status_options = [
+        {"text": {"type": "plain_text", "text": "✅ Done / Completed"}, "value": "[x] Done"},
+        {"text": {"type": "plain_text", "text": "⏳ In Progress / Ongoing"}, "value": "[-] In Progress"},
+        {"text": {"type": "plain_text", "text": "⚪ Planned / Not Started"}, "value": "[ ] Planned"},
+        {"text": {"type": "plain_text", "text": "🚨 Blocked / Need Help"}, "value": "[!] Blocked"}
+    ]
+
+    for t in all_owner_tasks:
+        t_id = t["id"]
+        t_task = t["task"]
+        curr_status = t.get("status", "[ ] Planned")
+
+        # Match initial option
+        initial_opt = status_options[2] # Default Planned
+        if "done" in curr_status.lower() or "[x]" in curr_status:
+            initial_opt = status_options[0]
+        elif "in progress" in curr_status.lower() or "[-]" in curr_status:
+            initial_opt = status_options[1]
+        elif "blocked" in curr_status.lower() or "[!]" in curr_status:
+            initial_opt = status_options[3]
+
+        curr_outcome = t.get("actual_outcome", "")
+        if curr_outcome == "-":
+            curr_outcome = ""
+
+        blocks.extend([
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*📌 `{t_id}`: {t_task}*\n*Target:* _{t.get('expected_outcome', '-')}_"
+                }
+            },
+            {
+                "type": "input",
+                "block_id": f"status_block_{t_id}",
+                "element": {
+                    "type": "static_select",
+                    "action_id": f"select_status_{t_id}",
+                    "options": status_options,
+                    "initial_option": initial_opt
+                },
+                "label": {"type": "plain_text", "text": f"Status for {t_id}"}
+            },
+            {
+                "type": "input",
+                "block_id": f"outcome_block_{t_id}",
+                "optional": True,
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": f"input_outcome_{t_id}",
+                    "initial_value": curr_outcome if curr_outcome else None,
+                    "placeholder": {"type": "plain_text", "text": "e.g. Completed draft / 50% done / PR link"}
+                },
+                "label": {"type": "plain_text", "text": f"Today's Progress / Outcome for {t_id}"}
+            },
+            {"type": "divider"}
+        ])
+
+    # Global Blocker input
+    blocks.append({
+        "type": "input",
+        "block_id": "global_blocker_block",
+        "optional": True,
+        "element": {
+            "type": "plain_text_input",
+            "action_id": "input_global_blocker",
+            "placeholder": {"type": "plain_text", "text": "None / Waiting on API key / Need sync with Rohan"}
+        },
+        "label": {"type": "plain_text", "text": "🚨 Active Blocker / Help Needed on Call (If any)"}
+    })
+
+    task_ids_json = json.dumps([t["id"] for t in all_owner_tasks])
 
     return {
         "type": "modal",
         "callback_id": "submit_consolidated_standup_callback",
-        "private_metadata": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day}),
-        "title": {"type": "plain_text", "text": "Today's Standup Focus", "emoji": True},
-        "submit": {"type": "plain_text", "text": "Submit", "emoji": True},
+        "private_metadata": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day, "tasks": task_ids_json}),
+        "title": {"type": "plain_text", "text": "Daily Standup Update", "emoji": True},
+        "submit": {"type": "plain_text", "text": "Submit All", "emoji": True},
         "close": {"type": "plain_text", "text": "Cancel", "emoji": True},
-        "blocks": blocks
+        "blocks": blocks[:100]
     }
 
 def build_add_task_modal(sprint_num: int) -> Dict[str, Any]:

@@ -132,22 +132,25 @@ if app:
         owner_name = meta["owner"]
         sprint_num = meta["sprint"]
         day = meta["day"]
+        task_ids = json.loads(meta.get("tasks", "[]"))
 
         values = view["state"]["values"]
-        
-        # Selected tasks from multi-select
-        selected_options = values.get("picked_tasks_block", {}).get("select_picked_tasks", {}).get("selected_options", [])
-        task_ids = [opt["value"] for opt in selected_options]
-
-        status_val = values.get("today_status_block", {}).get("select_today_status", {}).get("selected_option", {}).get("value", "[-] In Progress")
-        outcome = values.get("deliverable_link_block", {}).get("deliverable_link_input", {}).get("value") or "-"
-        blocker = values.get("blocker_notes_block", {}).get("blocker_notes_input", {}).get("value") or "None"
-
-        rag_val = map_status_to_rag(status_val, has_blocker=(blocker.lower() != "none" and blocker != "-"))
+        global_blocker = values.get("global_blocker_block", {}).get("input_global_blocker", {}).get("value") or "None"
         sprint_file, _ = get_sprint_file_for_day(day)
 
+        updated_summary = []
         for t_id in task_ids:
-            update_sprint_task(sprint_file, t_id, status_val, outcome, blocker, rag_val)
+            status_block = values.get(f"status_block_{t_id}", {})
+            outcome_block = values.get(f"outcome_block_{t_id}", {})
+
+            status_val = status_block.get(f"select_status_{t_id}", {}).get("selected_option", {}).get("value", "[-] In Progress")
+            outcome_val = outcome_block.get(f"input_outcome_{t_id}", {}).get("value") or "-"
+
+            has_block = (global_blocker.lower() != "none" and global_blocker != "-") or "[!]" in status_val
+            rag_val = map_status_to_rag(status_val, has_blocker=has_block)
+
+            update_sprint_task(sprint_file, t_id, status_val, outcome_val, global_blocker, rag_val)
+            updated_summary.append(f"`{t_id}`: `{status_val}`")
 
         tasks = parse_sprint_tasks(sprint_file)
         sync_active_blockers_to_master(tasks, sprint_num)
@@ -157,10 +160,10 @@ if app:
         user_id = body.get("user", {}).get("id")
         if user_id:
             try:
-                task_list_str = ", ".join(task_ids) if task_ids else "Tasks"
+                task_list_str = "\n".join([f"• {s}" for s in updated_summary]) if updated_summary else "Deliverables updated."
                 client.chat_postMessage(
                     channel=user_id,
-                    text=f"✅ *Daily Standup Update Saved!* Updated `{task_list_str}` as `{status_val}` in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and the master tracker."
+                    text=f"✅ *Daily Standup Update Saved!*\nYour deliverables were updated individually in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and the master Excel tracker:\n{task_list_str}"
                 )
             except Exception as e:
                 logger.error(f"Failed to send confirmation DM: {e}")
