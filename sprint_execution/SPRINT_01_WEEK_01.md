@@ -50,8 +50,8 @@
 | **S1.13** | Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | 🟡 |
 | **S1.14** | Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | 🟡 |
 | **S1.15** | Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | 🟡 |
-| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | - | Need to discuss the artifacts required for capability mapping | None | 🟡 |
-| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | - | Need to discuss the artifacts required for capability mapping | None | 🟡 |
+| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | Built & configured with Socket Mode & scheduler | None | None | 🟡 |
+| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | Live testing with pod members | None | None | 🟡 |
 
 ---
 
