@@ -10,11 +10,11 @@ from typing import Dict, Any, List
 
 def map_status_to_rag(status: str, has_blocker: bool = False) -> str:
     """
-    Automatically maps the 4 task statements to RAG indicator:
+    4 Canonical RAG Color Mappings:
+    - Blocked: 🔴 (Red)
     - Completed: 🟢 (Green)
     - In Progress: 🟡 (Yellow / Amber)
-    - Planned: 🟡 (Yellow / Amber)
-    - Blocked: 🔴 (Red)
+    - Not Started / Planned: ⚪ (White)
     """
     s_lower = status.lower()
     if "blocked" in s_lower or "[!]" in s_lower or has_blocker:
@@ -23,10 +23,10 @@ def map_status_to_rag(status: str, has_blocker: bool = False) -> str:
         return "🟢"
     elif "in progress" in s_lower or "[-]" in s_lower:
         return "🟡"
-    elif "planned" in s_lower or "[ ]" in s_lower:
-        return "🟡"
+    elif "planned" in s_lower or "not started" in s_lower or "[ ]" in s_lower:
+        return "⚪"
     else:
-        return "🟡"
+        return "⚪"
 
 def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: int, sprint_num: int) -> List[Dict[str, Any]]:
     """Builds a compact, personalized 1-screen DM view for task owners."""
@@ -352,7 +352,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
                 "text": (
                     f"📞 *Google Meet Standup starts at 8:00 PM IST (in 15 mins)*\n"
                     f"• *Sprint {sprint_num} Overview:* 🟢 `{len(completed_tasks)} Completed` | "
-                    f"🟡 `{len(in_progress)} In Progress` | 🟡 `{len(planned_tasks)} Planned` | 🔴 `{len(blocked_tasks)} Blocked`"
+                    f"🟡 `{len(in_progress)} In Progress` | ⚪ `{len(planned_tasks)} Not Started` | 🔴 `{len(blocked_tasks)} Blocked`"
                 )
             }
         },
