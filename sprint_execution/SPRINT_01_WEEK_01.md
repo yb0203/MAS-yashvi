@@ -20,12 +20,12 @@
 
 | ID | Task / Activity | Owner (Support) | Target Date (Day) | Status | Expected Outcome | Actual Outcome | Blocker | Delay Reason | RAG |
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
-| **S1.1** | Draft Business $\rightarrow$ Tech Intake Format v1 | **Prakhar** *(Yashvi)* | Thu, Sept 3 (Day 3) | `[ ] Planned` | Standard intake format defining: Who $\rightarrow$ Wants What $\rightarrow$ Context $\rightarrow$ POC $\rightarrow$ Scale $\rightarrow$ Tech expectation | - | None | None | ⚪ |
+| **S1.1** | Draft Business $\rightarrow$ Tech Intake Format v1 | **Prakhar** *(Yashvi)* | Thu, Sept 3 (Day 3) | `[-] In Progress` | Standard intake format defining: Who $\rightarrow$ Wants What $\rightarrow$ Context $\rightarrow$ POC $\rightarrow$ Scale $\rightarrow$ Tech expectation | Creating client contact intake sheet in Google Sheet format | None | None | 🟡 |
 | **S1.2** | Collect client context: **Orane** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete background, target audience, scale, missing items identified | - | None | None | ⚪ |
 | **S1.3** | Collect client context: **College Vidya** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete admissions/CRM context, scale, integration requirements | - | None | None | ⚪ |
 | **S1.4** | Collect client context: **Chitkara** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete placement/academic scope, 100-student cohort context | - | None | None | ⚪ |
 | **S1.5** | Define schema & draft **Product Catalogue v1** | **Prakhar** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Product, buyer, use case, maturity, demo readiness, limitations | - | None | None | ⚪ |
-| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | Need to understand the deliverable | Need to discuss the artifacts required for capability mapping | None | 🔴 |
+| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | Aligned on Week 2 demo readiness; assigning component owners | Need to discuss the artifacts required for capability mapping | None | 🟡 |
 
 ---
 
@@ -35,10 +35,10 @@
 |:---:|---|:---:|:---:|:---:|---|---|---|---|:---:|
 | **S1.7** | Freeze P0 product/module list & assign owners | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[-] In Progress` | Final P0 list with named module owners across both suites | - | None | None | 🟡 |
 | **S1.8** | Triage all P0 bugs across live suites by severity | **Shubham** *(Rohan)* | Wed, Sept 2 (Day 2) | `[-] In Progress` | Critical / blocker bug list ready with reproduction steps | - | None | None | 🟡 |
-| **S1.9** | **Fix critical / blocking P0 bugs on staging** | **Rohan** *(Shubham)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Critical blocker issues cleared in Week 1; verified** | - | working on bug hunterz pipeline migrating it to new email and also improving the pipeline | None | 🔴 |
+| **S1.9** | **Fix critical / blocking P0 bugs on staging** | **Rohan** *(Shubham)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Critical blocker issues cleared in Week 1; verified** | Email delivery bug fixed; info email account migrated; testing pipeline | working on bug hunterz pipeline migrating it to new email and also improving the pipeline | None | 🟡 |
 | **S1.10** | Define clean demo environment requirements | **Shubham** *(Rohan)* | Fri, Sept 4 (Day 4) | `[-] In Progress` | Spec sheet for dummy student rosters & sanitized CRM leads | - | None | None | 🟡 |
 | **S1.11** | **Demo #1: Sales & Admin Suite Walkthrough** | **Prakhar** *(Shubham)* | **Thu, Sept 3 (Day 3)** | `[ ] Planned` | **Weekday baseline demo of Sales & Admin Suite** | - | None | None | ⚪ |
-| **S1.22** | Sales Suite technical documentation & research plan | **Shubham** | Fri, Sept 4 (Day 4) | `[ ] Planned` | Technical architecture doc & generalized setup plan | - | None | None | ⚪ |
+| **S1.22** | Sales Suite technical documentation & research plan | **Shubham** | Fri, Sept 4 (Day 4) | `[-] In Progress` | Technical architecture doc & generalized setup plan | Sales Suite prototype presented (DB separation & lead import); backend analysis underway | None | None | 🟡 |
 
 ---
 
@@ -50,8 +50,8 @@
 | **S1.13** | Inventory AWS accounts/services used by AI Labs | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete AWS inventory (S3, compute, IAM) | - | None | None | ⚪ |
 | **S1.14** | Master inventory of AI/API keys, models & endpoints | **Rohan** *(Shubham)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | All third-party AI keys mapped to product modules | - | None | None | ⚪ |
 | **S1.15** | Collect top repetitive workflows across MAS departments | **Rohan** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Departmental automation intake list (Problem $\rightarrow$ Effort $\rightarrow$ Value) | - | None | None | ⚪ |
-| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | Built & configured with Socket Mode & scheduler | None | None | 🟡 |
-| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | Live testing with pod members | None | None | 🟡 |
+| **S1.16** | **Build & configure MAS Slack Standup Bot v1.0** | **Yashvi** *(Rohan)* | **Thu, Sept 3 (Day 3)** | `[-] In Progress` | **Personal DMs, dropdown modal, 7:45 PM summary & 2-way sync** | Slack bot integrated with Gmail & Gemini notes parsing | None | None | 🟡 |
+| **S1.17** | **Test & pilot Slack Standup Bot with core team** | **Yashvi** *(All)* | **Fri, Sept 4 (Day 4)** | `[-] In Progress` | **Live test during Friday standup & Friday review #1** | Live pilot testing with core team during daily standups | None | None | 🟡 |
 
 ---
 
@@ -75,6 +75,34 @@
 
 ## 📝 Daily Quick Updates Log
 
+### 📅 Wed, Sept 2 (Day 2) — Standup Call Summary & Highlights
+
+* **👤 Yashvi**:
+  * `S1.16 / S1.17`: Slack bot integrated with Gmail & Gemini LLM for automated standup summaries.
+  * `S1.2 – S1.4`: Initiating client context dossiers (Orane, College Vidya, Chitkara).
+  * `S1.6`: Aligned on Week 2 demo readiness; assigning primary & technical component owners.
+* **👤 Shubham**:
+  * `S1.10 / S1.22`: Presented Sales Suite prototype featuring dedicated client login & database separation.
+  * `S1.8`: Triaging live suite bugs and conducting backend technical evaluation of Sales Suite.
+  * Proposed revenue model for WhatsApp campaigns (Meta/Google Ads integration).
+* **👤 Rohan**:
+  * `S1.9`: Fixed email delivery bug; completed 'info' email account migration to clear clutter.
+  * `S1.9`: Coordinating with Yashvi to stabilize Student Admin dashboard with seeded data.
+* **👤 Prakhar**:
+  * `S1.1`: Creating client contact intake sheet in Google Sheet format.
+  * `S1.5 / S1.11`: Aligning Product Catalogue schema for Week 2 demos.
+* **👤 Gaurav**:
+  * `S1.18 / S1.19`: Steered prototype direction; confirmed Week 2/3 demo readiness milestones.
+* **🎯 Key Decisions & Alignments**:
+  * Defined component ownership (primary & technical owners) for Learning and Sales suites.
+  * Prioritize core feature parity for Sales Suite launch over monetization/billing.
+  * Sales Suite sequence: P0 Bug Fixes ➔ Technicalization ➔ Component-wise Imports.
+  * Approved Sales Suite architecture with database-level separation & independent client scaling.
+* **✨ New Action Items from Call**:
+  * 🆕 Shubham: Distribute Sales Suite prototype artifact to the team.
+  * 🆕 Shubham: Conduct backend analysis and evaluate component-wise import jobs.
+  * 🆕 Rohan & Yashvi: Align Student Admin dashboard with seeded test data.
+
 ### 📅 Tue, Sept 1 (Day 1) — Standup Call Summary & Highlights
 * **👤 Yashvi**:
   * `S1.9`: Coordinate & track weekly P0 bug fixes with engineering.
@@ -97,5 +125,3 @@
 
 ---
 *(Bot automatically appends the single final daily summary after each evening's standup)*
-
-
