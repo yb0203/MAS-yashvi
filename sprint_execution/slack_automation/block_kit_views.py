@@ -287,23 +287,15 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
     owner_sections = []
     for owner, tasks in owner_groups.items():
         lines = []
-        # Show active & blocked tasks individually
-        active = [t for t in tasks if t in in_progress or t in blocked or t in completed]
-        planned = [t for t in tasks if t in not_started]
-
-        for t in active:
-            rag = t.get("rag", "🟡")
-            status_clean = t["status"].replace("`", "").replace("[-]", "").replace("[x]", "").replace("[!]", "").strip()
+        for t in tasks:
+            rag = t.get("rag", "⚪")
+            status_clean = t["status"].replace("`", "").replace("[-]", "").replace("[x]", "").replace("[!]", "").replace("[ ]", "").strip()
             line = f"• {rag} *`{t['id']}`*: {t['task']} `[{status_clean}]`"
             if t.get("actual_outcome") and t["actual_outcome"] != "-" and t["actual_outcome"].strip():
                 line += f"\n  ↳ _{t['actual_outcome'].strip()}_"
             if t.get("blocker") and t["blocker"].lower() != "none" and t["blocker"] != "-":
                 line += f"\n  ↳ 🚨 *Blocker:* _{t['blocker'].strip()}_"
             lines.append(line)
-
-        if planned:
-            p_ids = ", ".join([f"`{t['id']}`" for t in planned])
-            lines.append(f"• ⚪ *Planned ({len(planned)}):* {p_ids}")
 
         owner_sections.append(f"*{owner}:*\n" + "\n".join(lines))
 
