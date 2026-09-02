@@ -124,6 +124,14 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
         if curr_outcome == "-":
             curr_outcome = ""
 
+        outcome_element = {
+            "type": "plain_text_input",
+            "action_id": f"input_outcome_{t_id}",
+            "placeholder": {"type": "plain_text", "text": "e.g. Completed draft / 50% done / PR link"}
+        }
+        if curr_outcome and isinstance(curr_outcome, str) and curr_outcome.strip():
+            outcome_element["initial_value"] = curr_outcome.strip()
+
         blocks.extend([
             {
                 "type": "section",
@@ -147,12 +155,7 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
                 "type": "input",
                 "block_id": f"outcome_block_{t_id}",
                 "optional": True,
-                "element": {
-                    "type": "plain_text_input",
-                    "action_id": f"input_outcome_{t_id}",
-                    "initial_value": curr_outcome if curr_outcome else None,
-                    "placeholder": {"type": "plain_text", "text": "e.g. Completed draft / 50% done / PR link"}
-                },
+                "element": outcome_element,
                 "label": {"type": "plain_text", "text": f"Today's Progress / Outcome for {t_id}"}
             },
             {"type": "divider"}
