@@ -4,7 +4,7 @@ Author: MAS AI PM
 Description: Ingests Google Meet Gemini meeting notes, maps discussions to individual
              task owners, identifies new tasks, extracts key decisions, and produces:
              1. Clean Block Kit Card for Slack #all-mas-ai-labs
-             2. Structured Daily Log in SPRINT_0X_WEEK_0X.md
+             2. Highly Readable, Owner-Wise Daily Log in SPRINT_0X_WEEK_0X.md
 """
 
 import os
@@ -38,13 +38,13 @@ def parse_structured_gemini_meeting_notes(raw_notes_text: str) -> Dict[str, Any]
     for line in lines:
         lower = line.lower()
         
-        # Skip raw headers / invite links
+        # Skip raw metadata
         if any(skip in lower for skip in ["invited [", "attachments [", "meeting records [", "you should review", "how is the quality"]):
             continue
 
         # Decisions & Alignments
         if "aspect ratio" in lower:
-            call_decisions.append("Adopt 16:9 aspect ratio standard for video content.")
+            call_decisions.append("Adopt 16:9 aspect ratio standard for all video content.")
         elif "response time" in lower or "bug hunter" in lower:
             call_decisions.append("Bug hunter response time interval set to 48 hours.")
         elif "leadership" in lower and "yashvi" in lower:
@@ -58,6 +58,7 @@ def parse_structured_gemini_meeting_notes(raw_notes_text: str) -> Dict[str, Any]
         if "salesuit" in lower and "shubham" in lower:
             new_tasks.append("Shubham: Create technical documentation & research plan for Sales Suite setup.")
             owner_updates["Shubham"].append("`S1.5 / S1.7`: Document technical pointers for product catalog.")
+            owner_updates["Shubham"].append("🆕 `S1.22`: Create technical documentation & research plan for Sales Suite setup.")
         
         if "gcp" in lower and "rohan" in lower:
             owner_updates["Rohan"].append("`S1.12`: Investigate GCP project scope, services, and VM instances.")
@@ -87,42 +88,37 @@ def parse_structured_gemini_meeting_notes(raw_notes_text: str) -> Dict[str, Any]
         "blockers": blockers
     }
 
-def format_structured_markdown_log(day: int, sprint_num: int, parsed_data: Dict[str, Any]) -> str:
-    """Formats the structured post-standup takeaways into a clean, professional markdown section."""
-    lines = [f"**Post-Standup Call Summary (Sprint {sprint_num} | Day {day})**:"]
+def format_structured_markdown_log(day: int, sprint_num: int, parsed_data: Dict[str, Any], date_title: str) -> str:
+    """Formats the structured post-standup takeaways into a clean, highly readable, point-wise markdown section."""
+    lines = [f"### 📅 {date_title} — Standup Call Summary & Highlights\n"]
 
     # 1. Owner updates
-    lines.append("   ↳ **Pod Deliverable Discussions**:")
     for owner, tasks in parsed_data["owner_updates"].items():
         if tasks:
-            task_str = "; ".join(tasks)
-            lines.append(f"     • **{owner}**: {task_str}")
+            lines.append(f"* **👤 {owner}**:")
+            for t in tasks:
+                lines.append(f"  * {t}")
 
-    # 2. New tasks
-    if parsed_data["new_tasks"]:
-        lines.append("   ↳ **✨ New Action Items Added from Call**:")
-        for t in parsed_data["new_tasks"]:
-            lines.append(f"     • 🆕 {t}")
-
-    # 3. Key decisions
+    # 2. Key decisions
     if parsed_data["call_decisions"]:
-        lines.append("   ↳ **🎯 Formal Decisions & Alignments**:")
+        lines.append("* **🎯 Key Decisions & Alignments**:")
         for d in parsed_data["call_decisions"]:
-            lines.append(f"     • {d}")
+            lines.append(f"  * {d}")
 
-    return "\n".join(lines)
+    return "\n".join(lines) + "\n"
 
 def process_and_sync_gemini_notes(day: int, raw_notes_text: str) -> Tuple[str, Dict[str, Any]]:
-    """End-to-end handler: parses raw Gemini notes, updates Sprint file, and returns Block Kit card."""
+    """End-to-end handler: parses raw Gemini notes, updates Sprint file with single clean log, and returns Block Kit card."""
     sprint_file, sprint_num = get_sprint_file_for_day(day)
     parsed = parse_structured_gemini_meeting_notes(raw_notes_text)
     
-    # 1. Generate markdown text & save to Sprint file
-    markdown_log = format_structured_markdown_log(day, sprint_num, parsed)
-    date_header = f"Tue, Sept 1 (Day {day})" if day == 1 else f"Day {day} ({datetime.now().strftime('%b %d')})"
-    append_daily_log_entry(sprint_file, date_header, markdown_log)
+    date_title = f"Tue, Sept 1 (Day {day})" if day == 1 else f"Day {day} ({datetime.now().strftime('%b %d')})"
+    markdown_log = format_structured_markdown_log(day, sprint_num, parsed, date_title)
+    
+    # Save single clean summary into Sprint markdown file
+    append_daily_log_entry(sprint_file, date_title, markdown_log)
 
-    # 2. Build structured Block Kit Card for Slack
+    # Build structured Block Kit Card for Slack
     card = build_post_standup_structured_summary_card(
         day=day,
         sprint_num=sprint_num,

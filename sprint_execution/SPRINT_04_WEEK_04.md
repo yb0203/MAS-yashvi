@@ -67,7 +67,10 @@
 
 ---
 
-## 📝 Daily Quick Updates Log (Bot & Owner Feed)
+## 📝 Daily Quick Updates Log
+
+---
+*(Bot automatically appends the single final daily summary after each evening's standup)*
 * *Mon, Sept 21 (Day 21)*: 
 * *Tue, Sept 22 (Day 22)*: 
 * *Wed, Sept 23 (Day 23)*: 
@@ -75,4 +78,4 @@
 * *Fri, Sept 25 (Day 25)*: 
 * *Mon, Sept 28 (Day 28)*: 
 * *Tue, Sept 29 (Day 29)*: 
-* *Wed, Sept 30 (Day 30)*: 
+* *Wed, Sept 30 (Day 30)*:

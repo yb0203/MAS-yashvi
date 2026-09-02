@@ -74,10 +74,8 @@
 
 ---
 
-## 📝 Daily Quick Updates Log (Bot & Owner Feed)
-* *Mon, Sept 14 (Day 14)*: 
-* *Tue, Sept 15 (Day 15)*: 
-* *Wed, Sept 16 (Day 16)*: 
-* *Thu, Sept 17 (Day 17)*: 
-* *Fri, Sept 18 (Day 18)*: 
+## 📝 Daily Quick Updates Log
+
+---
+*(Bot automatically appends the single final daily summary after each evening's standup)* 
 * *Mon, Sept 21 (Day 21 Milestone Check)*: 

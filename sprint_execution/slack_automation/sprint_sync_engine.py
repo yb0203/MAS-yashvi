@@ -215,7 +215,10 @@ def deprioritize_sprint_task(sprint_num: int, task_id: str, reason: str) -> bool
     )
 
 def append_daily_log_entry(file_path: str, date_header: str, summary_text: str):
-    """Appends a standup summary bullet under the Daily Quick Updates Log section."""
+    """
+    Idempotently sets the single official daily standup summary under ## 📝 Daily Quick Updates Log.
+    Prevents duplicate entries and ensures clean formatting.
+    """
     if not os.path.exists(file_path):
         return
 
@@ -224,10 +227,23 @@ def append_daily_log_entry(file_path: str, date_header: str, summary_text: str):
 
     log_marker = "## 📝 Daily Quick Updates Log"
     if log_marker in content:
-        entry = f"\n* **{date_header}**: {summary_text}\n"
-        content = content.replace(log_marker, log_marker + entry)
+        parts = content.split(log_marker)
+        header_section = parts[0] + log_marker + "\n\n"
+        log_section = parts[1] if len(parts) > 1 else ""
+
+        # Remove any existing entry for this day title
+        escaped_title = re.escape(date_header)
+        pattern = re.compile(rf"(### 📅\s*{escaped_title}.*?)(?=(### 📅|\Z))", re.DOTALL)
+        if pattern.search(log_section):
+            log_section = pattern.sub("", log_section).strip()
+        else:
+            # Also clean any old bullet formatted logs
+            old_pattern = re.compile(rf"(\*\s*\*\*{escaped_title}.*?)(?=(\n\*|\n###|\Z))", re.DOTALL)
+            log_section = old_pattern.sub("", log_section).strip()
+
+        new_content = header_section + summary_text.strip() + "\n\n" + (log_section if log_section else "")
         with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
+            f.write(new_content.strip() + "\n")
 
 def sync_active_blockers_to_master(sprint_tasks: List[Dict[str, Any]], sprint_num: int):
     """Rolls up active blockers into MONTH_01_MASTER_PLAN.md."""

@@ -76,9 +76,7 @@
 
 ---
 
-## 📝 Daily Quick Updates Log (Bot & Owner Feed)
-* *Mon, Sept 7 (Day 7)*: 
-* *Tue, Sept 8 (Day 8)*: 
-* *Wed, Sept 9 (Day 9)*: 
-* *Thu, Sept 10 (Day 10)*: 
-* *Fri, Sept 11 (Day 11)*: 
+## 📝 Daily Quick Updates Log
+
+---
+*(Bot automatically appends the single final daily summary after each evening's standup)* 
