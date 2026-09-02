@@ -2,10 +2,7 @@
 MAS AI Labs — Slack Block Kit UI Views & Templates
 Author: MAS AI PM
 Description: Centralized UI library generating clean, modern Slack Block Kit
-             cards for Personal DMs, Modals, Channel Digests, and Gemini Day Highlights.
-             - 3-Tier Data Architecture: "Tasks Picked Today" selector.
-             - Automated Status -> RAG mapping (Zero redundant dropdowns).
-             - Clean multi-teammate standup summary.
+             cards for Personal DMs, Modals, Pre-Standup Digests, and Structured Post-Standup Summaries.
 """
 
 import json
@@ -77,10 +74,7 @@ def build_personal_dm_view(owner_name: str, tasks: List[Dict[str, Any]], day: in
     ]
 
 def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[str, Any]], sprint_num: int, day: int) -> Dict[str, Any]:
-    """
-    Tier 2 Modal: 'What Did You Pick Today?'
-    Allows teammates to select only the specific tasks they worked on today.
-    """
+    """Tier 2 Modal: 'What Did You Pick Today?'"""
     task_options = []
     for t in all_owner_tasks:
         task_options.append({
@@ -91,7 +85,6 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
             "value": t["id"]
         })
 
-    # Default to first task if available
     initial_options = [task_options[0]] if task_options else []
 
     blocks = [
@@ -165,16 +158,11 @@ def build_consolidated_update_modal(owner_name: str, all_owner_tasks: List[Dict[
     }
 
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
-    """
-    Generates the 7:45 PM Standup Digest Card in #all-mas-ai-labs:
-    - Lists all team members and their deliverables.
-    - Flags active blockers in Red/Amber.
-    """
+    """Generates the 7:45 PM Pre-Standup Card in #all-mas-ai-labs."""
     done_tasks = [t for t in all_tasks if "done" in t["status"].lower() or "[x]" in t["status"]]
     in_progress = [t for t in all_tasks if "in progress" in t["status"].lower() or "[-]" in t["status"]]
     blocked_tasks = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"]]
 
-    # Group tasks by Owner
     owner_groups = {}
     for t in all_tasks:
         owner_groups.setdefault(t["owner"], []).append(t)
@@ -256,34 +244,109 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
 
     return {"blocks": blocks}
 
-def build_post_standup_gemini_card(day: int, sprint_num: int, highlight_text: str) -> Dict[str, Any]:
-    """Generates the structured 8:25 PM Post-Standup Day Highlights card."""
-    return {
-        "blocks": [
-            {
-                "type": "header",
-                "text": {
-                    "type": "plain_text",
-                    "text": f"📝 Post-Standup Day Highlights (Sprint {sprint_num} | Day {day})",
-                    "emoji": True
-                }
-            },
+def build_post_standup_structured_summary_card(
+    day: int,
+    sprint_num: int,
+    owner_updates: Dict[str, List[str]],
+    new_tasks: List[str],
+    call_decisions: List[str],
+    blockers: List[str]
+) -> Dict[str, Any]:
+    """
+    Generates the high-signal, beautifully formatted Post-Standup Card in #all-mas-ai-labs:
+    1. Person-by-Person Task Highlights & Discussions
+    2. 🆕 New Tasks / Action Items Added from the Call
+    3. 🎯 Agreed Decisions & Alignment
+    4. 🚨 Active Blockers
+    """
+    blocks = [
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": f"📝 MAS AI Labs — Post-Standup Highlights (Sprint {sprint_num} | Day {day})",
+                "emoji": True
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": f"✨ *Daily Standup Call Summary & Pod Alignments (Day {day})*"
+            }
+        },
+        {"type": "divider"}
+    ]
+
+    # 1. Person-by-person task updates
+    owner_sections = []
+    for owner, bullets in owner_updates.items():
+        if bullets:
+            b_text = "\n".join([f"   {b}" for b in bullets])
+            owner_sections.append(f"*👤 {owner}:*\n{b_text}")
+
+    if owner_sections:
+        blocks.append({
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*📋 Updates & Discussions on Active Tasks:*\n\n" + "\n\n".join(owner_sections)
+            }
+        })
+
+    # 2. 🆕 New tasks added from the call
+    if new_tasks:
+        new_bullets = "\n".join([f"• 🆕 {t}" for t in new_tasks])
+        blocks.extend([
+            {"type": "divider"},
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"✨ *Finalized Decisions & Action Items (Google Meet Gemini Notes):*\n\n{highlight_text}"
+                    "text": "*✨ New Tasks & Action Items Added from Call:*\n" + new_bullets
                 }
-            },
+            }
+        ])
+
+    # 3. 🎯 Key decisions
+    if call_decisions:
+        decisions_bullets = "\n".join([f"• {d}" for d in call_decisions])
+        blocks.extend([
             {"type": "divider"},
             {
-                "type": "context",
-                "elements": [
-                    {
-                        "type": "mrkdwn",
-                        "text": f"✅ Daily record updated in `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and `MONTH_01_MASTER_PLAN.md`."
-                    }
-                ]
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*🎯 Key Decisions & Pod Alignment:*\n" + decisions_bullets
+                }
             }
-        ]
-    }
+        ])
+
+    # 4. 🚨 Blockers
+    if blockers:
+        blockers_bullets = "\n".join([f"• 🚨 {b}" for b in blockers])
+        blocks.extend([
+            {"type": "divider"},
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*⚠️ Active Blockers & Dependencies:*\n" + blockers_bullets
+                }
+            }
+        ])
+
+    blocks.extend([
+        {"type": "divider"},
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": f"✅ Synced directly into `SPRINT_0{sprint_num}_WEEK_0{sprint_num}.md` and `MAS_AI_LABS_SPRINT_TRACKER.xlsx`."
+                }
+            ]
+        }
+    ])
+
+    return {"blocks": blocks}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MAS AI Labs — Ingest Day 1 Gemini Meeting Notes & Post to Slack
+MAS AI Labs — Ingest Day 1 Gemini Meeting Notes & Post Structured Highlights to Slack
 """
 
 import os
@@ -9,7 +9,6 @@ import certifi
 from dotenv import load_dotenv
 from slack_sdk import WebClient
 from gemini_notes_parser import process_and_sync_gemini_notes
-from block_kit_views import build_post_standup_gemini_card
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
@@ -42,9 +41,9 @@ Next steps
 
 def main():
     print("📝 Ingesting Day 1 Gemini Meeting Notes...")
-    highlight_text = process_and_sync_gemini_notes(1, RAW_NOTES)
+    markdown_log, card = process_and_sync_gemini_notes(1, RAW_NOTES)
     print("✅ SPRINT_01_WEEK_01.md updated successfully!")
-    print("\nFormatted Summary:\n", highlight_text)
+    print("\nFormatted Summary for Markdown Log:\n", markdown_log)
 
     # Post to Slack #all-mas-ai-labs
     token = os.environ.get("SLACK_BOT_TOKEN")
@@ -52,14 +51,13 @@ def main():
     ssl_ctx = ssl.create_default_context(cafile=certifi.where())
     client = WebClient(token=token, ssl=ssl_ctx)
 
-    card = build_post_standup_gemini_card(day=1, sprint_num=1, highlight_text=highlight_text)
     try:
         resp = client.chat_postMessage(
             channel=channel,
-            text="📝 Post-Standup Highlights (Day 1 — Google Meet Gemini Notes)",
+            text="📝 MAS AI Labs — Post-Standup Highlights (Sprint 1 | Day 1)",
             blocks=card["blocks"]
         )
-        print(f"\n🚀 Broadcasted Day 1 Highlights to Slack channel {channel}! ts: {resp.get('ts')}")
+        print(f"\n🚀 Broadcasted Structured Post-Standup Highlights to Slack channel {channel}! ts: {resp.get('ts')}")
     except Exception as e:
         print(f"Error posting to Slack: {e}")
 

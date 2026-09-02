@@ -50,7 +50,7 @@ from block_kit_views import (
     build_personal_dm_view,
     build_consolidated_update_modal,
     build_pre_standup_digest_card,
-    build_post_standup_gemini_card,
+    build_post_standup_structured_summary_card,
     map_status_to_rag
 )
 from gemini_notes_parser import process_and_sync_gemini_notes
@@ -260,12 +260,11 @@ if app:
             return
 
         # Ingest, parse and sync notes into Sprint doc
-        highlight_text = process_and_sync_gemini_notes(day, raw_text)
-        card = build_post_standup_gemini_card(day, sprint_num, highlight_text)
+        markdown_log, card = process_and_sync_gemini_notes(day, raw_text)
 
         client.chat_postMessage(
             channel=MAIN_STANDUP_CHANNEL,
-            text=f"📝 Post-Standup Highlights (Day {day})",
+            text=f"📝 MAS AI Labs — Post-Standup Highlights (Sprint {sprint_num} | Day {day})",
             blocks=card["blocks"]
         )
 
