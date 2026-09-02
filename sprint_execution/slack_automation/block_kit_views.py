@@ -275,6 +275,9 @@ def build_deprioritize_modal(sprint_num: int, all_tasks: List[Dict[str, Any]]) -
 
 def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dict[str, Any]], meet_url: str) -> Dict[str, Any]:
     """Sleek, high-signal Pre-Standup Summary Card for #all-mas-ai-labs."""
+    from datetime import datetime
+    date_str = datetime.now().strftime("%a, %b %d")
+
     completed = [t for t in all_tasks if "completed" in t["status"].lower() or "done" in t["status"].lower() or "[x]" in t["status"]]
     in_progress = [t for t in all_tasks if ("in progress" in t["status"].lower() or "[-]" in t["status"]) and t.get("rag") != "🔴"]
     not_started = [t for t in all_tasks if ("planned" in t["status"].lower() or "[ ]" in t["status"]) and t.get("rag") != "🔴"]
@@ -289,8 +292,7 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
         lines = []
         for t in tasks:
             rag = t.get("rag", "⚪")
-            status_clean = t["status"].replace("`", "").replace("[-]", "").replace("[x]", "").replace("[!]", "").replace("[ ]", "").strip()
-            line = f"• {rag} *`{t['id']}`*: {t['task']} `[{status_clean}]`"
+            line = f"• {rag} *`{t['id']}`*: {t['task']}"
             if t.get("actual_outcome") and t["actual_outcome"] != "-" and t["actual_outcome"].strip():
                 line += f"\n  ↳ _{t['actual_outcome'].strip()}_"
             if t.get("blocker") and t["blocker"].lower() != "none" and t["blocker"] != "-":
@@ -302,16 +304,13 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
     blocks = [
         {
             "type": "header",
-            "text": {"type": "plain_text", "text": f"📊 Pre-Standup Task Summary • Day {day}", "emoji": True}
+            "text": {"type": "plain_text", "text": f"📊 Pre-Standup Task Summary • Day {day} ({date_str})", "emoji": True}
         },
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": (
-                    f"📞 *Google Meet starts at 8:00 PM IST*\n"
-                    f"🟢 `{len(completed)} Done`  |  🟡 `{len(in_progress)} Active`  |  ⚪ `{len(not_started)} Planned`  |  🔴 `{len(blocked)} Blocked`"
-                )
+                "text": f"🟢 `{len(completed)} Done`  |  🟡 `{len(in_progress)} Active`  |  ⚪ `{len(not_started)} Planned`  |  🔴 `{len(blocked)} Blocked`"
             }
         },
         {"type": "divider"},
