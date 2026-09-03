@@ -325,15 +325,22 @@ def build_pre_standup_digest_card(day: int, sprint_num: int, all_tasks: List[Dic
 
     if blocked:
         b_lines = []
+        seen_blockers = set()
         for t in blocked:
-            b_lines.append(f"• 🔴 *{t['owner']} (`{t['id']}`)*: {t['blocker']}")
-        blocks.extend([
-            {"type": "divider"},
-            {
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": "*🚨 Priority Blockers for 8:00 PM Call:*\n" + "\n".join(b_lines)}
-            }
-        ])
+            if "[x]" in t.get("status", "").lower() or "completed" in t.get("status", "").lower() or "done" in t.get("status", "").lower():
+                continue
+            key = (t["owner"], t["blocker"])
+            if key not in seen_blockers:
+                seen_blockers.add(key)
+                b_lines.append(f"• 🔴 *{t['owner']} (`{t['id']}`)*: {t['blocker']}")
+        if b_lines:
+            blocks.extend([
+                {"type": "divider"},
+                {
+                    "type": "section",
+                    "text": {"type": "mrkdwn", "text": "*🚨 Priority Blockers for 8:00 PM Call:*\n" + "\n".join(b_lines)}
+                }
+            ])
 
     blocks.extend([
         {"type": "divider"},

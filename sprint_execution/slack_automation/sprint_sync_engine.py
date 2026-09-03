@@ -90,8 +90,8 @@ def update_sprint_task(file_path: str, task_id: str, new_status: str, actual_out
                     parts[5] = f"`{new_status}`"
                     if actual_outcome and actual_outcome != "-":
                         parts[7] = actual_outcome
-                    if blocker and blocker.lower() != "none" and blocker != "-":
-                        parts[8] = blocker
+                    if blocker is not None:
+                        parts[8] = blocker if (blocker.lower() != "none" and blocker != "-") else "None"
                     if delay_reason:
                         parts[9] = delay_reason
                     parts[10] = rag
@@ -116,8 +116,8 @@ def update_sprint_task(file_path: str, task_id: str, new_status: str, actual_out
                             r["status"] = new_status
                             if actual_outcome and actual_outcome != "-":
                                 r["actual"] = actual_outcome
-                            if blocker and blocker.lower() != "none" and blocker != "-":
-                                r["blocker"] = blocker
+                            if blocker is not None:
+                                r["blocker"] = blocker if (blocker.lower() != "none" and blocker != "-") else "None"
                             if delay_reason:
                                 r["delay_reason"] = delay_reason
                             r["rag"] = rag

@@ -25,7 +25,7 @@
 | **S1.3** | Collect client context: **College Vidya** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete admissions/CRM context, scale, integration requirements | Will start today | None | None | ⚪ |
 | **S1.4** | Collect client context: **Chitkara** | **Yashvi** *(Prakhar)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Complete placement/academic scope, 100-student cohort context | Will start today | None | None | ⚪ |
 | **S1.5** | Define schema & draft **Product Catalogue v1** | **Prakhar** *(Gaurav)* | Fri, Sept 4 (Day 4) | `[ ] Planned` | Product, buyer, use case, maturity, demo readiness, limitations | - | None | None | ⚪ |
-| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[x] Completed` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | Need to update it at end of the month | Need to discuss the artifacts required for capability mapping | None | 🟢 |
+| **S1.6** | Define schema & seed **Capability Registry v1** | **Yashvi** *(Shubham)* | Fri, Sept 4 (Day 4) | `[x] Completed` | Core AI capabilities (RAG, Eval, Voice, Parser) mapped to products | Need to update it at end of the month | None | None | 🟢 |
 
 ---
 
