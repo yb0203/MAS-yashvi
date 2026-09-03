@@ -443,3 +443,89 @@ def build_post_standup_structured_summary_card(
     ])
 
     return {"blocks": blocks}
+
+def build_app_home_view(owner_name: str, tasks: List[Dict[str, Any]], all_tasks: List[Dict[str, Any]], day: int, sprint_num: int) -> Dict[str, Any]:
+    """Generates the rich, interactive Slack App Home Dashboard."""
+    completed = [t for t in all_tasks if "completed" in t["status"].lower() or "done" in t["status"].lower() or "[x]" in t["status"]]
+    in_progress = [t for t in all_tasks if ("in progress" in t["status"].lower() or "[-]" in t["status"]) and t.get("rag") != "🔴"]
+    not_started = [t for t in all_tasks if ("planned" in t["status"].lower() or "[ ]" in t["status"]) and t.get("rag") != "🔴"]
+    blocked = [t for t in all_tasks if (t["blocker"] and t["blocker"].lower() != "none" and t["blocker"] != "-") or "[!]" in t["status"] or t.get("rag") == "🔴"]
+
+    my_tasks_bullets = []
+    for t in tasks:
+        rag = t.get("rag", "⚪")
+        status = t.get("status", "Planned").replace("`", "").replace("[ ]", "").replace("[-]", "").replace("[x]", "").replace("[!]", "").strip()
+        line = f"• {rag} *`{t['id']}`*: {t['task']} `({status})`"
+        if t.get("actual_outcome") and t["actual_outcome"] != "-" and t["actual_outcome"].strip():
+            line += f"\n   ↳ _{t['actual_outcome'].strip()}_"
+        if t.get("blocker") and t["blocker"].lower() != "none" and t["blocker"] != "-":
+            line += f"\n   ↳ 🚨 *Blocker:* _{t['blocker'].strip()}_"
+        my_tasks_bullets.append(line)
+
+    blocks = [
+        {
+            "type": "header",
+            "text": {"type": "plain_text", "text": f"🚀 MAS Standup Hub • Sprint {sprint_num} (Day {day})", "emoji": True}
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": f"👋 Welcome, *{owner_name}*! Here is your personal sprint execution dashboard."
+            }
+        },
+        {"type": "divider"},
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": (
+                    f"*📊 Sprint {sprint_num} Global Health:*\n"
+                    f"🟢 `{len(completed)} Done`  |  🟡 `{len(in_progress)} Active`  |  ⚪ `{len(not_started)} Planned`  |  🔴 `{len(blocked)} Blocked`"
+                )
+            }
+        },
+        {"type": "divider"},
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": f"*📌 Your Assigned Deliverables ({len(tasks)}):*\n" + ("\n".join(my_tasks_bullets) if my_tasks_bullets else "_No tasks currently assigned_")
+            }
+        },
+        {"type": "divider"},
+        {
+            "type": "actions",
+            "elements": [
+                {
+                    "type": "button",
+                    "text": {"type": "plain_text", "text": "⚡ Update Status (< 20s)", "emoji": True},
+                    "style": "primary",
+                    "value": json.dumps({"owner": owner_name, "sprint": sprint_num, "day": day}),
+                    "action_id": "open_consolidated_modal_action"
+                },
+                {
+                    "type": "button",
+                    "text": {"type": "plain_text", "text": "➕ Add New Task", "emoji": True},
+                    "action_id": "open_add_task_modal_action"
+                },
+                {
+                    "type": "button",
+                    "text": {"type": "plain_text", "text": "🟢 Join Google Meet", "emoji": True},
+                    "url": "https://meet.google.com/iek-smrh-zgg?authuser=0&hl=en_GB",
+                    "action_id": "join_meet_button"
+                },
+                {
+                    "type": "button",
+                    "text": {"type": "plain_text", "text": "📂 Sprint Plan", "emoji": True},
+                    "url": "https://github.com/yb0203/MAS-yashvi/tree/main/sprint_execution",
+                    "action_id": "open_sprint_link"
+                }
+            ]
+        }
+    ]
+
+    return {
+        "type": "home",
+        "blocks": blocks
+    }

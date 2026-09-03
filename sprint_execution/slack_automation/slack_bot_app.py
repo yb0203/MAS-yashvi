@@ -55,6 +55,7 @@ from block_kit_views import (
     build_deprioritize_modal,
     build_pre_standup_digest_card,
     build_post_standup_structured_summary_card,
+    build_app_home_view,
     map_status_to_rag
 )
 from gemini_notes_parser import process_and_sync_gemini_notes
@@ -109,6 +110,61 @@ if app:
     @app.action("join_meet_button")
     def handle_meet_button_click(ack, body):
         ack()
+
+    @app.action("open_add_task_modal_action")
+    def handle_open_add_task_modal_action(ack, body, client):
+        ack()
+        day = get_current_september_day()
+        _, sprint_num = get_sprint_file_for_day(day)
+        modal = build_add_task_modal(sprint_num)
+        try:
+            client.views_open(trigger_id=body["trigger_id"], view=modal)
+        except Exception as e:
+            logger.error(f"Failed to open add task modal from home: {e}")
+
+    @app.event("app_home_opened")
+    def handle_app_home_opened(ack, event, client, logger):
+        ack()
+        user_id = event.get("user")
+        if not user_id:
+            return
+
+        day = get_current_september_day()
+        sprint_file, sprint_num = get_sprint_file_for_day(day)
+        all_tasks = parse_sprint_tasks(sprint_file)
+
+        matched_owner = None
+        for name, u_id in TEAM_SLACK_IDS.items():
+            if u_id == user_id:
+                matched_owner = name
+                break
+
+        if not matched_owner:
+            try:
+                user_info = client.users_info(user=user_id)
+                user_obj = user_info.get("user", {})
+                real_name = user_obj.get("real_name", "").lower()
+                display_name = user_obj.get("profile", {}).get("display_name", "").lower()
+                email = user_obj.get("profile", {}).get("email", "").lower()
+                for name in ["Yashvi", "Prakhar", "Shubham", "Rohan", "Gaurav"]:
+                    if name.lower() in real_name or name.lower() in display_name or name.lower() in email:
+                        matched_owner = name
+                        TEAM_SLACK_IDS[name] = user_id
+                        break
+            except Exception as e:
+                logger.error(f"Error resolving user for App Home: {e}")
+
+        if not matched_owner:
+            matched_owner = "Yashvi"
+
+        owner_tasks = [t for t in all_tasks if t["owner"] == matched_owner] or all_tasks[:5]
+        home_view = build_app_home_view(matched_owner, owner_tasks, all_tasks, day, sprint_num)
+
+        try:
+            client.views_publish(user_id=user_id, view=home_view)
+            logger.info(f"Published App Home view for {matched_owner} ({user_id})")
+        except Exception as e:
+            logger.error(f"Failed to publish App Home view: {e}")
 
     @app.action("open_consolidated_modal_action")
     def handle_open_consolidated_modal(ack, body, client):

@@ -84,10 +84,12 @@
 
 | Log ID | Date Flagged | Source Sprint | Task ID & Owner | Blocker Description | Root Cause / Reason | Impact & Target Resolution Date | Status |
 |:---:|:---:|:---:|:---:|---|---|---|:---:|
-| BLK-01 | Sep 02 | Sprint 1 | `S1.6` (Yashvi) | Need to discuss the artifacts required for capability mapping | None | Under review for unblocking | `🔴 Blocked` |
-| BLK-02 | Sep 02 | Sprint 1 | `S1.9` (Rohan) | working on bug hunterz pipeline migrating it to new email and also improving the pipeline | None | Under review for unblocking | `🔴 Blocked` |
-| BLK-03 | Sep 02 | Sprint 1 | `S1.16` (Yashvi) | Need to discuss the artifacts required for capability mapping | None | Under review for unblocking | `🔴 Blocked` |
-| BLK-04 | Sep 02 | Sprint 1 | `S1.17` (Yashvi) | Need to discuss the artifacts required for capability mapping | None | Under review for unblocking | `🔴 Blocked` |
+| BLK-01 | Sep 03 | Sprint 1 | `S1.6` (Yashvi) | Need to discuss the artifacts required for capability mapping | None | Under review for unblocking | `🔴 Blocked` |
+| BLK-02 | Sep 03 | Sprint 1 | `S1.9` (Rohan) | GPT credit exhausted | None | Under review for unblocking | `🔴 Blocked` |
+| BLK-03 | Sep 03 | Sprint 1 | `S1.12` (Rohan) | GPT credit exhausted | None | Under review for unblocking | `🔴 Blocked` |
+| BLK-04 | Sep 03 | Sprint 1 | `S1.13` (Rohan) | GPT credit exhausted | None | Under review for unblocking | `🔴 Blocked` |
+| BLK-05 | Sep 03 | Sprint 1 | `S1.14` (Rohan) | GPT credit exhausted | None | Under review for unblocking | `🔴 Blocked` |
+| BLK-06 | Sep 03 | Sprint 1 | `S1.15` (Rohan) | GPT credit exhausted | None | Under review for unblocking | `🔴 Blocked` |
 
 ---
 
