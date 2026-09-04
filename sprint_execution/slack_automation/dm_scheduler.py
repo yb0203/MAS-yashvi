@@ -1,10 +1,10 @@
 """
 MAS AI Labs — Automated Standup DM & Digest Scheduler
 Author: MAS AI PM
-Description: Uses APScheduler to automatically dispatch:
+Description: Uses APScheduler + 30s Heartbeat Check to automatically dispatch:
              1. 7:00 PM IST: Personalized DMs to task owners.
              2. 7:45 PM IST: Aggregated Pre-Standup Digest in #all-mas-ai-labs.
-             Configured with 1-hour misfire_grace_time for sleep & network resilience.
+             Resilient to Mac sleep/wake cycles and network pauses.
 """
 
 import os
@@ -22,16 +22,21 @@ from block_kit_views import build_personal_dm_view, build_pre_standup_digest_car
 
 logger = logging.getLogger("MAS_Scheduler")
 
+LAST_DISPATCHED_DM_DAY = None
+LAST_DISPATCHED_DIGEST_DAY = None
+
 def get_current_september_day() -> int:
     """Calculates the current day number in September 2026."""
     now = datetime.now()
     if now.month == 9 and now.year == 2026:
         return now.day
-    # Fallback to Day 1 for testing
     return 1
 
 def dispatch_daily_dms(client, team_slack_ids: dict):
     """Sends personalized DMs to all task owners."""
+    global LAST_DISPATCHED_DM_DAY
+    LAST_DISPATCHED_DM_DAY = datetime.now().strftime("%Y-%m-%d")
+
     day = get_current_september_day()
     sprint_file, sprint_num = get_sprint_file_for_day(day)
     tasks = parse_sprint_tasks(sprint_file)
@@ -61,6 +66,9 @@ def dispatch_daily_dms(client, team_slack_ids: dict):
 
 def dispatch_channel_digest(client, main_channel: str, meet_url: str):
     """Posts the aggregated pre-standup digest to the main channel."""
+    global LAST_DISPATCHED_DIGEST_DAY
+    LAST_DISPATCHED_DIGEST_DAY = datetime.now().strftime("%Y-%m-%d")
+
     day = get_current_september_day()
     sprint_file, sprint_num = get_sprint_file_for_day(day)
     tasks = parse_sprint_tasks(sprint_file)
@@ -84,15 +92,42 @@ def dispatch_channel_digest(client, main_channel: str, meet_url: str):
     except Exception as e:
         logger.error(f"❌ Failed to post digest to {main_channel}: {e}")
 
+def heartbeat_catchup_check(client, team_slack_ids: dict, main_channel: str, meet_url: str):
+    """
+    Periodic heartbeat (runs every 30 seconds).
+    Guarantees that if the machine wakes from sleep between 19:00 and 20:00,
+    missed DMs or digests fire immediately upon wake.
+    """
+    global LAST_DISPATCHED_DM_DAY, LAST_DISPATCHED_DIGEST_DAY
+    now = datetime.now()
+    if now.weekday() >= 5:  # Skip weekends
+        return
+
+    hour = now.hour
+    minute = now.minute
+    today_key = now.strftime("%Y-%m-%d")
+
+    # 1. Catch-up DMs: Window 19:00 - 19:40
+    if hour == 19 and minute < 40:
+        if LAST_DISPATCHED_DM_DAY != today_key:
+            logger.info(f"🕒 Sleep catch-up: Auto-dispatching 7:00 PM DMs for {today_key}...")
+            dispatch_daily_dms(client, team_slack_ids)
+
+    # 2. Catch-up Digest: Window 19:45 - 20:15
+    if (hour == 19 and minute >= 45) or (hour == 20 and minute < 15):
+        if LAST_DISPATCHED_DIGEST_DAY != today_key:
+            logger.info(f"🕒 Sleep catch-up: Auto-dispatching 7:45 PM Channel Digest for {today_key}...")
+            dispatch_channel_digest(client, main_channel, meet_url)
+
 def start_standup_scheduler(client, team_slack_ids: dict, main_channel: str, meet_url: str):
-    """Initializes the background scheduler with misfire_grace_time=3600."""
+    """Initializes the background scheduler with cron jobs + 30s heartbeat."""
     if not BackgroundScheduler:
         logger.error("APScheduler is not installed. Run: pip install apscheduler")
         return None
 
     scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
     
-    # 7:00 PM IST Monday-Friday: Personal DMs (with 1h grace time)
+    # 1. 7:00 PM IST Monday-Friday: Personal DMs
     scheduler.add_job(
         dispatch_daily_dms,
         "cron",
@@ -104,7 +139,7 @@ def start_standup_scheduler(client, team_slack_ids: dict, main_channel: str, mee
         args=[client, team_slack_ids]
     )
 
-    # 7:45 PM IST Monday-Friday: Channel Digest (with 1h grace time)
+    # 2. 7:45 PM IST Monday-Friday: Channel Digest
     scheduler.add_job(
         dispatch_channel_digest,
         "cron",
@@ -116,6 +151,14 @@ def start_standup_scheduler(client, team_slack_ids: dict, main_channel: str, mee
         args=[client, main_channel, meet_url]
     )
 
+    # 3. 30-Second Heartbeat catch-up for sleep/wake resilience
+    scheduler.add_job(
+        heartbeat_catchup_check,
+        "interval",
+        seconds=30,
+        args=[client, team_slack_ids, main_channel, meet_url]
+    )
+
     scheduler.start()
-    logger.info("🕒 Daily Standup Scheduler started (7:00 PM DMs & 7:45 PM Digest in IST, 1h grace time).")
+    logger.info("🕒 Daily Standup Scheduler started (7:00 PM DMs, 7:45 PM Digest & 30s sleep-catchup heartbeat).")
     return scheduler
